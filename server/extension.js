@@ -181,7 +181,7 @@ var RoopComponent = {
         let block = "automatic1111.simpleImage2Image";
         let target = init_images[i];
         let meta = target.meta;
-        let targetB64 = await ctx.app.cdn.get(target.ticket, null, "asBase64");
+        let targetB64 = (await ctx.app.cdn.get(target.ticket)).asBase64();
         negative_prompt = negative_prompt || meta.sd?.negativePrompt;
         img2imgOpts = {
           width: meta.width,
@@ -219,6 +219,7 @@ var RoopComponent = {
           },
           img2imgOpts || {}
         );
+        console.log(pl.alwayson_scripts.roop);
         const imgResult = (await componentService.runBlock(ctx, block, pl)).images[0];
         if (imgResult) {
           (_a = imgResult.meta).sd ?? (_a.sd = {});

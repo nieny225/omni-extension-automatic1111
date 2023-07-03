@@ -1,7 +1,7 @@
-title: Automatic1111 extension
+title: Automatic1111 Support
 version: 0.0.1
 description: Extension adding additional automatic1111 support
 author: Georg Zoeller
 origin: https://github.com/georgzoeller/omni-extension-automatic1111.git
 client:
-  addToWorkbench: false
+  addToWorkbench: true
