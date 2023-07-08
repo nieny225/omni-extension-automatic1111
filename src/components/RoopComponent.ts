@@ -161,7 +161,7 @@ const RoopComponent =
           "type": "object",
           "x-type": "image",
           "required": true,
-          "title": "Face Image",
+          "title": "Face Image (Source)",
           "description": "Image containing a the face to replace in the target image.",
           control:
           {
