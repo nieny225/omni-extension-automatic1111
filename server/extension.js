@@ -144,7 +144,7 @@ var RoopComponent = {
           "type": "object",
           "x-type": "image",
           "required": true,
-          "title": "Face Image",
+          "title": "Face Image (Source)",
           "description": "Image containing a the face to replace in the target image.",
           control: {
             type: "AlpineLabelComponent"
@@ -181,7 +181,7 @@ var RoopComponent = {
         let block = "automatic1111.simpleImage2Image";
         let target = init_images[i];
         let meta = target.meta;
-        let targetB64 = (await ctx.app.cdn.get(target.ticket)).asBase64();
+        let targetB64 = await ctx.app.cdn.get(target.ticket, {}, "asBase64");
         negative_prompt = negative_prompt || meta.sd?.negativePrompt;
         img2imgOpts = {
           width: meta.width,
