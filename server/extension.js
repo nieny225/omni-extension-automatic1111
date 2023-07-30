@@ -76,15 +76,18 @@ var RoopComponent = {
       },
       inputs: {
         "prompt": {
-          placeholder: "Optional prompt. Uses CLIP for auto prompt if left blank."
+          description: "Optional prompt. Uses CLIP for auto prompt if left blank.",
+          default: ""
         },
         "negative_prompt": {
-          placeholder: "Optional negative prompt",
+          description: "Optional negative prompt",
+          default: "",
           type: "string",
           "x-type": "text"
         },
         "replace_faces": {
-          "placeholder": "Which faces (index) to replace, for example: 0 or 1,2"
+          "default": "0,1,2,3",
+          "description": "Which faces to replace"
         },
         "denoising_strength": {
           step: 0.01,
@@ -105,11 +108,31 @@ var RoopComponent = {
           default: 0.5,
           step: 0.01
         },
-        "checkpoint": {
-          title: "Checkpoint",
-          default: "",
-          type: "string",
-          "x-type": "text"
+        checkpoint: {
+          "title": "Model",
+          "x-type": "text",
+          "type": "string",
+          "description": "The checkpoint to use.",
+          "default": "v1-5-pruned-emaonly",
+          "choices": {
+            "block": "automatic1111.getModels",
+            map: {
+              "cache": "global",
+              "title": "model_name",
+              "value": "model_name"
+            }
+          }
+        },
+        sampler_name: {
+          default: "DPM++ 2M",
+          "choices": {
+            block: "automatic1111.getSamplers",
+            map: {
+              "cache": "global",
+              "title": "name",
+              "value": "name"
+            }
+          }
         },
         "scale_factor": {
           title: "Upscale Factor",
@@ -188,6 +211,7 @@ var RoopComponent = {
           height: meta.height,
           prompt: payload.prompt || meta.sd?.prompt || (await componentService.runBlock(ctx, "automatic1111.interrogate", { image: targetB64, model: "clip" })).caption,
           negative_prompt,
+          sampler_name: payload.sampler_name,
           init_images: [targetB64],
           denoising_strength: payload.denoising_strength || 0.05
         };
