@@ -11977,7 +11977,7 @@ var ControlComposer = class {
   constructor(name) {
     this.data = { name };
   }
-  create(name, dataType = "string") {
+  create(name, dataType) {
     this.data.name = name;
     this.data.dataType = dataType;
     return this;
@@ -12123,8 +12123,8 @@ var ComponentComposer = class extends BaseComposer {
     }
     return this;
   }
-  createControl(name) {
-    let ret = new ControlComposer(name).create(name);
+  createControl(name, dataType) {
+    let ret = new ControlComposer(name).create(name, dataType);
     return ret;
   }
   addControl(control) {
