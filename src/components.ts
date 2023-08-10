@@ -1,12 +1,16 @@
-import RoopComponent from './components/RoopComponent'
-let components = [RoopComponent]
+//import RoopComponent from './components/RoopComponent'
+import PromptComponent from './components/PromptComponent'
+import LoraComponent from './components/LoraComponent'
+let components = [PromptComponent, LoraComponent]
 
 
-export default (FactoryFn: any) =>
+export default () =>
 {
-  return components.map((c) => FactoryFn(c.schema, c.functions))
+  return {
+    blocks: components,
+    patches: []
+  }
 }
-
 
 
 

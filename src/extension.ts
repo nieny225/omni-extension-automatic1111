@@ -12,7 +12,8 @@ const extensionHooks = {
   {
     if (args.omniPackage === 'automatic1111')
     {
-      
+
+
 
     }
   }
