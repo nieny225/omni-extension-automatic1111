@@ -1,7 +1,8 @@
 //import RoopComponent from './components/RoopComponent'
 import PromptComponent from './components/PromptComponent'
 import LoraComponent from './components/LoraComponent'
-let components = [PromptComponent, LoraComponent]
+import RoopComponent from './components/RoopComponent'
+let components = [RoopComponent, PromptComponent, LoraComponent]
 
 
 export default () =>

@@ -664,9 +664,9 @@ var require_jsonata = __commonJS({
           const deltaWeeks = function(start, end) {
             return (end - start) / (millisInADay * 7) + 1;
           };
-          const getDateTimeFragment = (date, component3) => {
+          const getDateTimeFragment = (date, component4) => {
             let componentValue;
-            switch (component3) {
+            switch (component4) {
               case "Y":
                 componentValue = date.getUTCFullYear();
                 break;
@@ -5775,2853 +5775,6 @@ var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__
   isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
-var require_rete_common = __commonJS2({
-  "../../node_modules/rete/build/rete.common.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function ownKeys(object, enumerableOnly) {
-      var keys2 = Object.keys(object);
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        enumerableOnly && (symbols = symbols.filter(function(sym) {
-          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        })), keys2.push.apply(keys2, symbols);
-      }
-      return keys2;
-    }
-    function _objectSpread2(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = null != arguments[i] ? arguments[i] : {};
-        i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
-          _defineProperty(target, key, source[key]);
-        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-      return target;
-    }
-    function _regeneratorRuntime() {
-      _regeneratorRuntime = function() {
-        return exports2;
-      };
-      var exports2 = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-      function define2(obj, key, value) {
-        return Object.defineProperty(obj, key, {
-          value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        }), obj[key];
-      }
-      try {
-        define2({}, "");
-      } catch (err) {
-        define2 = function(obj, key, value) {
-          return obj[key] = value;
-        };
-      }
-      function wrap(innerFn, outerFn, self2, tryLocsList) {
-        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context2(tryLocsList || []);
-        return generator._invoke = function(innerFn2, self3, context2) {
-          var state = "suspendedStart";
-          return function(method, arg) {
-            if ("executing" === state)
-              throw new Error("Generator is already running");
-            if ("completed" === state) {
-              if ("throw" === method)
-                throw arg;
-              return doneResult();
-            }
-            for (context2.method = method, context2.arg = arg; ; ) {
-              var delegate = context2.delegate;
-              if (delegate) {
-                var delegateResult = maybeInvokeDelegate(delegate, context2);
-                if (delegateResult) {
-                  if (delegateResult === ContinueSentinel)
-                    continue;
-                  return delegateResult;
-                }
-              }
-              if ("next" === context2.method)
-                context2.sent = context2._sent = context2.arg;
-              else if ("throw" === context2.method) {
-                if ("suspendedStart" === state)
-                  throw state = "completed", context2.arg;
-                context2.dispatchException(context2.arg);
-              } else
-                "return" === context2.method && context2.abrupt("return", context2.arg);
-              state = "executing";
-              var record = tryCatch(innerFn2, self3, context2);
-              if ("normal" === record.type) {
-                if (state = context2.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel)
-                  continue;
-                return {
-                  value: record.arg,
-                  done: context2.done
-                };
-              }
-              "throw" === record.type && (state = "completed", context2.method = "throw", context2.arg = record.arg);
-            }
-          };
-        }(innerFn, self2, context), generator;
-      }
-      function tryCatch(fn, obj, arg) {
-        try {
-          return {
-            type: "normal",
-            arg: fn.call(obj, arg)
-          };
-        } catch (err) {
-          return {
-            type: "throw",
-            arg: err
-          };
-        }
-      }
-      exports2.wrap = wrap;
-      var ContinueSentinel = {};
-      function Generator() {
-      }
-      function GeneratorFunction() {
-      }
-      function GeneratorFunctionPrototype() {
-      }
-      var IteratorPrototype = {};
-      define2(IteratorPrototype, iteratorSymbol, function() {
-        return this;
-      });
-      var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-      NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
-      var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
-      function defineIteratorMethods(prototype) {
-        ["next", "throw", "return"].forEach(function(method) {
-          define2(prototype, method, function(arg) {
-            return this._invoke(method, arg);
-          });
-        });
-      }
-      function AsyncIterator(generator, PromiseImpl) {
-        function invoke(method, arg, resolve, reject) {
-          var record = tryCatch(generator[method], generator, arg);
-          if ("throw" !== record.type) {
-            var result = record.arg, value = result.value;
-            return value && "object" == typeof value && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function(value2) {
-              invoke("next", value2, resolve, reject);
-            }, function(err) {
-              invoke("throw", err, resolve, reject);
-            }) : PromiseImpl.resolve(value).then(function(unwrapped) {
-              result.value = unwrapped, resolve(result);
-            }, function(error) {
-              return invoke("throw", error, resolve, reject);
-            });
-          }
-          reject(record.arg);
-        }
-        var previousPromise;
-        this._invoke = function(method, arg) {
-          function callInvokeWithMethodAndArg() {
-            return new PromiseImpl(function(resolve, reject) {
-              invoke(method, arg, resolve, reject);
-            });
-          }
-          return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
-        };
-      }
-      function maybeInvokeDelegate(delegate, context) {
-        var method = delegate.iterator[context.method];
-        if (void 0 === method) {
-          if (context.delegate = null, "throw" === context.method) {
-            if (delegate.iterator.return && (context.method = "return", context.arg = void 0, maybeInvokeDelegate(delegate, context), "throw" === context.method))
-              return ContinueSentinel;
-            context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
-          }
-          return ContinueSentinel;
-        }
-        var record = tryCatch(method, delegate.iterator, context.arg);
-        if ("throw" === record.type)
-          return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
-        var info = record.arg;
-        return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = void 0), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
-      }
-      function pushTryEntry(locs) {
-        var entry = {
-          tryLoc: locs[0]
-        };
-        1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
-      }
-      function resetTryEntry(entry) {
-        var record = entry.completion || {};
-        record.type = "normal", delete record.arg, entry.completion = record;
-      }
-      function Context2(tryLocsList) {
-        this.tryEntries = [{
-          tryLoc: "root"
-        }], tryLocsList.forEach(pushTryEntry, this), this.reset(true);
-      }
-      function values(iterable) {
-        if (iterable) {
-          var iteratorMethod = iterable[iteratorSymbol];
-          if (iteratorMethod)
-            return iteratorMethod.call(iterable);
-          if ("function" == typeof iterable.next)
-            return iterable;
-          if (!isNaN(iterable.length)) {
-            var i = -1, next = function next2() {
-              for (; ++i < iterable.length; )
-                if (hasOwn.call(iterable, i))
-                  return next2.value = iterable[i], next2.done = false, next2;
-              return next2.value = void 0, next2.done = true, next2;
-            };
-            return next.next = next;
-          }
-        }
-        return {
-          next: doneResult
-        };
-      }
-      function doneResult() {
-        return {
-          value: void 0,
-          done: true
-        };
-      }
-      return GeneratorFunction.prototype = GeneratorFunctionPrototype, define2(Gp, "constructor", GeneratorFunctionPrototype), define2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define2(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports2.isGeneratorFunction = function(genFun) {
-        var ctor = "function" == typeof genFun && genFun.constructor;
-        return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
-      }, exports2.mark = function(genFun) {
-        return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define2(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
-      }, exports2.awrap = function(arg) {
-        return {
-          __await: arg
-        };
-      }, defineIteratorMethods(AsyncIterator.prototype), define2(AsyncIterator.prototype, asyncIteratorSymbol, function() {
-        return this;
-      }), exports2.AsyncIterator = AsyncIterator, exports2.async = function(innerFn, outerFn, self2, tryLocsList, PromiseImpl) {
-        void 0 === PromiseImpl && (PromiseImpl = Promise);
-        var iter = new AsyncIterator(wrap(innerFn, outerFn, self2, tryLocsList), PromiseImpl);
-        return exports2.isGeneratorFunction(outerFn) ? iter : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-      }, defineIteratorMethods(Gp), define2(Gp, toStringTagSymbol, "Generator"), define2(Gp, iteratorSymbol, function() {
-        return this;
-      }), define2(Gp, "toString", function() {
-        return "[object Generator]";
-      }), exports2.keys = function(object) {
-        var keys2 = [];
-        for (var key in object)
-          keys2.push(key);
-        return keys2.reverse(), function next() {
-          for (; keys2.length; ) {
-            var key2 = keys2.pop();
-            if (key2 in object)
-              return next.value = key2, next.done = false, next;
-          }
-          return next.done = true, next;
-        };
-      }, exports2.values = values, Context2.prototype = {
-        constructor: Context2,
-        reset: function(skipTempReset) {
-          if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = false, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(resetTryEntry), !skipTempReset)
-            for (var name in this)
-              "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = void 0);
-        },
-        stop: function() {
-          this.done = true;
-          var rootRecord = this.tryEntries[0].completion;
-          if ("throw" === rootRecord.type)
-            throw rootRecord.arg;
-          return this.rval;
-        },
-        dispatchException: function(exception) {
-          if (this.done)
-            throw exception;
-          var context = this;
-          function handle(loc, caught) {
-            return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = void 0), !!caught;
-          }
-          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-            var entry = this.tryEntries[i], record = entry.completion;
-            if ("root" === entry.tryLoc)
-              return handle("end");
-            if (entry.tryLoc <= this.prev) {
-              var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc");
-              if (hasCatch && hasFinally) {
-                if (this.prev < entry.catchLoc)
-                  return handle(entry.catchLoc, true);
-                if (this.prev < entry.finallyLoc)
-                  return handle(entry.finallyLoc);
-              } else if (hasCatch) {
-                if (this.prev < entry.catchLoc)
-                  return handle(entry.catchLoc, true);
-              } else {
-                if (!hasFinally)
-                  throw new Error("try statement without catch or finally");
-                if (this.prev < entry.finallyLoc)
-                  return handle(entry.finallyLoc);
-              }
-            }
-          }
-        },
-        abrupt: function(type, arg) {
-          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-            var entry = this.tryEntries[i];
-            if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
-              var finallyEntry = entry;
-              break;
-            }
-          }
-          finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
-          var record = finallyEntry ? finallyEntry.completion : {};
-          return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
-        },
-        complete: function(record, afterLoc) {
-          if ("throw" === record.type)
-            throw record.arg;
-          return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
-        },
-        finish: function(finallyLoc) {
-          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-            var entry = this.tryEntries[i];
-            if (entry.finallyLoc === finallyLoc)
-              return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
-          }
-        },
-        catch: function(tryLoc) {
-          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-            var entry = this.tryEntries[i];
-            if (entry.tryLoc === tryLoc) {
-              var record = entry.completion;
-              if ("throw" === record.type) {
-                var thrown = record.arg;
-                resetTryEntry(entry);
-              }
-              return thrown;
-            }
-          }
-          throw new Error("illegal catch attempt");
-        },
-        delegateYield: function(iterable, resultName, nextLoc) {
-          return this.delegate = {
-            iterator: values(iterable),
-            resultName,
-            nextLoc
-          }, "next" === this.method && (this.arg = void 0), ContinueSentinel;
-        }
-      }, exports2;
-    }
-    function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-      try {
-        var info = gen[key](arg);
-        var value = info.value;
-      } catch (error) {
-        reject(error);
-        return;
-      }
-      if (info.done) {
-        resolve(value);
-      } else {
-        Promise.resolve(value).then(_next, _throw);
-      }
-    }
-    function _asyncToGenerator(fn) {
-      return function() {
-        var self2 = this, args = arguments;
-        return new Promise(function(resolve, reject) {
-          var gen = fn.apply(self2, args);
-          function _next(value) {
-            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-          }
-          function _throw(err) {
-            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-          }
-          _next(void 0);
-        });
-      };
-    }
-    function _classCallCheck(instance, Constructor) {
-      if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-      }
-    }
-    function _defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor)
-          descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-    function _createClass(Constructor, protoProps, staticProps) {
-      if (protoProps)
-        _defineProperties(Constructor.prototype, protoProps);
-      if (staticProps)
-        _defineProperties(Constructor, staticProps);
-      Object.defineProperty(Constructor, "prototype", {
-        writable: false
-      });
-      return Constructor;
-    }
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-      return obj;
-    }
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function");
-      }
-      subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-          value: subClass,
-          writable: true,
-          configurable: true
-        }
-      });
-      Object.defineProperty(subClass, "prototype", {
-        writable: false
-      });
-      if (superClass)
-        _setPrototypeOf(subClass, superClass);
-    }
-    function _getPrototypeOf(o) {
-      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o2) {
-        return o2.__proto__ || Object.getPrototypeOf(o2);
-      };
-      return _getPrototypeOf(o);
-    }
-    function _setPrototypeOf(o, p2) {
-      _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p3) {
-        o2.__proto__ = p3;
-        return o2;
-      };
-      return _setPrototypeOf(o, p2);
-    }
-    function _isNativeReflectConstruct() {
-      if (typeof Reflect === "undefined" || !Reflect.construct)
-        return false;
-      if (Reflect.construct.sham)
-        return false;
-      if (typeof Proxy === "function")
-        return true;
-      try {
-        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-        }));
-        return true;
-      } catch (e) {
-        return false;
-      }
-    }
-    function _assertThisInitialized(self2) {
-      if (self2 === void 0) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-      }
-      return self2;
-    }
-    function _possibleConstructorReturn(self2, call) {
-      if (call && (typeof call === "object" || typeof call === "function")) {
-        return call;
-      } else if (call !== void 0) {
-        throw new TypeError("Derived constructors may only return object or undefined");
-      }
-      return _assertThisInitialized(self2);
-    }
-    function _createSuper(Derived) {
-      var hasNativeReflectConstruct = _isNativeReflectConstruct();
-      return function _createSuperInternal() {
-        var Super = _getPrototypeOf(Derived), result;
-        if (hasNativeReflectConstruct) {
-          var NewTarget = _getPrototypeOf(this).constructor;
-          result = Reflect.construct(Super, arguments, NewTarget);
-        } else {
-          result = Super.apply(this, arguments);
-        }
-        return _possibleConstructorReturn(this, result);
-      };
-    }
-    function _superPropBase(object, property) {
-      while (!Object.prototype.hasOwnProperty.call(object, property)) {
-        object = _getPrototypeOf(object);
-        if (object === null)
-          break;
-      }
-      return object;
-    }
-    function _get() {
-      if (typeof Reflect !== "undefined" && Reflect.get) {
-        _get = Reflect.get.bind();
-      } else {
-        _get = function _get2(target, property, receiver) {
-          var base = _superPropBase(target, property);
-          if (!base)
-            return;
-          var desc = Object.getOwnPropertyDescriptor(base, property);
-          if (desc.get) {
-            return desc.get.call(arguments.length < 3 ? target : receiver);
-          }
-          return desc.value;
-        };
-      }
-      return _get.apply(this, arguments);
-    }
-    function _slicedToArray(arr, i) {
-      return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-    }
-    function _toConsumableArray(arr) {
-      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-    }
-    function _arrayWithoutHoles(arr) {
-      if (Array.isArray(arr))
-        return _arrayLikeToArray(arr);
-    }
-    function _arrayWithHoles(arr) {
-      if (Array.isArray(arr))
-        return arr;
-    }
-    function _iterableToArray(iter) {
-      if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-        return Array.from(iter);
-    }
-    function _iterableToArrayLimit(arr, i) {
-      var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-      if (_i == null)
-        return;
-      var _arr = [];
-      var _n = true;
-      var _d = false;
-      var _s, _e;
-      try {
-        for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-          _arr.push(_s.value);
-          if (i && _arr.length === i)
-            break;
-        }
-      } catch (err) {
-        _d = true;
-        _e = err;
-      } finally {
-        try {
-          if (!_n && _i["return"] != null)
-            _i["return"]();
-        } finally {
-          if (_d)
-            throw _e;
-        }
-      }
-      return _arr;
-    }
-    function _unsupportedIterableToArray(o, minLen) {
-      if (!o)
-        return;
-      if (typeof o === "string")
-        return _arrayLikeToArray(o, minLen);
-      var n = Object.prototype.toString.call(o).slice(8, -1);
-      if (n === "Object" && o.constructor)
-        n = o.constructor.name;
-      if (n === "Map" || n === "Set")
-        return Array.from(o);
-      if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-        return _arrayLikeToArray(o, minLen);
-    }
-    function _arrayLikeToArray(arr, len) {
-      if (len == null || len > arr.length)
-        len = arr.length;
-      for (var i = 0, arr2 = new Array(len); i < len; i++)
-        arr2[i] = arr[i];
-      return arr2;
-    }
-    function _nonIterableSpread() {
-      throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    function _nonIterableRest() {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    function _createForOfIteratorHelper(o, allowArrayLike) {
-      var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-      if (!it) {
-        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-          if (it)
-            o = it;
-          var i = 0;
-          var F = function() {
-          };
-          return {
-            s: F,
-            n: function() {
-              if (i >= o.length)
-                return {
-                  done: true
-                };
-              return {
-                done: false,
-                value: o[i++]
-              };
-            },
-            e: function(e) {
-              throw e;
-            },
-            f: F
-          };
-        }
-        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-      }
-      var normalCompletion = true, didErr = false, err;
-      return {
-        s: function() {
-          it = it.call(o);
-        },
-        n: function() {
-          var step = it.next();
-          normalCompletion = step.done;
-          return step;
-        },
-        e: function(e) {
-          didErr = true;
-          err = e;
-        },
-        f: function() {
-          try {
-            if (!normalCompletion && it.return != null)
-              it.return();
-          } finally {
-            if (didErr)
-              throw err;
-          }
-        }
-      };
-    }
-    var Component$1 = /* @__PURE__ */ _createClass(function Component3(name) {
-      _classCallCheck(this, Component3);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "data", {});
-      _defineProperty(this, "engine", null);
-      this.name = name;
-    });
-    var Node2 = /* @__PURE__ */ function() {
-      function Node3(name) {
-        _classCallCheck(this, Node3);
-        _defineProperty(this, "name", void 0);
-        _defineProperty(this, "id", void 0);
-        _defineProperty(this, "position", [0, 0]);
-        _defineProperty(this, "inputs", /* @__PURE__ */ new Map());
-        _defineProperty(this, "outputs", /* @__PURE__ */ new Map());
-        _defineProperty(this, "controls", /* @__PURE__ */ new Map());
-        _defineProperty(this, "data", {});
-        _defineProperty(this, "meta", {});
-        this.name = name;
-        this.id = Node3.incrementId();
-      }
-      _createClass(Node3, [{
-        key: "_add",
-        value: function _add(list, item, prop) {
-          if (list.has(item.key))
-            throw new Error("Item with key '".concat(item.key, "' already been added to the node"));
-          if (item[prop] !== null)
-            throw new Error("Item has already been added to some node");
-          item[prop] = this;
-          list.set(item.key, item);
-        }
-      }, {
-        key: "addControl",
-        value: function addControl(control) {
-          this._add(this.controls, control, "parent");
-          return this;
-        }
-      }, {
-        key: "removeControl",
-        value: function removeControl(control) {
-          control.parent = null;
-          this.controls["delete"](control.key);
-        }
-      }, {
-        key: "addInput",
-        value: function addInput(input) {
-          this._add(this.inputs, input, "node");
-          return this;
-        }
-      }, {
-        key: "removeInput",
-        value: function removeInput(input) {
-          input.removeConnections();
-          input.node = null;
-          this.inputs["delete"](input.key);
-        }
-      }, {
-        key: "addOutput",
-        value: function addOutput(output) {
-          this._add(this.outputs, output, "node");
-          return this;
-        }
-      }, {
-        key: "removeOutput",
-        value: function removeOutput(output) {
-          output.removeConnections();
-          output.node = null;
-          this.outputs["delete"](output.key);
-        }
-      }, {
-        key: "setMeta",
-        value: function setMeta(meta) {
-          this.meta = meta;
-          return this;
-        }
-      }, {
-        key: "getConnections",
-        value: function getConnections() {
-          var ios = [].concat(_toConsumableArray(this.inputs.values()), _toConsumableArray(this.outputs.values()));
-          var connections = ios.reduce(function(arr, io) {
-            return [].concat(_toConsumableArray(arr), _toConsumableArray(io.connections));
-          }, []);
-          return connections;
-        }
-      }, {
-        key: "update",
-        value: function update() {
-        }
-      }, {
-        key: "toJSON",
-        value: function toJSON() {
-          var reduceIO = function reduceIO2(list) {
-            return Array.from(list).reduce(function(obj, _ref) {
-              var _ref2 = _slicedToArray(_ref, 2), key = _ref2[0], io = _ref2[1];
-              obj[key] = io.toJSON();
-              return obj;
-            }, {});
-          };
-          return {
-            "id": this.id,
-            "data": this.data,
-            "inputs": reduceIO(this.inputs),
-            "outputs": reduceIO(this.outputs),
-            "position": this.position,
-            "name": this.name
-          };
-        }
-      }], [{
-        key: "incrementId",
-        value: function incrementId() {
-          if (!this.latestId)
-            this.latestId = 1;
-          else
-            this.latestId++;
-          return this.latestId;
-        }
-      }, {
-        key: "resetId",
-        value: function resetId() {
-          this.latestId = 0;
-        }
-      }, {
-        key: "fromJSON",
-        value: function fromJSON(json) {
-          var node = new Node3(json.name);
-          var _json$position = _slicedToArray(json.position, 2), x = _json$position[0], y = _json$position[1];
-          node.id = json.id;
-          node.data = json.data;
-          node.position = [x, y];
-          node.name = json.name;
-          Node3.latestId = Math.max(node.id, Node3.latestId);
-          return node;
-        }
-      }]);
-      return Node3;
-    }();
-    _defineProperty(Node2, "latestId", 0);
-    var Component2 = /* @__PURE__ */ function(_ComponentWorker) {
-      _inherits(Component3, _ComponentWorker);
-      var _super = _createSuper(Component3);
-      function Component3(name) {
-        var _this;
-        _classCallCheck(this, Component3);
-        _this = _super.call(this, name);
-        _defineProperty(_assertThisInitialized(_this), "editor", null);
-        _defineProperty(_assertThisInitialized(_this), "data", {});
-        return _this;
-      }
-      _createClass(Component3, [{
-        key: "build",
-        value: function() {
-          var _build = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(node) {
-            return _regeneratorRuntime().wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    _context.next = 2;
-                    return this.builder(node);
-                  case 2:
-                    return _context.abrupt("return", node);
-                  case 3:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-          function build(_x) {
-            return _build.apply(this, arguments);
-          }
-          return build;
-        }()
-      }, {
-        key: "createNode",
-        value: function() {
-          var _createNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2() {
-            var data, node, _args2 = arguments;
-            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    data = _args2.length > 0 && _args2[0] !== void 0 ? _args2[0] : {};
-                    node = new Node2(this.name);
-                    node.data = data;
-                    _context2.next = 5;
-                    return this.build(node);
-                  case 5:
-                    return _context2.abrupt("return", node);
-                  case 6:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this);
-          }));
-          function createNode() {
-            return _createNode.apply(this, arguments);
-          }
-          return createNode;
-        }()
-      }]);
-      return Component3;
-    }(Component$1);
-    var Connection = /* @__PURE__ */ function() {
-      function Connection2(output, input) {
-        _classCallCheck(this, Connection2);
-        _defineProperty(this, "output", void 0);
-        _defineProperty(this, "input", void 0);
-        _defineProperty(this, "data", {});
-        this.output = output;
-        this.input = input;
-        this.data = {};
-        this.input.addConnection(this);
-      }
-      _createClass(Connection2, [{
-        key: "remove",
-        value: function remove() {
-          this.input.removeConnection(this);
-          this.output.removeConnection(this);
-        }
-      }]);
-      return Connection2;
-    }();
-    var Control = /* @__PURE__ */ function() {
-      function Control2(key) {
-        _classCallCheck(this, Control2);
-        _defineProperty(this, "key", void 0);
-        _defineProperty(this, "data", {});
-        _defineProperty(this, "parent", null);
-        if (this.constructor === Control2)
-          throw new TypeError("Can not construct abstract class");
-        if (!key)
-          throw new Error("The key parameter is missing in super() of Control ");
-        this.key = key;
-      }
-      _createClass(Control2, [{
-        key: "getNode",
-        value: function getNode() {
-          if (this.parent === null)
-            throw new Error("Control isn't added to Node/Input");
-          if (this.parent instanceof Node2)
-            return this.parent;
-          if (!this.parent.node)
-            throw new Error("Control hasn't be added to Input or Node");
-          return this.parent.node;
-        }
-      }, {
-        key: "getData",
-        value: function getData(key) {
-          return this.getNode().data[key];
-        }
-      }, {
-        key: "putData",
-        value: function putData(key, data) {
-          this.getNode().data[key] = data;
-        }
-      }]);
-      return Control2;
-    }();
-    var Emitter = /* @__PURE__ */ function() {
-      function Emitter2(events) {
-        _classCallCheck(this, Emitter2);
-        _defineProperty(this, "events", {});
-        _defineProperty(this, "silent", false);
-        this.events = events instanceof Emitter2 ? events.events : events.handlers;
-      }
-      _createClass(Emitter2, [{
-        key: "on",
-        value: function on(names, handler) {
-          var _this = this;
-          var events = names instanceof Array ? names : names.split(" ");
-          events.forEach(function(name) {
-            if (!_this.events[name])
-              throw new Error("The event ".concat(name, " does not exist"));
-            _this.events[name].push(handler);
-          });
-          return this;
-        }
-      }, {
-        key: "trigger",
-        value: function trigger(name) {
-          var params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-          if (!(name in this.events))
-            throw new Error("The event ".concat(String(name), " cannot be triggered"));
-          return this.events[name].reduce(function(r2, e) {
-            return e(params) !== false && r2;
-          }, true);
-        }
-      }, {
-        key: "bind",
-        value: function bind(name) {
-          if (this.events[name])
-            throw new Error("The event ".concat(name, " is already bound"));
-          this.events[name] = [];
-        }
-      }, {
-        key: "exist",
-        value: function exist(name) {
-          return Array.isArray(this.events[name]);
-        }
-      }]);
-      return Emitter2;
-    }();
-    var IO = /* @__PURE__ */ function() {
-      function IO2(key, name, socket, multiConns) {
-        _classCallCheck(this, IO2);
-        _defineProperty(this, "node", null);
-        _defineProperty(this, "multipleConnections", void 0);
-        _defineProperty(this, "connections", []);
-        _defineProperty(this, "key", void 0);
-        _defineProperty(this, "name", void 0);
-        _defineProperty(this, "socket", void 0);
-        this.node = null;
-        this.multipleConnections = multiConns;
-        this.connections = [];
-        this.key = key;
-        this.name = name;
-        this.socket = socket;
-      }
-      _createClass(IO2, [{
-        key: "removeConnection",
-        value: function removeConnection(connection) {
-          this.connections.splice(this.connections.indexOf(connection), 1);
-        }
-      }, {
-        key: "removeConnections",
-        value: function removeConnections() {
-          var _this = this;
-          this.connections.forEach(function(connection) {
-            return _this.removeConnection(connection);
-          });
-        }
-      }]);
-      return IO2;
-    }();
-    var Input2 = /* @__PURE__ */ function(_IO) {
-      _inherits(Input3, _IO);
-      var _super = _createSuper(Input3);
-      function Input3(key, title, socket) {
-        var _this;
-        var multiConns = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : false;
-        _classCallCheck(this, Input3);
-        _this = _super.call(this, key, title, socket, multiConns);
-        _defineProperty(_assertThisInitialized(_this), "control", null);
-        return _this;
-      }
-      _createClass(Input3, [{
-        key: "hasConnection",
-        value: function hasConnection() {
-          return this.connections.length > 0;
-        }
-      }, {
-        key: "addConnection",
-        value: function addConnection(connection) {
-          if (!this.multipleConnections && this.hasConnection())
-            throw new Error("Multiple connections not allowed");
-          this.connections.push(connection);
-        }
-      }, {
-        key: "addControl",
-        value: function addControl(control) {
-          this.control = control;
-          control.parent = this;
-        }
-      }, {
-        key: "showControl",
-        value: function showControl() {
-          return !this.hasConnection() && this.control !== null;
-        }
-      }, {
-        key: "toJSON",
-        value: function toJSON() {
-          return {
-            "connections": this.connections.map(function(c2) {
-              if (!c2.output.node)
-                throw new Error("Node not added to Output");
-              return {
-                node: c2.output.node.id,
-                output: c2.output.key,
-                data: c2.data
-              };
-            })
-          };
-        }
-      }]);
-      return Input3;
-    }(IO);
-    var Validator = /* @__PURE__ */ function() {
-      function Validator2() {
-        _classCallCheck(this, Validator2);
-      }
-      _createClass(Validator2, null, [{
-        key: "isValidData",
-        value: function isValidData(data) {
-          return typeof data.id === "string" && this.isValidId(data.id) && data.nodes instanceof Object && !(data.nodes instanceof Array);
-        }
-      }, {
-        key: "isValidId",
-        value: function isValidId(id) {
-          return /^[\w-]{3,}@[0-9]+\.[0-9]+\.[0-9]+$/.test(id);
-        }
-      }, {
-        key: "validate",
-        value: function validate(id, data) {
-          var id1 = id.split("@");
-          var id2 = data.id.split("@");
-          var msg = [];
-          if (!this.isValidData(data))
-            msg.push("Data is not suitable");
-          if (id !== data.id)
-            msg.push("IDs not equal");
-          if (id1[0] !== id2[0])
-            msg.push("Names don't match");
-          if (id1[1] !== id2[1])
-            msg.push("Versions don't match");
-          return {
-            success: Boolean(!msg.length),
-            msg: msg.join(". ")
-          };
-        }
-      }]);
-      return Validator2;
-    }();
-    var Context = /* @__PURE__ */ function(_Emitter) {
-      _inherits(Context2, _Emitter);
-      var _super = _createSuper(Context2);
-      function Context2(id, events) {
-        var _this;
-        _classCallCheck(this, Context2);
-        _this = _super.call(this, events);
-        _defineProperty(_assertThisInitialized(_this), "id", void 0);
-        _defineProperty(_assertThisInitialized(_this), "plugins", void 0);
-        _defineProperty(_assertThisInitialized(_this), "components", void 0);
-        if (!Validator.isValidId(id))
-          throw new Error("ID should be valid to name@0.1.0 format");
-        _this.id = id;
-        _this.plugins = /* @__PURE__ */ new Map();
-        _this.components = /* @__PURE__ */ new Map();
-        return _this;
-      }
-      _createClass(Context2, [{
-        key: "use",
-        value: function use(plugin, options2) {
-          if (plugin.name && this.plugins.has(plugin.name))
-            throw new Error("Plugin ".concat(plugin.name, " already in use"));
-          plugin.install(this, options2 || {});
-          this.plugins.set(plugin.name, options2);
-        }
-      }, {
-        key: "register",
-        value: function register(component3) {
-          if (this.components.has(component3.name))
-            throw new Error("Component ".concat(component3.name, " already registered"));
-          this.components.set(component3.name, component3);
-          this.trigger("componentregister", component3);
-        }
-      }, {
-        key: "destroy",
-        value: function destroy() {
-          this.trigger("destroy");
-        }
-      }]);
-      return Context2;
-    }(Emitter);
-    function listenWindow(event, handler) {
-      window.addEventListener(event, handler);
-      return function() {
-        window.removeEventListener(event, handler);
-      };
-    }
-    function getOffset(el, offsetParentEl) {
-      var searchDepth = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 8;
-      var x = el.offsetLeft;
-      var y = el.offsetTop;
-      var parent = el.offsetParent;
-      while (parent && parent !== offsetParentEl && searchDepth > 0) {
-        searchDepth--;
-        x += parent.offsetLeft;
-        y += parent.offsetTop;
-        parent = parent.offsetParent;
-      }
-      return {
-        x,
-        y
-      };
-    }
-    var Drag = /* @__PURE__ */ function() {
-      function Drag2(el) {
-        var onTranslate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : function(_x, _y, _e) {
-        };
-        var onStart = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : function(_e) {
-        };
-        var onDrag = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : function(_e) {
-        };
-        _classCallCheck(this, Drag2);
-        this.onTranslate = onTranslate;
-        this.onStart = onStart;
-        this.onDrag = onDrag;
-        _defineProperty(this, "pointerStart", void 0);
-        _defineProperty(this, "el", void 0);
-        _defineProperty(this, "destroy", void 0);
-        this.pointerStart = null;
-        this.el = el;
-        this.el.style.touchAction = "none";
-        this.el.addEventListener("pointerdown", this.down.bind(this));
-        var destroyMove = listenWindow("pointermove", this.move.bind(this));
-        var destroyUp = listenWindow("pointerup", this.up.bind(this));
-        this.destroy = function() {
-          destroyMove();
-          destroyUp();
-        };
-      }
-      _createClass(Drag2, [{
-        key: "down",
-        value: function down(e) {
-          if (e.pointerType === "mouse" && e.button !== 0)
-            return;
-          e.stopPropagation();
-          this.pointerStart = [e.pageX, e.pageY];
-          this.onStart(e);
-        }
-      }, {
-        key: "move",
-        value: function move(e) {
-          if (!this.pointerStart)
-            return;
-          e.preventDefault();
-          var _ref = [e.pageX, e.pageY], x = _ref[0], y = _ref[1];
-          var delta = [x - this.pointerStart[0], y - this.pointerStart[1]];
-          var zoom = this.el.getBoundingClientRect().width / this.el.offsetWidth;
-          this.onTranslate(delta[0] / zoom, delta[1] / zoom, e);
-        }
-      }, {
-        key: "up",
-        value: function up(e) {
-          if (!this.pointerStart)
-            return;
-          this.pointerStart = null;
-          this.onDrag(e);
-        }
-      }]);
-      return Drag2;
-    }();
-    var Zoom = /* @__PURE__ */ function() {
-      function Zoom2(container, el, intensity, onzoom) {
-        _classCallCheck(this, Zoom2);
-        _defineProperty(this, "el", void 0);
-        _defineProperty(this, "intensity", void 0);
-        _defineProperty(this, "onzoom", void 0);
-        _defineProperty(this, "previous", null);
-        _defineProperty(this, "pointers", []);
-        _defineProperty(this, "destroy", void 0);
-        this.el = el;
-        this.intensity = intensity;
-        this.onzoom = onzoom;
-        container.addEventListener("wheel", this.wheel.bind(this));
-        container.addEventListener("pointerdown", this.down.bind(this));
-        container.addEventListener("dblclick", this.dblclick.bind(this));
-        var destroyMove = listenWindow("pointermove", this.move.bind(this));
-        var destroyUp = listenWindow("pointerup", this.end.bind(this));
-        var destroyCancel = listenWindow("pointercancel", this.end.bind(this));
-        this.destroy = function() {
-          destroyMove();
-          destroyUp();
-          destroyCancel();
-        };
-      }
-      _createClass(Zoom2, [{
-        key: "translating",
-        get: function get() {
-          return this.pointers.length >= 2;
-        }
-      }, {
-        key: "wheel",
-        value: function wheel(e) {
-          e.preventDefault();
-          var rect = this.el.getBoundingClientRect();
-          var isNegative = e.deltaY < 0;
-          var delta = isNegative ? this.intensity : -this.intensity;
-          var ox = (rect.left - e.clientX) * delta;
-          var oy = (rect.top - e.clientY) * delta;
-          this.onzoom(delta, ox, oy, "wheel");
-        }
-      }, {
-        key: "touches",
-        value: function touches() {
-          var e = {
-            touches: this.pointers
-          };
-          var _ref = [e.touches[0].clientX, e.touches[0].clientY], x1 = _ref[0], y1 = _ref[1];
-          var _ref2 = [e.touches[1].clientX, e.touches[1].clientY], x2 = _ref2[0], y2 = _ref2[1];
-          var distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-          return {
-            cx: (x1 + x2) / 2,
-            cy: (y1 + y2) / 2,
-            distance
-          };
-        }
-      }, {
-        key: "down",
-        value: function down(e) {
-          this.pointers.push(e);
-        }
-      }, {
-        key: "move",
-        value: function move(e) {
-          this.pointers = this.pointers.map(function(p2) {
-            return p2.pointerId === e.pointerId ? e : p2;
-          });
-          if (!this.translating)
-            return;
-          var rect = this.el.getBoundingClientRect();
-          var _this$touches = this.touches(), cx = _this$touches.cx, cy = _this$touches.cy, distance = _this$touches.distance;
-          if (this.previous !== null) {
-            var delta = distance / this.previous.distance - 1;
-            var ox = (rect.left - cx) * delta;
-            var oy = (rect.top - cy) * delta;
-            this.onzoom(delta, ox - (this.previous.cx - cx), oy - (this.previous.cy - cy), "touch");
-          }
-          this.previous = {
-            cx,
-            cy,
-            distance
-          };
-        }
-      }, {
-        key: "end",
-        value: function end(e) {
-          this.previous = null;
-          this.pointers = this.pointers.filter(function(p2) {
-            return p2.pointerId !== e.pointerId;
-          });
-        }
-      }, {
-        key: "dblclick",
-        value: function dblclick(e) {
-          e.preventDefault();
-          var rect = this.el.getBoundingClientRect();
-          var delta = 4 * this.intensity;
-          var ox = (rect.left - e.clientX) * delta;
-          var oy = (rect.top - e.clientY) * delta;
-          this.onzoom(delta, ox, oy, "dblclick");
-        }
-      }]);
-      return Zoom2;
-    }();
-    var Area = /* @__PURE__ */ function(_Emitter) {
-      _inherits(Area2, _Emitter);
-      var _super = _createSuper(Area2);
-      function Area2(container, emitter) {
-        var _this;
-        _classCallCheck(this, Area2);
-        _this = _super.call(this, emitter);
-        _defineProperty(_assertThisInitialized(_this), "el", void 0);
-        _defineProperty(_assertThisInitialized(_this), "container", void 0);
-        _defineProperty(_assertThisInitialized(_this), "transform", {
-          k: 1,
-          x: 0,
-          y: 0
-        });
-        _defineProperty(_assertThisInitialized(_this), "mouse", {
-          x: 0,
-          y: 0
-        });
-        _defineProperty(_assertThisInitialized(_this), "_startPosition", null);
-        _defineProperty(_assertThisInitialized(_this), "_zoom", void 0);
-        _defineProperty(_assertThisInitialized(_this), "_drag", void 0);
-        var el = _this.el = document.createElement("div");
-        _this.container = container;
-        el.style.transformOrigin = "0 0";
-        _this._zoom = new Zoom(container, el, 0.1, _this.onZoom.bind(_assertThisInitialized(_this)));
-        _this._drag = new Drag(container, _this.onTranslate.bind(_assertThisInitialized(_this)), _this.onStart.bind(_assertThisInitialized(_this)));
-        emitter.on("destroy", function() {
-          _this._zoom.destroy();
-          _this._drag.destroy();
-        });
-        _this.container.addEventListener("pointermove", _this.pointermove.bind(_assertThisInitialized(_this)));
-        _this.update();
-        return _this;
-      }
-      _createClass(Area2, [{
-        key: "update",
-        value: function update() {
-          var t = this.transform;
-          this.el.style.transform = "translate(".concat(t.x, "px, ").concat(t.y, "px) scale(").concat(t.k, ")");
-        }
-      }, {
-        key: "pointermove",
-        value: function pointermove(e) {
-          var clientX = e.clientX, clientY = e.clientY;
-          var rect = this.el.getBoundingClientRect();
-          var x = clientX - rect.left;
-          var y = clientY - rect.top;
-          var k = this.transform.k;
-          this.mouse = {
-            x: x / k,
-            y: y / k
-          };
-          this.trigger("mousemove", _objectSpread2({}, this.mouse));
-        }
-      }, {
-        key: "onStart",
-        value: function onStart() {
-          this._startPosition = _objectSpread2({}, this.transform);
-        }
-      }, {
-        key: "onTranslate",
-        value: function onTranslate(dx, dy) {
-          if (this._zoom.translating)
-            return;
-          if (this._startPosition)
-            this.translate(this._startPosition.x + dx, this._startPosition.y + dy);
-        }
-      }, {
-        key: "onZoom",
-        value: function onZoom(delta, ox, oy, source) {
-          this.zoom(this.transform.k * (1 + delta), ox, oy, source);
-          this.update();
-        }
-      }, {
-        key: "translate",
-        value: function translate(x, y) {
-          var params = {
-            transform: this.transform,
-            x,
-            y
-          };
-          if (!this.trigger("translate", params))
-            return;
-          this.transform.x = params.x;
-          this.transform.y = params.y;
-          this.update();
-          this.trigger("translated");
-        }
-      }, {
-        key: "zoom",
-        value: function zoom(_zoom) {
-          var ox = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
-          var oy = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
-          var source = arguments.length > 3 ? arguments[3] : void 0;
-          var k = this.transform.k;
-          var params = {
-            transform: this.transform,
-            zoom: _zoom,
-            source
-          };
-          if (!this.trigger("zoom", params))
-            return;
-          var d = (k - params.zoom) / (k - _zoom || 1);
-          this.transform.k = params.zoom || 1;
-          this.transform.x += ox * d;
-          this.transform.y += oy * d;
-          this.update();
-          this.trigger("zoomed", {
-            source
-          });
-        }
-      }, {
-        key: "appendChild",
-        value: function appendChild(el) {
-          this.el.appendChild(el);
-        }
-      }, {
-        key: "removeChild",
-        value: function removeChild(el) {
-          this.el.removeChild(el);
-        }
-      }]);
-      return Area2;
-    }(Emitter);
-    var ConnectionView = /* @__PURE__ */ function(_Emitter) {
-      _inherits(ConnectionView2, _Emitter);
-      var _super = _createSuper(ConnectionView2);
-      function ConnectionView2(connection, inputNode, outputNode, emitter) {
-        var _this;
-        _classCallCheck(this, ConnectionView2);
-        _this = _super.call(this, emitter);
-        _defineProperty(_assertThisInitialized(_this), "connection", void 0);
-        _defineProperty(_assertThisInitialized(_this), "inputNode", void 0);
-        _defineProperty(_assertThisInitialized(_this), "outputNode", void 0);
-        _defineProperty(_assertThisInitialized(_this), "el", void 0);
-        _this.connection = connection;
-        _this.inputNode = inputNode;
-        _this.outputNode = outputNode;
-        _this.el = document.createElement("div");
-        _this.el.style.position = "absolute";
-        _this.el.style.zIndex = "-1";
-        _this.trigger("renderconnection", {
-          el: _this.el,
-          connection: _this.connection,
-          points: _this.getPoints()
-        });
-        return _this;
-      }
-      _createClass(ConnectionView2, [{
-        key: "getPoints",
-        value: function getPoints() {
-          var _this$connection = this.connection, input = _this$connection.input, output = _this$connection.output;
-          if (this.inputNode.hasSocket(input) && this.outputNode.hasSocket(output)) {
-            var _this$outputNode$getS = this.outputNode.getSocketPosition(output), _this$outputNode$getS2 = _slicedToArray(_this$outputNode$getS, 2), x1 = _this$outputNode$getS2[0], y1 = _this$outputNode$getS2[1];
-            var _this$inputNode$getSo = this.inputNode.getSocketPosition(input), _this$inputNode$getSo2 = _slicedToArray(_this$inputNode$getSo, 2), x2 = _this$inputNode$getSo2[0], y2 = _this$inputNode$getSo2[1];
-            return [x1, y1, x2, y2];
-          }
-          return [0, 0, 0, 0];
-        }
-      }, {
-        key: "update",
-        value: function update() {
-          this.trigger("updateconnection", {
-            el: this.el,
-            connection: this.connection,
-            points: this.getPoints()
-          });
-        }
-      }]);
-      return ConnectionView2;
-    }(Emitter);
-    var ControlView = /* @__PURE__ */ function(_Emitter) {
-      _inherits(ControlView2, _Emitter);
-      var _super = _createSuper(ControlView2);
-      function ControlView2(el, control, emitter) {
-        var _this;
-        _classCallCheck(this, ControlView2);
-        _this = _super.call(this, emitter);
-        _this.trigger("rendercontrol", {
-          el,
-          control
-        });
-        return _this;
-      }
-      return _createClass(ControlView2);
-    }(Emitter);
-    var SocketView = /* @__PURE__ */ function(_Emitter) {
-      _inherits(SocketView2, _Emitter);
-      var _super = _createSuper(SocketView2);
-      function SocketView2(el, type, io, node, emitter) {
-        var _this$trigger;
-        var _this;
-        _classCallCheck(this, SocketView2);
-        _this = _super.call(this, emitter);
-        _defineProperty(_assertThisInitialized(_this), "el", void 0);
-        _defineProperty(_assertThisInitialized(_this), "type", void 0);
-        _defineProperty(_assertThisInitialized(_this), "io", void 0);
-        _defineProperty(_assertThisInitialized(_this), "node", void 0);
-        _this.el = el;
-        _this.type = type;
-        _this.io = io;
-        _this.node = node;
-        _this.trigger("rendersocket", (_this$trigger = {
-          el
-        }, _defineProperty(_this$trigger, type, _this.io), _defineProperty(_this$trigger, "socket", io.socket), _this$trigger));
-        return _this;
-      }
-      _createClass(SocketView2, [{
-        key: "getPosition",
-        value: function getPosition(_ref, nodeViewEl) {
-          var position = _ref.position;
-          var el = this.el;
-          var _getOffset = getOffset(el, nodeViewEl), x = _getOffset.x, y = _getOffset.y;
-          return [position[0] + x + el.offsetWidth / 2, position[1] + y + el.offsetHeight / 2];
-        }
-      }]);
-      return SocketView2;
-    }(Emitter);
-    var NodeView = /* @__PURE__ */ function(_Emitter) {
-      _inherits(NodeView2, _Emitter);
-      var _super = _createSuper(NodeView2);
-      function NodeView2(node, component3, emitter) {
-        var _this;
-        _classCallCheck(this, NodeView2);
-        _this = _super.call(this, emitter);
-        _defineProperty(_assertThisInitialized(_this), "node", void 0);
-        _defineProperty(_assertThisInitialized(_this), "component", void 0);
-        _defineProperty(_assertThisInitialized(_this), "sockets", /* @__PURE__ */ new Map());
-        _defineProperty(_assertThisInitialized(_this), "controls", /* @__PURE__ */ new Map());
-        _defineProperty(_assertThisInitialized(_this), "el", void 0);
-        _defineProperty(_assertThisInitialized(_this), "_startPosition", []);
-        _defineProperty(_assertThisInitialized(_this), "_drag", void 0);
-        _this.node = node;
-        _this.component = component3;
-        _this.el = document.createElement("div");
-        _this.el.style.position = "absolute";
-        _this.el.addEventListener("contextmenu", function(e) {
-          return _this.trigger("contextmenu", {
-            e,
-            node: _this.node
-          });
-        });
-        _this._drag = new Drag(_this.el, _this.onTranslate.bind(_assertThisInitialized(_this)), _this.onSelect.bind(_assertThisInitialized(_this)), function() {
-          _this.trigger("nodedraged", node);
-          _this.trigger("nodedragged", node);
-        });
-        _this.trigger("rendernode", {
-          el: _this.el,
-          node,
-          component: component3.data,
-          bindSocket: _this.bindSocket.bind(_assertThisInitialized(_this)),
-          bindControl: _this.bindControl.bind(_assertThisInitialized(_this))
-        });
-        _this.update();
-        return _this;
-      }
-      _createClass(NodeView2, [{
-        key: "clearSockets",
-        value: function clearSockets() {
-          var _this2 = this;
-          var ios = [].concat(_toConsumableArray(this.node.inputs.values()), _toConsumableArray(this.node.outputs.values()));
-          this.sockets.forEach(function(s3) {
-            if (!ios.includes(s3.io))
-              _this2.sockets["delete"](s3.io);
-          });
-        }
-      }, {
-        key: "bindSocket",
-        value: function bindSocket(el, type, io) {
-          this.clearSockets();
-          this.sockets.set(io, new SocketView(el, type, io, this.node, this));
-        }
-      }, {
-        key: "bindControl",
-        value: function bindControl(el, control) {
-          this.controls.set(control, new ControlView(el, control, this));
-        }
-      }, {
-        key: "hasSocket",
-        value: function hasSocket(io) {
-          return this.sockets.has(io);
-        }
-      }, {
-        key: "getSocketPosition",
-        value: function getSocketPosition(io) {
-          var socket = this.sockets.get(io);
-          if (!socket)
-            throw new Error("Socket not found for ".concat(io.name, " with key ").concat(io.key));
-          return socket.getPosition(this.node, this.el);
-        }
-      }, {
-        key: "onSelect",
-        value: function onSelect(e) {
-          var payload = {
-            node: this.node,
-            accumulate: e.ctrlKey,
-            e
-          };
-          this.onStart();
-          this.trigger("multiselectnode", payload);
-          this.trigger("selectnode", payload);
-        }
-      }, {
-        key: "onStart",
-        value: function onStart() {
-          this._startPosition = _toConsumableArray(this.node.position);
-        }
-      }, {
-        key: "onTranslate",
-        value: function onTranslate(dx, dy) {
-          this.trigger("translatenode", {
-            node: this.node,
-            dx,
-            dy
-          });
-        }
-      }, {
-        key: "onDrag",
-        value: function onDrag(dx, dy) {
-          var x = this._startPosition[0] + dx;
-          var y = this._startPosition[1] + dy;
-          this.translate(x, y);
-        }
-      }, {
-        key: "translate",
-        value: function translate(x, y) {
-          var node = this.node;
-          var params = {
-            node,
-            x,
-            y
-          };
-          if (!this.trigger("nodetranslate", params))
-            return;
-          var _node$position = _slicedToArray(node.position, 2), px = _node$position[0], py = _node$position[1];
-          var prev = [px, py];
-          node.position[0] = params.x;
-          node.position[1] = params.y;
-          this.update();
-          this.trigger("nodetranslated", {
-            node,
-            prev
-          });
-        }
-      }, {
-        key: "update",
-        value: function update() {
-          var _this$node$position = _slicedToArray(this.node.position, 2), x = _this$node$position[0], y = _this$node$position[1];
-          this.el.style.transform = "translate(".concat(x, "px, ").concat(y, "px)");
-        }
-      }, {
-        key: "remove",
-        value: function remove() {
-        }
-      }, {
-        key: "destroy",
-        value: function destroy() {
-          this._drag.destroy();
-        }
-      }]);
-      return NodeView2;
-    }(Emitter);
-    var EditorView = /* @__PURE__ */ function(_Emitter) {
-      _inherits(EditorView2, _Emitter);
-      var _super = _createSuper(EditorView2);
-      function EditorView2(container, components2, emitter) {
-        var _this;
-        _classCallCheck(this, EditorView2);
-        _this = _super.call(this, emitter);
-        _defineProperty(_assertThisInitialized(_this), "container", void 0);
-        _defineProperty(_assertThisInitialized(_this), "components", void 0);
-        _defineProperty(_assertThisInitialized(_this), "nodes", /* @__PURE__ */ new Map());
-        _defineProperty(_assertThisInitialized(_this), "connections", /* @__PURE__ */ new Map());
-        _defineProperty(_assertThisInitialized(_this), "area", void 0);
-        _this.container = container;
-        _this.components = components2;
-        _this.container.style.overflow = "hidden";
-        _this.container.addEventListener("click", _this.click.bind(_assertThisInitialized(_this)));
-        _this.container.addEventListener("contextmenu", function(e) {
-          return _this.trigger("contextmenu", {
-            e,
-            view: _assertThisInitialized(_this)
-          });
-        });
-        emitter.on("destroy", listenWindow("resize", _this.resize.bind(_assertThisInitialized(_this))));
-        emitter.on("destroy", function() {
-          return _this.nodes.forEach(function(view) {
-            return view.destroy();
-          });
-        });
-        _this.on("nodetranslated", _this.updateConnections.bind(_assertThisInitialized(_this)));
-        _this.on("rendersocket", function(_ref) {
-          var input = _ref.input, output = _ref.output;
-          var connections = Array.from(_this.connections.entries());
-          var relatedConnections = connections.filter(function(_ref2) {
-            var _ref3 = _slicedToArray(_ref2, 1), connection = _ref3[0];
-            return connection.input === input || connection.output === output;
-          });
-          relatedConnections.forEach(function(_ref4) {
-            var _ref5 = _slicedToArray(_ref4, 2);
-            _ref5[0];
-            var view = _ref5[1];
-            return requestAnimationFrame(function() {
-              return view.update();
-            });
-          });
-        });
-        _this.area = new Area(container, _assertThisInitialized(_this));
-        _this.container.appendChild(_this.area.el);
-        return _this;
-      }
-      _createClass(EditorView2, [{
-        key: "addNode",
-        value: function addNode(node) {
-          var component3 = this.components.get(node.name);
-          if (!component3)
-            throw new Error("Component ".concat(node.name, " not found"));
-          var nodeView = new NodeView(node, component3, this);
-          this.nodes.set(node, nodeView);
-          this.area.appendChild(nodeView.el);
-        }
-      }, {
-        key: "removeNode",
-        value: function removeNode(node) {
-          var nodeView = this.nodes.get(node);
-          this.nodes["delete"](node);
-          if (nodeView) {
-            this.area.removeChild(nodeView.el);
-            nodeView.destroy();
-          }
-        }
-      }, {
-        key: "addConnection",
-        value: function addConnection(connection) {
-          if (!connection.input.node || !connection.output.node)
-            throw new Error("Connection input or output not added to node");
-          var viewInput = this.nodes.get(connection.input.node);
-          var viewOutput = this.nodes.get(connection.output.node);
-          if (!viewInput || !viewOutput)
-            throw new Error("View node not found for input or output");
-          var connView = new ConnectionView(connection, viewInput, viewOutput, this);
-          this.connections.set(connection, connView);
-          this.area.appendChild(connView.el);
-        }
-      }, {
-        key: "removeConnection",
-        value: function removeConnection(connection) {
-          var connView = this.connections.get(connection);
-          this.connections["delete"](connection);
-          if (connView)
-            this.area.removeChild(connView.el);
-        }
-      }, {
-        key: "updateConnections",
-        value: function updateConnections(_ref6) {
-          var _this2 = this;
-          var node = _ref6.node;
-          node.getConnections().forEach(function(conn) {
-            var connView = _this2.connections.get(conn);
-            if (!connView)
-              throw new Error("Connection view not found");
-            connView.update();
-          });
-        }
-      }, {
-        key: "resize",
-        value: function resize() {
-          var container = this.container;
-          if (!container.parentElement)
-            throw new Error("Container doesn't have parent element");
-          var width = container.parentElement.clientWidth;
-          var height = container.parentElement.clientHeight;
-          container.style.width = width + "px";
-          container.style.height = height + "px";
-        }
-      }, {
-        key: "click",
-        value: function click(e) {
-          var container = this.container;
-          if (container !== e.target)
-            return;
-          if (!this.trigger("click", {
-            e,
-            container
-          }))
-            return;
-        }
-      }]);
-      return EditorView2;
-    }(Emitter);
-    var Selected = /* @__PURE__ */ function() {
-      function Selected2() {
-        _classCallCheck(this, Selected2);
-        _defineProperty(this, "list", []);
-      }
-      _createClass(Selected2, [{
-        key: "add",
-        value: function add(item) {
-          var accumulate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-          if (!accumulate)
-            this.list = [item];
-          else if (!this.contains(item))
-            this.list.push(item);
-        }
-      }, {
-        key: "clear",
-        value: function clear() {
-          this.list = [];
-        }
-      }, {
-        key: "remove",
-        value: function remove(item) {
-          this.list.splice(this.list.indexOf(item), 1);
-        }
-      }, {
-        key: "contains",
-        value: function contains(item) {
-          return this.list.indexOf(item) !== -1;
-        }
-      }, {
-        key: "each",
-        value: function each(callback) {
-          this.list.forEach(callback);
-        }
-      }]);
-      return Selected2;
-    }();
-    var Events = /* @__PURE__ */ _createClass(function Events2(handlers) {
-      _classCallCheck(this, Events2);
-      _defineProperty(this, "handlers", void 0);
-      this.handlers = _objectSpread2({
-        warn: [console.warn],
-        error: [console.error],
-        componentregister: [],
-        destroy: []
-      }, handlers);
-    });
-    var EditorEvents = /* @__PURE__ */ function(_Events) {
-      _inherits(EditorEvents2, _Events);
-      var _super = _createSuper(EditorEvents2);
-      function EditorEvents2() {
-        _classCallCheck(this, EditorEvents2);
-        return _super.call(this, {
-          nodecreate: [],
-          nodecreated: [],
-          noderemove: [],
-          noderemoved: [],
-          connectioncreate: [],
-          connectioncreated: [],
-          connectionremove: [],
-          connectionremoved: [],
-          translatenode: [],
-          nodetranslate: [],
-          nodetranslated: [],
-          nodedraged: [],
-          nodedragged: [],
-          selectnode: [],
-          multiselectnode: [],
-          nodeselect: [],
-          nodeselected: [],
-          rendernode: [],
-          rendersocket: [],
-          rendercontrol: [],
-          renderconnection: [],
-          updateconnection: [],
-          keydown: [],
-          keyup: [],
-          translate: [],
-          translated: [],
-          zoom: [],
-          zoomed: [],
-          click: [],
-          mousemove: [],
-          contextmenu: [],
-          "import": [],
-          "export": [],
-          process: [],
-          clear: []
-        });
-      }
-      return _createClass(EditorEvents2);
-    }(Events);
-    var NodeEditor = /* @__PURE__ */ function(_Context) {
-      _inherits(NodeEditor2, _Context);
-      var _super = _createSuper(NodeEditor2);
-      function NodeEditor2(id, container) {
-        var _this;
-        _classCallCheck(this, NodeEditor2);
-        _this = _super.call(this, id, new EditorEvents());
-        _defineProperty(_assertThisInitialized(_this), "nodes", []);
-        _defineProperty(_assertThisInitialized(_this), "selected", new Selected());
-        _defineProperty(_assertThisInitialized(_this), "view", void 0);
-        _this.view = new EditorView(container, _this.components, _assertThisInitialized(_this));
-        _this.on("destroy", listenWindow("keydown", function(e) {
-          return _this.trigger("keydown", e);
-        }));
-        _this.on("destroy", listenWindow("keyup", function(e) {
-          return _this.trigger("keyup", e);
-        }));
-        _this.on("selectnode", function(_ref) {
-          var node = _ref.node, accumulate = _ref.accumulate;
-          return _this.selectNode(node, accumulate);
-        });
-        _this.on("nodeselected", function() {
-          return _this.selected.each(function(n) {
-            var nodeView = _this.view.nodes.get(n);
-            nodeView && nodeView.onStart();
-          });
-        });
-        _this.on("translatenode", function(_ref2) {
-          var dx = _ref2.dx, dy = _ref2.dy;
-          return _this.selected.each(function(n) {
-            var nodeView = _this.view.nodes.get(n);
-            nodeView && nodeView.onDrag(dx, dy);
-          });
-        });
-        return _this;
-      }
-      _createClass(NodeEditor2, [{
-        key: "addNode",
-        value: function addNode(node) {
-          if (!this.trigger("nodecreate", node))
-            return;
-          this.nodes.push(node);
-          this.view.addNode(node);
-          this.trigger("nodecreated", node);
-        }
-      }, {
-        key: "removeNode",
-        value: function removeNode(node) {
-          var _this2 = this;
-          if (!this.trigger("noderemove", node))
-            return;
-          node.getConnections().forEach(function(c2) {
-            return _this2.removeConnection(c2);
-          });
-          this.nodes.splice(this.nodes.indexOf(node), 1);
-          this.view.removeNode(node);
-          this.trigger("noderemoved", node);
-        }
-      }, {
-        key: "connect",
-        value: function connect(output, input) {
-          var data = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
-          if (!this.trigger("connectioncreate", {
-            output,
-            input
-          }))
-            return;
-          try {
-            var connection = output.connectTo(input);
-            connection.data = data;
-            this.view.addConnection(connection);
-            this.trigger("connectioncreated", connection);
-          } catch (e) {
-            this.trigger("warn", e);
-          }
-        }
-      }, {
-        key: "removeConnection",
-        value: function removeConnection(connection) {
-          if (!this.trigger("connectionremove", connection))
-            return;
-          this.view.removeConnection(connection);
-          connection.remove();
-          this.trigger("connectionremoved", connection);
-        }
-      }, {
-        key: "selectNode",
-        value: function selectNode(node) {
-          var accumulate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-          if (this.nodes.indexOf(node) === -1)
-            throw new Error("Node not exist in list");
-          if (!this.trigger("nodeselect", node))
-            return;
-          this.selected.add(node, accumulate);
-          this.trigger("nodeselected", node);
-        }
-      }, {
-        key: "getComponent",
-        value: function getComponent(name) {
-          var component3 = this.components.get(name);
-          if (!component3)
-            throw "Component ".concat(name, " not found");
-          return component3;
-        }
-      }, {
-        key: "register",
-        value: function register(component3) {
-          _get(_getPrototypeOf(NodeEditor2.prototype), "register", this).call(this, component3);
-          component3.editor = this;
-        }
-      }, {
-        key: "clear",
-        value: function clear() {
-          var _this3 = this;
-          _toConsumableArray(this.nodes).forEach(function(node) {
-            return _this3.removeNode(node);
-          });
-          this.trigger("clear");
-        }
-      }, {
-        key: "toJSON",
-        value: function toJSON() {
-          var data = {
-            id: this.id,
-            nodes: {}
-          };
-          this.nodes.forEach(function(node) {
-            return data.nodes[node.id] = node.toJSON();
-          });
-          this.trigger("export", data);
-          return data;
-        }
-      }, {
-        key: "beforeImport",
-        value: function beforeImport(json) {
-          var checking = Validator.validate(this.id, json);
-          if (!checking.success) {
-            this.trigger("warn", checking.msg);
-            return false;
-          }
-          this.silent = true;
-          this.clear();
-          this.trigger("import", json);
-          return true;
-        }
-      }, {
-        key: "afterImport",
-        value: function afterImport() {
-          this.silent = false;
-          return true;
-        }
-      }, {
-        key: "fromJSON",
-        value: function() {
-          var _fromJSON = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2(json) {
-            var _this4 = this;
-            var nodes;
-            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    if (this.beforeImport(json)) {
-                      _context2.next = 2;
-                      break;
-                    }
-                    return _context2.abrupt("return", false);
-                  case 2:
-                    nodes = {};
-                    _context2.prev = 3;
-                    _context2.next = 6;
-                    return Promise.all(Object.keys(json.nodes).map(/* @__PURE__ */ function() {
-                      var _ref3 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(id) {
-                        var node, component3;
-                        return _regeneratorRuntime().wrap(function _callee$(_context) {
-                          while (1) {
-                            switch (_context.prev = _context.next) {
-                              case 0:
-                                node = json.nodes[id];
-                                component3 = _this4.getComponent(node.name);
-                                _context.next = 4;
-                                return component3.build(Node2.fromJSON(node));
-                              case 4:
-                                nodes[id] = _context.sent;
-                                _this4.addNode(nodes[id]);
-                              case 6:
-                              case "end":
-                                return _context.stop();
-                            }
-                          }
-                        }, _callee);
-                      }));
-                      return function(_x2) {
-                        return _ref3.apply(this, arguments);
-                      };
-                    }()));
-                  case 6:
-                    Object.keys(json.nodes).forEach(function(id) {
-                      var jsonNode = json.nodes[id];
-                      var node = nodes[id];
-                      Object.keys(jsonNode.outputs).forEach(function(key) {
-                        var outputJson = jsonNode.outputs[key];
-                        outputJson.connections.forEach(function(jsonConnection) {
-                          var nodeId = jsonConnection.node;
-                          var data = jsonConnection.data;
-                          var targetOutput = node.outputs.get(key);
-                          var targetInput = nodes[nodeId].inputs.get(jsonConnection.input);
-                          if (!targetOutput || !targetInput) {
-                            return _this4.trigger("error", "IO not found for node ".concat(node.id));
-                          }
-                          _this4.connect(targetOutput, targetInput, data);
-                        });
-                      });
-                    });
-                    _context2.next = 13;
-                    break;
-                  case 9:
-                    _context2.prev = 9;
-                    _context2.t0 = _context2["catch"](3);
-                    this.trigger("warn", _context2.t0);
-                    return _context2.abrupt("return", !this.afterImport());
-                  case 13:
-                    return _context2.abrupt("return", this.afterImport());
-                  case 14:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this, [[3, 9]]);
-          }));
-          function fromJSON(_x) {
-            return _fromJSON.apply(this, arguments);
-          }
-          return fromJSON;
-        }()
-      }]);
-      return NodeEditor2;
-    }(Context);
-    var Output2 = /* @__PURE__ */ function(_IO) {
-      _inherits(Output3, _IO);
-      var _super = _createSuper(Output3);
-      function Output3(key, title, socket) {
-        var multiConns = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : true;
-        _classCallCheck(this, Output3);
-        return _super.call(this, key, title, socket, multiConns);
-      }
-      _createClass(Output3, [{
-        key: "hasConnection",
-        value: function hasConnection() {
-          return this.connections.length > 0;
-        }
-      }, {
-        key: "connectTo",
-        value: function connectTo(input) {
-          if (!this.socket.compatibleWith(input.socket))
-            throw new Error("Sockets not compatible");
-          if (!input.multipleConnections && input.hasConnection())
-            throw new Error("Input already has one connection");
-          if (!this.multipleConnections && this.hasConnection())
-            throw new Error("Output already has one connection");
-          var connection = new Connection(this, input);
-          this.connections.push(connection);
-          return connection;
-        }
-      }, {
-        key: "connectedTo",
-        value: function connectedTo(input) {
-          return this.connections.some(function(item) {
-            return item.input === input;
-          });
-        }
-      }, {
-        key: "toJSON",
-        value: function toJSON() {
-          return {
-            "connections": this.connections.map(function(c2) {
-              if (!c2.input.node)
-                throw new Error("Node not added to Input");
-              return {
-                node: c2.input.node.id,
-                input: c2.input.key,
-                data: c2.data
-              };
-            })
-          };
-        }
-      }]);
-      return Output3;
-    }(IO);
-    var Socket3 = /* @__PURE__ */ function() {
-      function Socket4(name) {
-        var data = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-        _classCallCheck(this, Socket4);
-        _defineProperty(this, "name", void 0);
-        _defineProperty(this, "data", void 0);
-        _defineProperty(this, "compatible", []);
-        this.name = name;
-        this.data = data;
-        this.compatible = [];
-      }
-      _createClass(Socket4, [{
-        key: "combineWith",
-        value: function combineWith(socket) {
-          this.compatible.push(socket);
-        }
-      }, {
-        key: "compatibleWith",
-        value: function compatibleWith(socket) {
-          return this === socket || this.compatible.includes(socket);
-        }
-      }]);
-      return Socket4;
-    }();
-    function intersect(array1, array2) {
-      return array1.filter(function(value) {
-        return -1 !== array2.indexOf(value);
-      });
-    }
-    var Recursion = /* @__PURE__ */ function() {
-      function Recursion2(nodes) {
-        _classCallCheck(this, Recursion2);
-        _defineProperty(this, "nodes", void 0);
-        this.nodes = nodes;
-      }
-      _createClass(Recursion2, [{
-        key: "extractInputNodes",
-        value: function extractInputNodes(node) {
-          var _this = this;
-          return Object.keys(node.inputs).reduce(function(acc, key) {
-            var connections = node.inputs[key].connections;
-            var nodesData = (connections || []).reduce(function(b2, c2) {
-              return [].concat(_toConsumableArray(b2), [_this.nodes[c2.node]]);
-            }, []);
-            return [].concat(_toConsumableArray(acc), _toConsumableArray(nodesData));
-          }, []);
-        }
-      }, {
-        key: "findSelf",
-        value: function findSelf(list, inputNodes) {
-          var inters = intersect(list, inputNodes);
-          if (inters.length)
-            return inters[0];
-          var _iterator = _createForOfIteratorHelper(inputNodes), _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done; ) {
-              var node = _step.value;
-              var l2 = [node].concat(_toConsumableArray(list));
-              var inter = this.findSelf(l2, this.extractInputNodes(node));
-              if (inter)
-                return inter;
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-          return null;
-        }
-      }, {
-        key: "detect",
-        value: function detect() {
-          var _this2 = this;
-          var nodesArr = Object.keys(this.nodes).map(function(id) {
-            return _this2.nodes[id];
-          });
-          var _iterator2 = _createForOfIteratorHelper(nodesArr), _step2;
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-              var node = _step2.value;
-              var inters = this.findSelf([node], this.extractInputNodes(node));
-              if (inters)
-                return inters;
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-          return null;
-        }
-      }]);
-      return Recursion2;
-    }();
-    var State = {
-      AVAILABLE: 0,
-      PROCESSED: 1,
-      ABORT: 2
-    };
-    var EngineEvents = /* @__PURE__ */ function(_Events) {
-      _inherits(EngineEvents2, _Events);
-      var _super = _createSuper(EngineEvents2);
-      function EngineEvents2() {
-        _classCallCheck(this, EngineEvents2);
-        return _super.call(this, {});
-      }
-      return _createClass(EngineEvents2);
-    }(Events);
-    var Engine = /* @__PURE__ */ function(_Context) {
-      _inherits(Engine2, _Context);
-      var _super = _createSuper(Engine2);
-      function Engine2(id) {
-        var _this;
-        _classCallCheck(this, Engine2);
-        _this = _super.call(this, id, new EngineEvents());
-        _defineProperty(_assertThisInitialized(_this), "args", []);
-        _defineProperty(_assertThisInitialized(_this), "data", null);
-        _defineProperty(_assertThisInitialized(_this), "state", State.AVAILABLE);
-        _defineProperty(_assertThisInitialized(_this), "forwarded", /* @__PURE__ */ new Set());
-        _defineProperty(_assertThisInitialized(_this), "onAbort", function() {
-        });
-        return _this;
-      }
-      _createClass(Engine2, [{
-        key: "clone",
-        value: function clone() {
-          var engine = new Engine2(this.id);
-          this.components.forEach(function(c2) {
-            return engine.register(c2);
-          });
-          return engine;
-        }
-      }, {
-        key: "throwError",
-        value: function() {
-          var _throwError = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(message) {
-            var data, _args = arguments;
-            return _regeneratorRuntime().wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    data = _args.length > 1 && _args[1] !== void 0 ? _args[1] : null;
-                    _context.next = 3;
-                    return this.abort();
-                  case 3:
-                    this.trigger("error", {
-                      message,
-                      data
-                    });
-                    this.processDone();
-                    return _context.abrupt("return", "error");
-                  case 6:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee, this);
-          }));
-          function throwError(_x) {
-            return _throwError.apply(this, arguments);
-          }
-          return throwError;
-        }()
-      }, {
-        key: "processStart",
-        value: function processStart() {
-          if (this.state === State.AVAILABLE) {
-            this.state = State.PROCESSED;
-            return true;
-          }
-          if (this.state === State.ABORT) {
-            return false;
-          }
-          console.warn("The process is busy and has not been restarted.\n                Use abort() to force it to complete");
-          return false;
-        }
-      }, {
-        key: "processDone",
-        value: function processDone() {
-          var success = this.state !== State.ABORT;
-          this.state = State.AVAILABLE;
-          if (!success) {
-            this.onAbort();
-            this.onAbort = function() {
-            };
-          }
-          return success;
-        }
-      }, {
-        key: "abort",
-        value: function() {
-          var _abort = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2() {
-            var _this2 = this;
-            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    return _context2.abrupt("return", new Promise(function(ret) {
-                      if (_this2.state === State.PROCESSED) {
-                        _this2.state = State.ABORT;
-                        _this2.onAbort = ret;
-                      } else if (_this2.state === State.ABORT) {
-                        _this2.onAbort();
-                        _this2.onAbort = ret;
-                      } else
-                        ret();
-                    }));
-                  case 1:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2);
-          }));
-          function abort() {
-            return _abort.apply(this, arguments);
-          }
-          return abort;
-        }()
-      }, {
-        key: "lock",
-        value: function() {
-          var _lock = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee3(node) {
-            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-              while (1) {
-                switch (_context3.prev = _context3.next) {
-                  case 0:
-                    return _context3.abrupt("return", new Promise(function(res) {
-                      node.unlockPool = node.unlockPool || [];
-                      if (node.busy && !node.outputData)
-                        node.unlockPool.push(res);
-                      else
-                        res();
-                      node.busy = true;
-                    }));
-                  case 1:
-                  case "end":
-                    return _context3.stop();
-                }
-              }
-            }, _callee3);
-          }));
-          function lock(_x2) {
-            return _lock.apply(this, arguments);
-          }
-          return lock;
-        }()
-      }, {
-        key: "unlock",
-        value: function unlock(node) {
-          node.unlockPool.forEach(function(a) {
-            return a();
-          });
-          node.unlockPool = [];
-          node.busy = false;
-        }
-      }, {
-        key: "extractInputData",
-        value: function() {
-          var _extractInputData = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee5(node) {
-            var _this3 = this;
-            var obj, _i, _Object$keys, key, input, conns, connData;
-            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-              while (1) {
-                switch (_context5.prev = _context5.next) {
-                  case 0:
-                    obj = {};
-                    _i = 0, _Object$keys = Object.keys(node.inputs);
-                  case 2:
-                    if (!(_i < _Object$keys.length)) {
-                      _context5.next = 13;
-                      break;
-                    }
-                    key = _Object$keys[_i];
-                    input = node.inputs[key];
-                    conns = input.connections;
-                    _context5.next = 8;
-                    return Promise.all(conns.map(/* @__PURE__ */ function() {
-                      var _ref = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee4(c2) {
-                        var prevNode, outputs;
-                        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-                          while (1) {
-                            switch (_context4.prev = _context4.next) {
-                              case 0:
-                                prevNode = _this3.data.nodes[c2.node];
-                                _context4.next = 3;
-                                return _this3.processNode(prevNode);
-                              case 3:
-                                outputs = _context4.sent;
-                                if (outputs) {
-                                  _context4.next = 8;
-                                  break;
-                                }
-                                _this3.abort();
-                                _context4.next = 9;
-                                break;
-                              case 8:
-                                return _context4.abrupt("return", outputs[c2.output]);
-                              case 9:
-                              case "end":
-                                return _context4.stop();
-                            }
-                          }
-                        }, _callee4);
-                      }));
-                      return function(_x4) {
-                        return _ref.apply(this, arguments);
-                      };
-                    }()));
-                  case 8:
-                    connData = _context5.sent;
-                    obj[key] = connData;
-                  case 10:
-                    _i++;
-                    _context5.next = 2;
-                    break;
-                  case 13:
-                    return _context5.abrupt("return", obj);
-                  case 14:
-                  case "end":
-                    return _context5.stop();
-                }
-              }
-            }, _callee5);
-          }));
-          function extractInputData(_x3) {
-            return _extractInputData.apply(this, arguments);
-          }
-          return extractInputData;
-        }()
-      }, {
-        key: "processWorker",
-        value: function() {
-          var _processWorker = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee6(node) {
-            var inputData, component3, outputData;
-            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-              while (1) {
-                switch (_context6.prev = _context6.next) {
-                  case 0:
-                    _context6.next = 2;
-                    return this.extractInputData(node);
-                  case 2:
-                    inputData = _context6.sent;
-                    component3 = this.components.get(node.name);
-                    outputData = {};
-                    _context6.prev = 5;
-                    _context6.next = 8;
-                    return component3.worker.apply(component3, [node, inputData, outputData].concat(_toConsumableArray(this.args)));
-                  case 8:
-                    _context6.next = 14;
-                    break;
-                  case 10:
-                    _context6.prev = 10;
-                    _context6.t0 = _context6["catch"](5);
-                    this.abort();
-                    this.trigger("warn", _context6.t0);
-                  case 14:
-                    return _context6.abrupt("return", outputData);
-                  case 15:
-                  case "end":
-                    return _context6.stop();
-                }
-              }
-            }, _callee6, this, [[5, 10]]);
-          }));
-          function processWorker(_x5) {
-            return _processWorker.apply(this, arguments);
-          }
-          return processWorker;
-        }()
-      }, {
-        key: "processNode",
-        value: function() {
-          var _processNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee7(node) {
-            return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-              while (1) {
-                switch (_context7.prev = _context7.next) {
-                  case 0:
-                    if (!(this.state === State.ABORT || !node)) {
-                      _context7.next = 2;
-                      break;
-                    }
-                    return _context7.abrupt("return", null);
-                  case 2:
-                    _context7.next = 4;
-                    return this.lock(node);
-                  case 4:
-                    if (node.outputData) {
-                      _context7.next = 8;
-                      break;
-                    }
-                    _context7.next = 7;
-                    return this.processWorker(node);
-                  case 7:
-                    node.outputData = _context7.sent;
-                  case 8:
-                    this.unlock(node);
-                    return _context7.abrupt("return", node.outputData);
-                  case 10:
-                  case "end":
-                    return _context7.stop();
-                }
-              }
-            }, _callee7, this);
-          }));
-          function processNode(_x6) {
-            return _processNode.apply(this, arguments);
-          }
-          return processNode;
-        }()
-      }, {
-        key: "forwardProcess",
-        value: function() {
-          var _forwardProcess = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee10(node) {
-            var _this4 = this;
-            return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-              while (1) {
-                switch (_context10.prev = _context10.next) {
-                  case 0:
-                    if (!(this.state === State.ABORT)) {
-                      _context10.next = 2;
-                      break;
-                    }
-                    return _context10.abrupt("return", null);
-                  case 2:
-                    _context10.next = 4;
-                    return Promise.all(Object.keys(node.outputs).map(/* @__PURE__ */ function() {
-                      var _ref2 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee9(key) {
-                        var output;
-                        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-                          while (1) {
-                            switch (_context9.prev = _context9.next) {
-                              case 0:
-                                output = node.outputs[key];
-                                _context9.next = 3;
-                                return Promise.all(output.connections.map(/* @__PURE__ */ function() {
-                                  var _ref3 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee8(c2) {
-                                    var nextNode;
-                                    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-                                      while (1) {
-                                        switch (_context8.prev = _context8.next) {
-                                          case 0:
-                                            nextNode = _this4.data.nodes[c2.node];
-                                            if (_this4.forwarded.has(nextNode)) {
-                                              _context8.next = 7;
-                                              break;
-                                            }
-                                            _this4.forwarded.add(nextNode);
-                                            _context8.next = 5;
-                                            return _this4.processNode(nextNode);
-                                          case 5:
-                                            _context8.next = 7;
-                                            return _this4.forwardProcess(nextNode);
-                                          case 7:
-                                          case "end":
-                                            return _context8.stop();
-                                        }
-                                      }
-                                    }, _callee8);
-                                  }));
-                                  return function(_x9) {
-                                    return _ref3.apply(this, arguments);
-                                  };
-                                }()));
-                              case 3:
-                                return _context9.abrupt("return", _context9.sent);
-                              case 4:
-                              case "end":
-                                return _context9.stop();
-                            }
-                          }
-                        }, _callee9);
-                      }));
-                      return function(_x8) {
-                        return _ref2.apply(this, arguments);
-                      };
-                    }()));
-                  case 4:
-                    return _context10.abrupt("return", _context10.sent);
-                  case 5:
-                  case "end":
-                    return _context10.stop();
-                }
-              }
-            }, _callee10, this);
-          }));
-          function forwardProcess(_x7) {
-            return _forwardProcess.apply(this, arguments);
-          }
-          return forwardProcess;
-        }()
-      }, {
-        key: "copy",
-        value: function copy(data) {
-          data = Object.assign({}, data);
-          data.nodes = Object.assign({}, data.nodes);
-          Object.keys(data.nodes).forEach(function(key) {
-            data.nodes[key] = Object.assign({}, data.nodes[key]);
-          });
-          return data;
-        }
-      }, {
-        key: "validate",
-        value: function() {
-          var _validate = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee11(data) {
-            var checking, recursion, recurrentNode;
-            return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-              while (1) {
-                switch (_context11.prev = _context11.next) {
-                  case 0:
-                    checking = Validator.validate(this.id, data);
-                    recursion = new Recursion(data.nodes);
-                    if (checking.success) {
-                      _context11.next = 6;
-                      break;
-                    }
-                    _context11.next = 5;
-                    return this.throwError(checking.msg);
-                  case 5:
-                    return _context11.abrupt("return", _context11.sent);
-                  case 6:
-                    recurrentNode = recursion.detect();
-                    if (!recurrentNode) {
-                      _context11.next = 11;
-                      break;
-                    }
-                    _context11.next = 10;
-                    return this.throwError("Recursion detected", recurrentNode);
-                  case 10:
-                    return _context11.abrupt("return", _context11.sent);
-                  case 11:
-                    return _context11.abrupt("return", true);
-                  case 12:
-                  case "end":
-                    return _context11.stop();
-                }
-              }
-            }, _callee11, this);
-          }));
-          function validate(_x10) {
-            return _validate.apply(this, arguments);
-          }
-          return validate;
-        }()
-      }, {
-        key: "processStartNode",
-        value: function() {
-          var _processStartNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee12(id) {
-            var startNode;
-            return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-              while (1) {
-                switch (_context12.prev = _context12.next) {
-                  case 0:
-                    if (id) {
-                      _context12.next = 2;
-                      break;
-                    }
-                    return _context12.abrupt("return");
-                  case 2:
-                    startNode = this.data.nodes[id];
-                    if (startNode) {
-                      _context12.next = 7;
-                      break;
-                    }
-                    _context12.next = 6;
-                    return this.throwError("Node with such id not found");
-                  case 6:
-                    return _context12.abrupt("return", _context12.sent);
-                  case 7:
-                    _context12.next = 9;
-                    return this.processNode(startNode);
-                  case 9:
-                    _context12.next = 11;
-                    return this.forwardProcess(startNode);
-                  case 11:
-                  case "end":
-                    return _context12.stop();
-                }
-              }
-            }, _callee12, this);
-          }));
-          function processStartNode(_x11) {
-            return _processStartNode.apply(this, arguments);
-          }
-          return processStartNode;
-        }()
-      }, {
-        key: "processUnreachable",
-        value: function() {
-          var _processUnreachable = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee13() {
-            var data, i, node;
-            return _regeneratorRuntime().wrap(function _callee13$(_context13) {
-              while (1) {
-                switch (_context13.prev = _context13.next) {
-                  case 0:
-                    data = this.data;
-                    _context13.t0 = _regeneratorRuntime().keys(data.nodes);
-                  case 2:
-                    if ((_context13.t1 = _context13.t0()).done) {
-                      _context13.next = 12;
-                      break;
-                    }
-                    i = _context13.t1.value;
-                    node = data.nodes[i];
-                    if (!(typeof node.outputData === "undefined")) {
-                      _context13.next = 10;
-                      break;
-                    }
-                    _context13.next = 8;
-                    return this.processNode(node);
-                  case 8:
-                    _context13.next = 10;
-                    return this.forwardProcess(node);
-                  case 10:
-                    _context13.next = 2;
-                    break;
-                  case 12:
-                  case "end":
-                    return _context13.stop();
-                }
-              }
-            }, _callee13, this);
-          }));
-          function processUnreachable() {
-            return _processUnreachable.apply(this, arguments);
-          }
-          return processUnreachable;
-        }()
-      }, {
-        key: "process",
-        value: function() {
-          var _process = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee14(data) {
-            var startId, _len, args, _key, _args14 = arguments;
-            return _regeneratorRuntime().wrap(function _callee14$(_context14) {
-              while (1) {
-                switch (_context14.prev = _context14.next) {
-                  case 0:
-                    startId = _args14.length > 1 && _args14[1] !== void 0 ? _args14[1] : null;
-                    if (this.processStart()) {
-                      _context14.next = 3;
-                      break;
-                    }
-                    return _context14.abrupt("return");
-                  case 3:
-                    if (this.validate(data)) {
-                      _context14.next = 5;
-                      break;
-                    }
-                    return _context14.abrupt("return");
-                  case 5:
-                    this.data = this.copy(data);
-                    for (_len = _args14.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                      args[_key - 2] = _args14[_key];
-                    }
-                    this.args = args;
-                    this.forwarded = /* @__PURE__ */ new Set();
-                    _context14.next = 11;
-                    return this.processStartNode(startId);
-                  case 11:
-                    _context14.next = 13;
-                    return this.processUnreachable();
-                  case 13:
-                    return _context14.abrupt("return", this.processDone() ? "success" : "aborted");
-                  case 14:
-                  case "end":
-                    return _context14.stop();
-                }
-              }
-            }, _callee14, this);
-          }));
-          function process2(_x12) {
-            return _process.apply(this, arguments);
-          }
-          return process2;
-        }()
-      }]);
-      return Engine2;
-    }(Context);
-    var index = {
-      Engine,
-      Recursion,
-      Component: Component2,
-      Control,
-      Connection,
-      Emitter,
-      Input: Input2,
-      IO,
-      Node: Node2,
-      NodeEditor,
-      Output: Output2,
-      Socket: Socket3
-    };
-    exports.Component = Component2;
-    exports.Connection = Connection;
-    exports.Control = Control;
-    exports.Emitter = Emitter;
-    exports.Engine = Engine;
-    exports.IO = IO;
-    exports.Input = Input2;
-    exports.Node = Node2;
-    exports.NodeEditor = NodeEditor;
-    exports.Output = Output2;
-    exports.Recursion = Recursion;
-    exports.Socket = Socket3;
-    exports["default"] = index;
-  }
-});
 var require_cjs = __commonJS2({
   "../../node_modules/deepmerge/dist/cjs.js"(exports, module) {
     "use strict";
@@ -10679,78 +7832,3494 @@ var init_consola_36c0034f = __esm({
     consola = createConsola2();
   }
 });
-var Sockets_exports = {};
-__export(Sockets_exports, {
-  JSONArraySocket: () => JSONArraySocket,
-  JSONSocket: () => JSONSocket,
-  audioArraySocket: () => audioArraySocket,
-  booleanSocket: () => booleanSocket,
-  createSocket: () => createSocket,
-  getSocketFromString: () => getSocketFromString,
-  imageArraySocket: () => imageArraySocket,
-  imageSocket: () => imageSocket,
-  isValidSocket: () => isValidSocket,
-  markdownSocket: () => markdownSocket,
-  numSocket: () => numSocket,
-  promptSocket: () => promptSocket,
-  textArraySocket: () => textArraySocket,
-  textSocket: () => textSocket,
-  toolArraySocket: () => toolArraySocket,
-  urlSocket: () => urlSocket
-});
-var import_rete = __toESM2(require_rete_common(), 1);
-var numSocket = new import_rete.Socket("Number value");
-var promptSocket = new import_rete.Socket("Prompt value");
-var textSocket = new import_rete.Socket("String value");
-var textArraySocket = new import_rete.Socket("String Array value");
-var imageArraySocket = new import_rete.Socket("Image Array value");
-var imageSocket = new import_rete.Socket("Image Socket");
-var JSONSocket = new import_rete.Socket("Object Socket");
-var JSONArraySocket = new import_rete.Socket("Object Array Socket");
-var audioArraySocket = new import_rete.Socket("Audio Array value");
-var urlSocket = new import_rete.Socket("Url value");
-var booleanSocket = new import_rete.Socket("Boolean value");
-var markdownSocket = new import_rete.Socket("Markdown value");
-var toolArraySocket = new import_rete.Socket("Tool Array Socket");
-var isValidSocket = (socket) => {
-  return socket === numSocket || socket === promptSocket || socket === audioArraySocket || socket === textSocket || socket === imageArraySocket || socket === imageSocket || socket === JSONSocket || socket === JSONArraySocket || socket === urlSocket || socket === booleanSocket || socket === textArraySocket || socket === markdownSocket || socket === toolArraySocket;
-};
-var createSocket = (name) => new import_rete.Socket(name);
-var getSocketFromString = (socketType) => {
-  switch (socketType) {
-    case "number":
-    case "float":
-    case "integer":
-      return numSocket;
-    case "bool":
-    case "boolean":
-      return booleanSocket;
-    case "prompt":
-      return promptSocket;
-    case "string":
-      return textSocket;
-    case "string[]":
-      return textArraySocket;
-    case "image[]":
-      return imageArraySocket;
-    case "image":
-      return imageSocket;
-    case "object":
-      return JSONSocket;
-    case "object[]":
-      return JSONArraySocket;
-    case "audio[]":
-      return audioArraySocket;
-    case "url":
-      return urlSocket;
-    case "markdown":
-      return markdownSocket;
-    case "tool[]":
-      return toolArraySocket;
-    default:
-      throw new Error(`Invalid socket type: ${socketType}`);
+var require_he = __commonJS2({
+  "../../node_modules/he/he.js"(exports, module) {
+    "use strict";
+    (function(root) {
+      var freeExports = typeof exports == "object" && exports;
+      var freeModule = typeof module == "object" && module && module.exports == freeExports && module;
+      var freeGlobal = typeof global == "object" && global;
+      if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
+        root = freeGlobal;
+      }
+      var regexAstralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+      var regexAsciiWhitelist = /[\x01-\x7F]/g;
+      var regexBmpWhitelist = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
+      var regexEncodeNonAscii = /<\u20D2|=\u20E5|>\u20D2|\u205F\u200A|\u219D\u0338|\u2202\u0338|\u2220\u20D2|\u2229\uFE00|\u222A\uFE00|\u223C\u20D2|\u223D\u0331|\u223E\u0333|\u2242\u0338|\u224B\u0338|\u224D\u20D2|\u224E\u0338|\u224F\u0338|\u2250\u0338|\u2261\u20E5|\u2264\u20D2|\u2265\u20D2|\u2266\u0338|\u2267\u0338|\u2268\uFE00|\u2269\uFE00|\u226A\u0338|\u226A\u20D2|\u226B\u0338|\u226B\u20D2|\u227F\u0338|\u2282\u20D2|\u2283\u20D2|\u228A\uFE00|\u228B\uFE00|\u228F\u0338|\u2290\u0338|\u2293\uFE00|\u2294\uFE00|\u22B4\u20D2|\u22B5\u20D2|\u22D8\u0338|\u22D9\u0338|\u22DA\uFE00|\u22DB\uFE00|\u22F5\u0338|\u22F9\u0338|\u2933\u0338|\u29CF\u0338|\u29D0\u0338|\u2A6D\u0338|\u2A70\u0338|\u2A7D\u0338|\u2A7E\u0338|\u2AA1\u0338|\u2AA2\u0338|\u2AAC\uFE00|\u2AAD\uFE00|\u2AAF\u0338|\u2AB0\u0338|\u2AC5\u0338|\u2AC6\u0338|\u2ACB\uFE00|\u2ACC\uFE00|\u2AFD\u20E5|[\xA0-\u0113\u0116-\u0122\u0124-\u012B\u012E-\u014D\u0150-\u017E\u0192\u01B5\u01F5\u0237\u02C6\u02C7\u02D8-\u02DD\u0311\u0391-\u03A1\u03A3-\u03A9\u03B1-\u03C9\u03D1\u03D2\u03D5\u03D6\u03DC\u03DD\u03F0\u03F1\u03F5\u03F6\u0401-\u040C\u040E-\u044F\u0451-\u045C\u045E\u045F\u2002-\u2005\u2007-\u2010\u2013-\u2016\u2018-\u201A\u201C-\u201E\u2020-\u2022\u2025\u2026\u2030-\u2035\u2039\u203A\u203E\u2041\u2043\u2044\u204F\u2057\u205F-\u2063\u20AC\u20DB\u20DC\u2102\u2105\u210A-\u2113\u2115-\u211E\u2122\u2124\u2127-\u2129\u212C\u212D\u212F-\u2131\u2133-\u2138\u2145-\u2148\u2153-\u215E\u2190-\u219B\u219D-\u21A7\u21A9-\u21AE\u21B0-\u21B3\u21B5-\u21B7\u21BA-\u21DB\u21DD\u21E4\u21E5\u21F5\u21FD-\u2205\u2207-\u2209\u220B\u220C\u220F-\u2214\u2216-\u2218\u221A\u221D-\u2238\u223A-\u2257\u2259\u225A\u225C\u225F-\u2262\u2264-\u228B\u228D-\u229B\u229D-\u22A5\u22A7-\u22B0\u22B2-\u22BB\u22BD-\u22DB\u22DE-\u22E3\u22E6-\u22F7\u22F9-\u22FE\u2305\u2306\u2308-\u2310\u2312\u2313\u2315\u2316\u231C-\u231F\u2322\u2323\u232D\u232E\u2336\u233D\u233F\u237C\u23B0\u23B1\u23B4-\u23B6\u23DC-\u23DF\u23E2\u23E7\u2423\u24C8\u2500\u2502\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2550-\u256C\u2580\u2584\u2588\u2591-\u2593\u25A1\u25AA\u25AB\u25AD\u25AE\u25B1\u25B3-\u25B5\u25B8\u25B9\u25BD-\u25BF\u25C2\u25C3\u25CA\u25CB\u25EC\u25EF\u25F8-\u25FC\u2605\u2606\u260E\u2640\u2642\u2660\u2663\u2665\u2666\u266A\u266D-\u266F\u2713\u2717\u2720\u2736\u2758\u2772\u2773\u27C8\u27C9\u27E6-\u27ED\u27F5-\u27FA\u27FC\u27FF\u2902-\u2905\u290C-\u2913\u2916\u2919-\u2920\u2923-\u292A\u2933\u2935-\u2939\u293C\u293D\u2945\u2948-\u294B\u294E-\u2976\u2978\u2979\u297B-\u297F\u2985\u2986\u298B-\u2996\u299A\u299C\u299D\u29A4-\u29B7\u29B9\u29BB\u29BC\u29BE-\u29C5\u29C9\u29CD-\u29D0\u29DC-\u29DE\u29E3-\u29E5\u29EB\u29F4\u29F6\u2A00-\u2A02\u2A04\u2A06\u2A0C\u2A0D\u2A10-\u2A17\u2A22-\u2A27\u2A29\u2A2A\u2A2D-\u2A31\u2A33-\u2A3C\u2A3F\u2A40\u2A42-\u2A4D\u2A50\u2A53-\u2A58\u2A5A-\u2A5D\u2A5F\u2A66\u2A6A\u2A6D-\u2A75\u2A77-\u2A9A\u2A9D-\u2AA2\u2AA4-\u2AB0\u2AB3-\u2AC8\u2ACB\u2ACC\u2ACF-\u2ADB\u2AE4\u2AE6-\u2AE9\u2AEB-\u2AF3\u2AFD\uFB00-\uFB04]|\uD835[\uDC9C\uDC9E\uDC9F\uDCA2\uDCA5\uDCA6\uDCA9-\uDCAC\uDCAE-\uDCB9\uDCBB\uDCBD-\uDCC3\uDCC5-\uDCCF\uDD04\uDD05\uDD07-\uDD0A\uDD0D-\uDD14\uDD16-\uDD1C\uDD1E-\uDD39\uDD3B-\uDD3E\uDD40-\uDD44\uDD46\uDD4A-\uDD50\uDD52-\uDD6B]/g;
+      var encodeMap = { "\xC1": "Aacute", "\xE1": "aacute", "\u0102": "Abreve", "\u0103": "abreve", "\u223E": "ac", "\u223F": "acd", "\u223E\u0333": "acE", "\xC2": "Acirc", "\xE2": "acirc", "\xB4": "acute", "\u0410": "Acy", "\u0430": "acy", "\xC6": "AElig", "\xE6": "aelig", "\u2061": "af", "\u{1D504}": "Afr", "\u{1D51E}": "afr", "\xC0": "Agrave", "\xE0": "agrave", "\u2135": "aleph", "\u0391": "Alpha", "\u03B1": "alpha", "\u0100": "Amacr", "\u0101": "amacr", "\u2A3F": "amalg", "&": "amp", "\u2A55": "andand", "\u2A53": "And", "\u2227": "and", "\u2A5C": "andd", "\u2A58": "andslope", "\u2A5A": "andv", "\u2220": "ang", "\u29A4": "ange", "\u29A8": "angmsdaa", "\u29A9": "angmsdab", "\u29AA": "angmsdac", "\u29AB": "angmsdad", "\u29AC": "angmsdae", "\u29AD": "angmsdaf", "\u29AE": "angmsdag", "\u29AF": "angmsdah", "\u2221": "angmsd", "\u221F": "angrt", "\u22BE": "angrtvb", "\u299D": "angrtvbd", "\u2222": "angsph", "\xC5": "angst", "\u237C": "angzarr", "\u0104": "Aogon", "\u0105": "aogon", "\u{1D538}": "Aopf", "\u{1D552}": "aopf", "\u2A6F": "apacir", "\u2248": "ap", "\u2A70": "apE", "\u224A": "ape", "\u224B": "apid", "'": "apos", "\xE5": "aring", "\u{1D49C}": "Ascr", "\u{1D4B6}": "ascr", "\u2254": "colone", "*": "ast", "\u224D": "CupCap", "\xC3": "Atilde", "\xE3": "atilde", "\xC4": "Auml", "\xE4": "auml", "\u2233": "awconint", "\u2A11": "awint", "\u224C": "bcong", "\u03F6": "bepsi", "\u2035": "bprime", "\u223D": "bsim", "\u22CD": "bsime", "\u2216": "setmn", "\u2AE7": "Barv", "\u22BD": "barvee", "\u2305": "barwed", "\u2306": "Barwed", "\u23B5": "bbrk", "\u23B6": "bbrktbrk", "\u0411": "Bcy", "\u0431": "bcy", "\u201E": "bdquo", "\u2235": "becaus", "\u29B0": "bemptyv", "\u212C": "Bscr", "\u0392": "Beta", "\u03B2": "beta", "\u2136": "beth", "\u226C": "twixt", "\u{1D505}": "Bfr", "\u{1D51F}": "bfr", "\u22C2": "xcap", "\u25EF": "xcirc", "\u22C3": "xcup", "\u2A00": "xodot", "\u2A01": "xoplus", "\u2A02": "xotime", "\u2A06": "xsqcup", "\u2605": "starf", "\u25BD": "xdtri", "\u25B3": "xutri", "\u2A04": "xuplus", "\u22C1": "Vee", "\u22C0": "Wedge", "\u290D": "rbarr", "\u29EB": "lozf", "\u25AA": "squf", "\u25B4": "utrif", "\u25BE": "dtrif", "\u25C2": "ltrif", "\u25B8": "rtrif", "\u2423": "blank", "\u2592": "blk12", "\u2591": "blk14", "\u2593": "blk34", "\u2588": "block", "=\u20E5": "bne", "\u2261\u20E5": "bnequiv", "\u2AED": "bNot", "\u2310": "bnot", "\u{1D539}": "Bopf", "\u{1D553}": "bopf", "\u22A5": "bot", "\u22C8": "bowtie", "\u29C9": "boxbox", "\u2510": "boxdl", "\u2555": "boxdL", "\u2556": "boxDl", "\u2557": "boxDL", "\u250C": "boxdr", "\u2552": "boxdR", "\u2553": "boxDr", "\u2554": "boxDR", "\u2500": "boxh", "\u2550": "boxH", "\u252C": "boxhd", "\u2564": "boxHd", "\u2565": "boxhD", "\u2566": "boxHD", "\u2534": "boxhu", "\u2567": "boxHu", "\u2568": "boxhU", "\u2569": "boxHU", "\u229F": "minusb", "\u229E": "plusb", "\u22A0": "timesb", "\u2518": "boxul", "\u255B": "boxuL", "\u255C": "boxUl", "\u255D": "boxUL", "\u2514": "boxur", "\u2558": "boxuR", "\u2559": "boxUr", "\u255A": "boxUR", "\u2502": "boxv", "\u2551": "boxV", "\u253C": "boxvh", "\u256A": "boxvH", "\u256B": "boxVh", "\u256C": "boxVH", "\u2524": "boxvl", "\u2561": "boxvL", "\u2562": "boxVl", "\u2563": "boxVL", "\u251C": "boxvr", "\u255E": "boxvR", "\u255F": "boxVr", "\u2560": "boxVR", "\u02D8": "breve", "\xA6": "brvbar", "\u{1D4B7}": "bscr", "\u204F": "bsemi", "\u29C5": "bsolb", "\\": "bsol", "\u27C8": "bsolhsub", "\u2022": "bull", "\u224E": "bump", "\u2AAE": "bumpE", "\u224F": "bumpe", "\u0106": "Cacute", "\u0107": "cacute", "\u2A44": "capand", "\u2A49": "capbrcup", "\u2A4B": "capcap", "\u2229": "cap", "\u22D2": "Cap", "\u2A47": "capcup", "\u2A40": "capdot", "\u2145": "DD", "\u2229\uFE00": "caps", "\u2041": "caret", "\u02C7": "caron", "\u212D": "Cfr", "\u2A4D": "ccaps", "\u010C": "Ccaron", "\u010D": "ccaron", "\xC7": "Ccedil", "\xE7": "ccedil", "\u0108": "Ccirc", "\u0109": "ccirc", "\u2230": "Cconint", "\u2A4C": "ccups", "\u2A50": "ccupssm", "\u010A": "Cdot", "\u010B": "cdot", "\xB8": "cedil", "\u29B2": "cemptyv", "\xA2": "cent", "\xB7": "middot", "\u{1D520}": "cfr", "\u0427": "CHcy", "\u0447": "chcy", "\u2713": "check", "\u03A7": "Chi", "\u03C7": "chi", "\u02C6": "circ", "\u2257": "cire", "\u21BA": "olarr", "\u21BB": "orarr", "\u229B": "oast", "\u229A": "ocir", "\u229D": "odash", "\u2299": "odot", "\xAE": "reg", "\u24C8": "oS", "\u2296": "ominus", "\u2295": "oplus", "\u2297": "otimes", "\u25CB": "cir", "\u29C3": "cirE", "\u2A10": "cirfnint", "\u2AEF": "cirmid", "\u29C2": "cirscir", "\u2232": "cwconint", "\u201D": "rdquo", "\u2019": "rsquo", "\u2663": "clubs", ":": "colon", "\u2237": "Colon", "\u2A74": "Colone", ",": "comma", "@": "commat", "\u2201": "comp", "\u2218": "compfn", "\u2102": "Copf", "\u2245": "cong", "\u2A6D": "congdot", "\u2261": "equiv", "\u222E": "oint", "\u222F": "Conint", "\u{1D554}": "copf", "\u2210": "coprod", "\xA9": "copy", "\u2117": "copysr", "\u21B5": "crarr", "\u2717": "cross", "\u2A2F": "Cross", "\u{1D49E}": "Cscr", "\u{1D4B8}": "cscr", "\u2ACF": "csub", "\u2AD1": "csube", "\u2AD0": "csup", "\u2AD2": "csupe", "\u22EF": "ctdot", "\u2938": "cudarrl", "\u2935": "cudarrr", "\u22DE": "cuepr", "\u22DF": "cuesc", "\u21B6": "cularr", "\u293D": "cularrp", "\u2A48": "cupbrcap", "\u2A46": "cupcap", "\u222A": "cup", "\u22D3": "Cup", "\u2A4A": "cupcup", "\u228D": "cupdot", "\u2A45": "cupor", "\u222A\uFE00": "cups", "\u21B7": "curarr", "\u293C": "curarrm", "\u22CE": "cuvee", "\u22CF": "cuwed", "\xA4": "curren", "\u2231": "cwint", "\u232D": "cylcty", "\u2020": "dagger", "\u2021": "Dagger", "\u2138": "daleth", "\u2193": "darr", "\u21A1": "Darr", "\u21D3": "dArr", "\u2010": "dash", "\u2AE4": "Dashv", "\u22A3": "dashv", "\u290F": "rBarr", "\u02DD": "dblac", "\u010E": "Dcaron", "\u010F": "dcaron", "\u0414": "Dcy", "\u0434": "dcy", "\u21CA": "ddarr", "\u2146": "dd", "\u2911": "DDotrahd", "\u2A77": "eDDot", "\xB0": "deg", "\u2207": "Del", "\u0394": "Delta", "\u03B4": "delta", "\u29B1": "demptyv", "\u297F": "dfisht", "\u{1D507}": "Dfr", "\u{1D521}": "dfr", "\u2965": "dHar", "\u21C3": "dharl", "\u21C2": "dharr", "\u02D9": "dot", "`": "grave", "\u02DC": "tilde", "\u22C4": "diam", "\u2666": "diams", "\xA8": "die", "\u03DD": "gammad", "\u22F2": "disin", "\xF7": "div", "\u22C7": "divonx", "\u0402": "DJcy", "\u0452": "djcy", "\u231E": "dlcorn", "\u230D": "dlcrop", "$": "dollar", "\u{1D53B}": "Dopf", "\u{1D555}": "dopf", "\u20DC": "DotDot", "\u2250": "doteq", "\u2251": "eDot", "\u2238": "minusd", "\u2214": "plusdo", "\u22A1": "sdotb", "\u21D0": "lArr", "\u21D4": "iff", "\u27F8": "xlArr", "\u27FA": "xhArr", "\u27F9": "xrArr", "\u21D2": "rArr", "\u22A8": "vDash", "\u21D1": "uArr", "\u21D5": "vArr", "\u2225": "par", "\u2913": "DownArrowBar", "\u21F5": "duarr", "\u0311": "DownBreve", "\u2950": "DownLeftRightVector", "\u295E": "DownLeftTeeVector", "\u2956": "DownLeftVectorBar", "\u21BD": "lhard", "\u295F": "DownRightTeeVector", "\u2957": "DownRightVectorBar", "\u21C1": "rhard", "\u21A7": "mapstodown", "\u22A4": "top", "\u2910": "RBarr", "\u231F": "drcorn", "\u230C": "drcrop", "\u{1D49F}": "Dscr", "\u{1D4B9}": "dscr", "\u0405": "DScy", "\u0455": "dscy", "\u29F6": "dsol", "\u0110": "Dstrok", "\u0111": "dstrok", "\u22F1": "dtdot", "\u25BF": "dtri", "\u296F": "duhar", "\u29A6": "dwangle", "\u040F": "DZcy", "\u045F": "dzcy", "\u27FF": "dzigrarr", "\xC9": "Eacute", "\xE9": "eacute", "\u2A6E": "easter", "\u011A": "Ecaron", "\u011B": "ecaron", "\xCA": "Ecirc", "\xEA": "ecirc", "\u2256": "ecir", "\u2255": "ecolon", "\u042D": "Ecy", "\u044D": "ecy", "\u0116": "Edot", "\u0117": "edot", "\u2147": "ee", "\u2252": "efDot", "\u{1D508}": "Efr", "\u{1D522}": "efr", "\u2A9A": "eg", "\xC8": "Egrave", "\xE8": "egrave", "\u2A96": "egs", "\u2A98": "egsdot", "\u2A99": "el", "\u2208": "in", "\u23E7": "elinters", "\u2113": "ell", "\u2A95": "els", "\u2A97": "elsdot", "\u0112": "Emacr", "\u0113": "emacr", "\u2205": "empty", "\u25FB": "EmptySmallSquare", "\u25AB": "EmptyVerySmallSquare", "\u2004": "emsp13", "\u2005": "emsp14", "\u2003": "emsp", "\u014A": "ENG", "\u014B": "eng", "\u2002": "ensp", "\u0118": "Eogon", "\u0119": "eogon", "\u{1D53C}": "Eopf", "\u{1D556}": "eopf", "\u22D5": "epar", "\u29E3": "eparsl", "\u2A71": "eplus", "\u03B5": "epsi", "\u0395": "Epsilon", "\u03F5": "epsiv", "\u2242": "esim", "\u2A75": "Equal", "=": "equals", "\u225F": "equest", "\u21CC": "rlhar", "\u2A78": "equivDD", "\u29E5": "eqvparsl", "\u2971": "erarr", "\u2253": "erDot", "\u212F": "escr", "\u2130": "Escr", "\u2A73": "Esim", "\u0397": "Eta", "\u03B7": "eta", "\xD0": "ETH", "\xF0": "eth", "\xCB": "Euml", "\xEB": "euml", "\u20AC": "euro", "!": "excl", "\u2203": "exist", "\u0424": "Fcy", "\u0444": "fcy", "\u2640": "female", "\uFB03": "ffilig", "\uFB00": "fflig", "\uFB04": "ffllig", "\u{1D509}": "Ffr", "\u{1D523}": "ffr", "\uFB01": "filig", "\u25FC": "FilledSmallSquare", "fj": "fjlig", "\u266D": "flat", "\uFB02": "fllig", "\u25B1": "fltns", "\u0192": "fnof", "\u{1D53D}": "Fopf", "\u{1D557}": "fopf", "\u2200": "forall", "\u22D4": "fork", "\u2AD9": "forkv", "\u2131": "Fscr", "\u2A0D": "fpartint", "\xBD": "half", "\u2153": "frac13", "\xBC": "frac14", "\u2155": "frac15", "\u2159": "frac16", "\u215B": "frac18", "\u2154": "frac23", "\u2156": "frac25", "\xBE": "frac34", "\u2157": "frac35", "\u215C": "frac38", "\u2158": "frac45", "\u215A": "frac56", "\u215D": "frac58", "\u215E": "frac78", "\u2044": "frasl", "\u2322": "frown", "\u{1D4BB}": "fscr", "\u01F5": "gacute", "\u0393": "Gamma", "\u03B3": "gamma", "\u03DC": "Gammad", "\u2A86": "gap", "\u011E": "Gbreve", "\u011F": "gbreve", "\u0122": "Gcedil", "\u011C": "Gcirc", "\u011D": "gcirc", "\u0413": "Gcy", "\u0433": "gcy", "\u0120": "Gdot", "\u0121": "gdot", "\u2265": "ge", "\u2267": "gE", "\u2A8C": "gEl", "\u22DB": "gel", "\u2A7E": "ges", "\u2AA9": "gescc", "\u2A80": "gesdot", "\u2A82": "gesdoto", "\u2A84": "gesdotol", "\u22DB\uFE00": "gesl", "\u2A94": "gesles", "\u{1D50A}": "Gfr", "\u{1D524}": "gfr", "\u226B": "gg", "\u22D9": "Gg", "\u2137": "gimel", "\u0403": "GJcy", "\u0453": "gjcy", "\u2AA5": "gla", "\u2277": "gl", "\u2A92": "glE", "\u2AA4": "glj", "\u2A8A": "gnap", "\u2A88": "gne", "\u2269": "gnE", "\u22E7": "gnsim", "\u{1D53E}": "Gopf", "\u{1D558}": "gopf", "\u2AA2": "GreaterGreater", "\u2273": "gsim", "\u{1D4A2}": "Gscr", "\u210A": "gscr", "\u2A8E": "gsime", "\u2A90": "gsiml", "\u2AA7": "gtcc", "\u2A7A": "gtcir", ">": "gt", "\u22D7": "gtdot", "\u2995": "gtlPar", "\u2A7C": "gtquest", "\u2978": "gtrarr", "\u2269\uFE00": "gvnE", "\u200A": "hairsp", "\u210B": "Hscr", "\u042A": "HARDcy", "\u044A": "hardcy", "\u2948": "harrcir", "\u2194": "harr", "\u21AD": "harrw", "^": "Hat", "\u210F": "hbar", "\u0124": "Hcirc", "\u0125": "hcirc", "\u2665": "hearts", "\u2026": "mldr", "\u22B9": "hercon", "\u{1D525}": "hfr", "\u210C": "Hfr", "\u2925": "searhk", "\u2926": "swarhk", "\u21FF": "hoarr", "\u223B": "homtht", "\u21A9": "larrhk", "\u21AA": "rarrhk", "\u{1D559}": "hopf", "\u210D": "Hopf", "\u2015": "horbar", "\u{1D4BD}": "hscr", "\u0126": "Hstrok", "\u0127": "hstrok", "\u2043": "hybull", "\xCD": "Iacute", "\xED": "iacute", "\u2063": "ic", "\xCE": "Icirc", "\xEE": "icirc", "\u0418": "Icy", "\u0438": "icy", "\u0130": "Idot", "\u0415": "IEcy", "\u0435": "iecy", "\xA1": "iexcl", "\u{1D526}": "ifr", "\u2111": "Im", "\xCC": "Igrave", "\xEC": "igrave", "\u2148": "ii", "\u2A0C": "qint", "\u222D": "tint", "\u29DC": "iinfin", "\u2129": "iiota", "\u0132": "IJlig", "\u0133": "ijlig", "\u012A": "Imacr", "\u012B": "imacr", "\u2110": "Iscr", "\u0131": "imath", "\u22B7": "imof", "\u01B5": "imped", "\u2105": "incare", "\u221E": "infin", "\u29DD": "infintie", "\u22BA": "intcal", "\u222B": "int", "\u222C": "Int", "\u2124": "Zopf", "\u2A17": "intlarhk", "\u2A3C": "iprod", "\u2062": "it", "\u0401": "IOcy", "\u0451": "iocy", "\u012E": "Iogon", "\u012F": "iogon", "\u{1D540}": "Iopf", "\u{1D55A}": "iopf", "\u0399": "Iota", "\u03B9": "iota", "\xBF": "iquest", "\u{1D4BE}": "iscr", "\u22F5": "isindot", "\u22F9": "isinE", "\u22F4": "isins", "\u22F3": "isinsv", "\u0128": "Itilde", "\u0129": "itilde", "\u0406": "Iukcy", "\u0456": "iukcy", "\xCF": "Iuml", "\xEF": "iuml", "\u0134": "Jcirc", "\u0135": "jcirc", "\u0419": "Jcy", "\u0439": "jcy", "\u{1D50D}": "Jfr", "\u{1D527}": "jfr", "\u0237": "jmath", "\u{1D541}": "Jopf", "\u{1D55B}": "jopf", "\u{1D4A5}": "Jscr", "\u{1D4BF}": "jscr", "\u0408": "Jsercy", "\u0458": "jsercy", "\u0404": "Jukcy", "\u0454": "jukcy", "\u039A": "Kappa", "\u03BA": "kappa", "\u03F0": "kappav", "\u0136": "Kcedil", "\u0137": "kcedil", "\u041A": "Kcy", "\u043A": "kcy", "\u{1D50E}": "Kfr", "\u{1D528}": "kfr", "\u0138": "kgreen", "\u0425": "KHcy", "\u0445": "khcy", "\u040C": "KJcy", "\u045C": "kjcy", "\u{1D542}": "Kopf", "\u{1D55C}": "kopf", "\u{1D4A6}": "Kscr", "\u{1D4C0}": "kscr", "\u21DA": "lAarr", "\u0139": "Lacute", "\u013A": "lacute", "\u29B4": "laemptyv", "\u2112": "Lscr", "\u039B": "Lambda", "\u03BB": "lambda", "\u27E8": "lang", "\u27EA": "Lang", "\u2991": "langd", "\u2A85": "lap", "\xAB": "laquo", "\u21E4": "larrb", "\u291F": "larrbfs", "\u2190": "larr", "\u219E": "Larr", "\u291D": "larrfs", "\u21AB": "larrlp", "\u2939": "larrpl", "\u2973": "larrsim", "\u21A2": "larrtl", "\u2919": "latail", "\u291B": "lAtail", "\u2AAB": "lat", "\u2AAD": "late", "\u2AAD\uFE00": "lates", "\u290C": "lbarr", "\u290E": "lBarr", "\u2772": "lbbrk", "{": "lcub", "[": "lsqb", "\u298B": "lbrke", "\u298F": "lbrksld", "\u298D": "lbrkslu", "\u013D": "Lcaron", "\u013E": "lcaron", "\u013B": "Lcedil", "\u013C": "lcedil", "\u2308": "lceil", "\u041B": "Lcy", "\u043B": "lcy", "\u2936": "ldca", "\u201C": "ldquo", "\u2967": "ldrdhar", "\u294B": "ldrushar", "\u21B2": "ldsh", "\u2264": "le", "\u2266": "lE", "\u21C6": "lrarr", "\u27E6": "lobrk", "\u2961": "LeftDownTeeVector", "\u2959": "LeftDownVectorBar", "\u230A": "lfloor", "\u21BC": "lharu", "\u21C7": "llarr", "\u21CB": "lrhar", "\u294E": "LeftRightVector", "\u21A4": "mapstoleft", "\u295A": "LeftTeeVector", "\u22CB": "lthree", "\u29CF": "LeftTriangleBar", "\u22B2": "vltri", "\u22B4": "ltrie", "\u2951": "LeftUpDownVector", "\u2960": "LeftUpTeeVector", "\u2958": "LeftUpVectorBar", "\u21BF": "uharl", "\u2952": "LeftVectorBar", "\u2A8B": "lEg", "\u22DA": "leg", "\u2A7D": "les", "\u2AA8": "lescc", "\u2A7F": "lesdot", "\u2A81": "lesdoto", "\u2A83": "lesdotor", "\u22DA\uFE00": "lesg", "\u2A93": "lesges", "\u22D6": "ltdot", "\u2276": "lg", "\u2AA1": "LessLess", "\u2272": "lsim", "\u297C": "lfisht", "\u{1D50F}": "Lfr", "\u{1D529}": "lfr", "\u2A91": "lgE", "\u2962": "lHar", "\u296A": "lharul", "\u2584": "lhblk", "\u0409": "LJcy", "\u0459": "ljcy", "\u226A": "ll", "\u22D8": "Ll", "\u296B": "llhard", "\u25FA": "lltri", "\u013F": "Lmidot", "\u0140": "lmidot", "\u23B0": "lmoust", "\u2A89": "lnap", "\u2A87": "lne", "\u2268": "lnE", "\u22E6": "lnsim", "\u27EC": "loang", "\u21FD": "loarr", "\u27F5": "xlarr", "\u27F7": "xharr", "\u27FC": "xmap", "\u27F6": "xrarr", "\u21AC": "rarrlp", "\u2985": "lopar", "\u{1D543}": "Lopf", "\u{1D55D}": "lopf", "\u2A2D": "loplus", "\u2A34": "lotimes", "\u2217": "lowast", "_": "lowbar", "\u2199": "swarr", "\u2198": "searr", "\u25CA": "loz", "(": "lpar", "\u2993": "lparlt", "\u296D": "lrhard", "\u200E": "lrm", "\u22BF": "lrtri", "\u2039": "lsaquo", "\u{1D4C1}": "lscr", "\u21B0": "lsh", "\u2A8D": "lsime", "\u2A8F": "lsimg", "\u2018": "lsquo", "\u201A": "sbquo", "\u0141": "Lstrok", "\u0142": "lstrok", "\u2AA6": "ltcc", "\u2A79": "ltcir", "<": "lt", "\u22C9": "ltimes", "\u2976": "ltlarr", "\u2A7B": "ltquest", "\u25C3": "ltri", "\u2996": "ltrPar", "\u294A": "lurdshar", "\u2966": "luruhar", "\u2268\uFE00": "lvnE", "\xAF": "macr", "\u2642": "male", "\u2720": "malt", "\u2905": "Map", "\u21A6": "map", "\u21A5": "mapstoup", "\u25AE": "marker", "\u2A29": "mcomma", "\u041C": "Mcy", "\u043C": "mcy", "\u2014": "mdash", "\u223A": "mDDot", "\u205F": "MediumSpace", "\u2133": "Mscr", "\u{1D510}": "Mfr", "\u{1D52A}": "mfr", "\u2127": "mho", "\xB5": "micro", "\u2AF0": "midcir", "\u2223": "mid", "\u2212": "minus", "\u2A2A": "minusdu", "\u2213": "mp", "\u2ADB": "mlcp", "\u22A7": "models", "\u{1D544}": "Mopf", "\u{1D55E}": "mopf", "\u{1D4C2}": "mscr", "\u039C": "Mu", "\u03BC": "mu", "\u22B8": "mumap", "\u0143": "Nacute", "\u0144": "nacute", "\u2220\u20D2": "nang", "\u2249": "nap", "\u2A70\u0338": "napE", "\u224B\u0338": "napid", "\u0149": "napos", "\u266E": "natur", "\u2115": "Nopf", "\xA0": "nbsp", "\u224E\u0338": "nbump", "\u224F\u0338": "nbumpe", "\u2A43": "ncap", "\u0147": "Ncaron", "\u0148": "ncaron", "\u0145": "Ncedil", "\u0146": "ncedil", "\u2247": "ncong", "\u2A6D\u0338": "ncongdot", "\u2A42": "ncup", "\u041D": "Ncy", "\u043D": "ncy", "\u2013": "ndash", "\u2924": "nearhk", "\u2197": "nearr", "\u21D7": "neArr", "\u2260": "ne", "\u2250\u0338": "nedot", "\u200B": "ZeroWidthSpace", "\u2262": "nequiv", "\u2928": "toea", "\u2242\u0338": "nesim", "\n": "NewLine", "\u2204": "nexist", "\u{1D511}": "Nfr", "\u{1D52B}": "nfr", "\u2267\u0338": "ngE", "\u2271": "nge", "\u2A7E\u0338": "nges", "\u22D9\u0338": "nGg", "\u2275": "ngsim", "\u226B\u20D2": "nGt", "\u226F": "ngt", "\u226B\u0338": "nGtv", "\u21AE": "nharr", "\u21CE": "nhArr", "\u2AF2": "nhpar", "\u220B": "ni", "\u22FC": "nis", "\u22FA": "nisd", "\u040A": "NJcy", "\u045A": "njcy", "\u219A": "nlarr", "\u21CD": "nlArr", "\u2025": "nldr", "\u2266\u0338": "nlE", "\u2270": "nle", "\u2A7D\u0338": "nles", "\u226E": "nlt", "\u22D8\u0338": "nLl", "\u2274": "nlsim", "\u226A\u20D2": "nLt", "\u22EA": "nltri", "\u22EC": "nltrie", "\u226A\u0338": "nLtv", "\u2224": "nmid", "\u2060": "NoBreak", "\u{1D55F}": "nopf", "\u2AEC": "Not", "\xAC": "not", "\u226D": "NotCupCap", "\u2226": "npar", "\u2209": "notin", "\u2279": "ntgl", "\u22F5\u0338": "notindot", "\u22F9\u0338": "notinE", "\u22F7": "notinvb", "\u22F6": "notinvc", "\u29CF\u0338": "NotLeftTriangleBar", "\u2278": "ntlg", "\u2AA2\u0338": "NotNestedGreaterGreater", "\u2AA1\u0338": "NotNestedLessLess", "\u220C": "notni", "\u22FE": "notnivb", "\u22FD": "notnivc", "\u2280": "npr", "\u2AAF\u0338": "npre", "\u22E0": "nprcue", "\u29D0\u0338": "NotRightTriangleBar", "\u22EB": "nrtri", "\u22ED": "nrtrie", "\u228F\u0338": "NotSquareSubset", "\u22E2": "nsqsube", "\u2290\u0338": "NotSquareSuperset", "\u22E3": "nsqsupe", "\u2282\u20D2": "vnsub", "\u2288": "nsube", "\u2281": "nsc", "\u2AB0\u0338": "nsce", "\u22E1": "nsccue", "\u227F\u0338": "NotSucceedsTilde", "\u2283\u20D2": "vnsup", "\u2289": "nsupe", "\u2241": "nsim", "\u2244": "nsime", "\u2AFD\u20E5": "nparsl", "\u2202\u0338": "npart", "\u2A14": "npolint", "\u2933\u0338": "nrarrc", "\u219B": "nrarr", "\u21CF": "nrArr", "\u219D\u0338": "nrarrw", "\u{1D4A9}": "Nscr", "\u{1D4C3}": "nscr", "\u2284": "nsub", "\u2AC5\u0338": "nsubE", "\u2285": "nsup", "\u2AC6\u0338": "nsupE", "\xD1": "Ntilde", "\xF1": "ntilde", "\u039D": "Nu", "\u03BD": "nu", "#": "num", "\u2116": "numero", "\u2007": "numsp", "\u224D\u20D2": "nvap", "\u22AC": "nvdash", "\u22AD": "nvDash", "\u22AE": "nVdash", "\u22AF": "nVDash", "\u2265\u20D2": "nvge", ">\u20D2": "nvgt", "\u2904": "nvHarr", "\u29DE": "nvinfin", "\u2902": "nvlArr", "\u2264\u20D2": "nvle", "<\u20D2": "nvlt", "\u22B4\u20D2": "nvltrie", "\u2903": "nvrArr", "\u22B5\u20D2": "nvrtrie", "\u223C\u20D2": "nvsim", "\u2923": "nwarhk", "\u2196": "nwarr", "\u21D6": "nwArr", "\u2927": "nwnear", "\xD3": "Oacute", "\xF3": "oacute", "\xD4": "Ocirc", "\xF4": "ocirc", "\u041E": "Ocy", "\u043E": "ocy", "\u0150": "Odblac", "\u0151": "odblac", "\u2A38": "odiv", "\u29BC": "odsold", "\u0152": "OElig", "\u0153": "oelig", "\u29BF": "ofcir", "\u{1D512}": "Ofr", "\u{1D52C}": "ofr", "\u02DB": "ogon", "\xD2": "Ograve", "\xF2": "ograve", "\u29C1": "ogt", "\u29B5": "ohbar", "\u03A9": "ohm", "\u29BE": "olcir", "\u29BB": "olcross", "\u203E": "oline", "\u29C0": "olt", "\u014C": "Omacr", "\u014D": "omacr", "\u03C9": "omega", "\u039F": "Omicron", "\u03BF": "omicron", "\u29B6": "omid", "\u{1D546}": "Oopf", "\u{1D560}": "oopf", "\u29B7": "opar", "\u29B9": "operp", "\u2A54": "Or", "\u2228": "or", "\u2A5D": "ord", "\u2134": "oscr", "\xAA": "ordf", "\xBA": "ordm", "\u22B6": "origof", "\u2A56": "oror", "\u2A57": "orslope", "\u2A5B": "orv", "\u{1D4AA}": "Oscr", "\xD8": "Oslash", "\xF8": "oslash", "\u2298": "osol", "\xD5": "Otilde", "\xF5": "otilde", "\u2A36": "otimesas", "\u2A37": "Otimes", "\xD6": "Ouml", "\xF6": "ouml", "\u233D": "ovbar", "\u23DE": "OverBrace", "\u23B4": "tbrk", "\u23DC": "OverParenthesis", "\xB6": "para", "\u2AF3": "parsim", "\u2AFD": "parsl", "\u2202": "part", "\u041F": "Pcy", "\u043F": "pcy", "%": "percnt", ".": "period", "\u2030": "permil", "\u2031": "pertenk", "\u{1D513}": "Pfr", "\u{1D52D}": "pfr", "\u03A6": "Phi", "\u03C6": "phi", "\u03D5": "phiv", "\u260E": "phone", "\u03A0": "Pi", "\u03C0": "pi", "\u03D6": "piv", "\u210E": "planckh", "\u2A23": "plusacir", "\u2A22": "pluscir", "+": "plus", "\u2A25": "plusdu", "\u2A72": "pluse", "\xB1": "pm", "\u2A26": "plussim", "\u2A27": "plustwo", "\u2A15": "pointint", "\u{1D561}": "popf", "\u2119": "Popf", "\xA3": "pound", "\u2AB7": "prap", "\u2ABB": "Pr", "\u227A": "pr", "\u227C": "prcue", "\u2AAF": "pre", "\u227E": "prsim", "\u2AB9": "prnap", "\u2AB5": "prnE", "\u22E8": "prnsim", "\u2AB3": "prE", "\u2032": "prime", "\u2033": "Prime", "\u220F": "prod", "\u232E": "profalar", "\u2312": "profline", "\u2313": "profsurf", "\u221D": "prop", "\u22B0": "prurel", "\u{1D4AB}": "Pscr", "\u{1D4C5}": "pscr", "\u03A8": "Psi", "\u03C8": "psi", "\u2008": "puncsp", "\u{1D514}": "Qfr", "\u{1D52E}": "qfr", "\u{1D562}": "qopf", "\u211A": "Qopf", "\u2057": "qprime", "\u{1D4AC}": "Qscr", "\u{1D4C6}": "qscr", "\u2A16": "quatint", "?": "quest", '"': "quot", "\u21DB": "rAarr", "\u223D\u0331": "race", "\u0154": "Racute", "\u0155": "racute", "\u221A": "Sqrt", "\u29B3": "raemptyv", "\u27E9": "rang", "\u27EB": "Rang", "\u2992": "rangd", "\u29A5": "range", "\xBB": "raquo", "\u2975": "rarrap", "\u21E5": "rarrb", "\u2920": "rarrbfs", "\u2933": "rarrc", "\u2192": "rarr", "\u21A0": "Rarr", "\u291E": "rarrfs", "\u2945": "rarrpl", "\u2974": "rarrsim", "\u2916": "Rarrtl", "\u21A3": "rarrtl", "\u219D": "rarrw", "\u291A": "ratail", "\u291C": "rAtail", "\u2236": "ratio", "\u2773": "rbbrk", "}": "rcub", "]": "rsqb", "\u298C": "rbrke", "\u298E": "rbrksld", "\u2990": "rbrkslu", "\u0158": "Rcaron", "\u0159": "rcaron", "\u0156": "Rcedil", "\u0157": "rcedil", "\u2309": "rceil", "\u0420": "Rcy", "\u0440": "rcy", "\u2937": "rdca", "\u2969": "rdldhar", "\u21B3": "rdsh", "\u211C": "Re", "\u211B": "Rscr", "\u211D": "Ropf", "\u25AD": "rect", "\u297D": "rfisht", "\u230B": "rfloor", "\u{1D52F}": "rfr", "\u2964": "rHar", "\u21C0": "rharu", "\u296C": "rharul", "\u03A1": "Rho", "\u03C1": "rho", "\u03F1": "rhov", "\u21C4": "rlarr", "\u27E7": "robrk", "\u295D": "RightDownTeeVector", "\u2955": "RightDownVectorBar", "\u21C9": "rrarr", "\u22A2": "vdash", "\u295B": "RightTeeVector", "\u22CC": "rthree", "\u29D0": "RightTriangleBar", "\u22B3": "vrtri", "\u22B5": "rtrie", "\u294F": "RightUpDownVector", "\u295C": "RightUpTeeVector", "\u2954": "RightUpVectorBar", "\u21BE": "uharr", "\u2953": "RightVectorBar", "\u02DA": "ring", "\u200F": "rlm", "\u23B1": "rmoust", "\u2AEE": "rnmid", "\u27ED": "roang", "\u21FE": "roarr", "\u2986": "ropar", "\u{1D563}": "ropf", "\u2A2E": "roplus", "\u2A35": "rotimes", "\u2970": "RoundImplies", ")": "rpar", "\u2994": "rpargt", "\u2A12": "rppolint", "\u203A": "rsaquo", "\u{1D4C7}": "rscr", "\u21B1": "rsh", "\u22CA": "rtimes", "\u25B9": "rtri", "\u29CE": "rtriltri", "\u29F4": "RuleDelayed", "\u2968": "ruluhar", "\u211E": "rx", "\u015A": "Sacute", "\u015B": "sacute", "\u2AB8": "scap", "\u0160": "Scaron", "\u0161": "scaron", "\u2ABC": "Sc", "\u227B": "sc", "\u227D": "sccue", "\u2AB0": "sce", "\u2AB4": "scE", "\u015E": "Scedil", "\u015F": "scedil", "\u015C": "Scirc", "\u015D": "scirc", "\u2ABA": "scnap", "\u2AB6": "scnE", "\u22E9": "scnsim", "\u2A13": "scpolint", "\u227F": "scsim", "\u0421": "Scy", "\u0441": "scy", "\u22C5": "sdot", "\u2A66": "sdote", "\u21D8": "seArr", "\xA7": "sect", ";": "semi", "\u2929": "tosa", "\u2736": "sext", "\u{1D516}": "Sfr", "\u{1D530}": "sfr", "\u266F": "sharp", "\u0429": "SHCHcy", "\u0449": "shchcy", "\u0428": "SHcy", "\u0448": "shcy", "\u2191": "uarr", "\xAD": "shy", "\u03A3": "Sigma", "\u03C3": "sigma", "\u03C2": "sigmaf", "\u223C": "sim", "\u2A6A": "simdot", "\u2243": "sime", "\u2A9E": "simg", "\u2AA0": "simgE", "\u2A9D": "siml", "\u2A9F": "simlE", "\u2246": "simne", "\u2A24": "simplus", "\u2972": "simrarr", "\u2A33": "smashp", "\u29E4": "smeparsl", "\u2323": "smile", "\u2AAA": "smt", "\u2AAC": "smte", "\u2AAC\uFE00": "smtes", "\u042C": "SOFTcy", "\u044C": "softcy", "\u233F": "solbar", "\u29C4": "solb", "/": "sol", "\u{1D54A}": "Sopf", "\u{1D564}": "sopf", "\u2660": "spades", "\u2293": "sqcap", "\u2293\uFE00": "sqcaps", "\u2294": "sqcup", "\u2294\uFE00": "sqcups", "\u228F": "sqsub", "\u2291": "sqsube", "\u2290": "sqsup", "\u2292": "sqsupe", "\u25A1": "squ", "\u{1D4AE}": "Sscr", "\u{1D4C8}": "sscr", "\u22C6": "Star", "\u2606": "star", "\u2282": "sub", "\u22D0": "Sub", "\u2ABD": "subdot", "\u2AC5": "subE", "\u2286": "sube", "\u2AC3": "subedot", "\u2AC1": "submult", "\u2ACB": "subnE", "\u228A": "subne", "\u2ABF": "subplus", "\u2979": "subrarr", "\u2AC7": "subsim", "\u2AD5": "subsub", "\u2AD3": "subsup", "\u2211": "sum", "\u266A": "sung", "\xB9": "sup1", "\xB2": "sup2", "\xB3": "sup3", "\u2283": "sup", "\u22D1": "Sup", "\u2ABE": "supdot", "\u2AD8": "supdsub", "\u2AC6": "supE", "\u2287": "supe", "\u2AC4": "supedot", "\u27C9": "suphsol", "\u2AD7": "suphsub", "\u297B": "suplarr", "\u2AC2": "supmult", "\u2ACC": "supnE", "\u228B": "supne", "\u2AC0": "supplus", "\u2AC8": "supsim", "\u2AD4": "supsub", "\u2AD6": "supsup", "\u21D9": "swArr", "\u292A": "swnwar", "\xDF": "szlig", "	": "Tab", "\u2316": "target", "\u03A4": "Tau", "\u03C4": "tau", "\u0164": "Tcaron", "\u0165": "tcaron", "\u0162": "Tcedil", "\u0163": "tcedil", "\u0422": "Tcy", "\u0442": "tcy", "\u20DB": "tdot", "\u2315": "telrec", "\u{1D517}": "Tfr", "\u{1D531}": "tfr", "\u2234": "there4", "\u0398": "Theta", "\u03B8": "theta", "\u03D1": "thetav", "\u205F\u200A": "ThickSpace", "\u2009": "thinsp", "\xDE": "THORN", "\xFE": "thorn", "\u2A31": "timesbar", "\xD7": "times", "\u2A30": "timesd", "\u2336": "topbot", "\u2AF1": "topcir", "\u{1D54B}": "Topf", "\u{1D565}": "topf", "\u2ADA": "topfork", "\u2034": "tprime", "\u2122": "trade", "\u25B5": "utri", "\u225C": "trie", "\u25EC": "tridot", "\u2A3A": "triminus", "\u2A39": "triplus", "\u29CD": "trisb", "\u2A3B": "tritime", "\u23E2": "trpezium", "\u{1D4AF}": "Tscr", "\u{1D4C9}": "tscr", "\u0426": "TScy", "\u0446": "tscy", "\u040B": "TSHcy", "\u045B": "tshcy", "\u0166": "Tstrok", "\u0167": "tstrok", "\xDA": "Uacute", "\xFA": "uacute", "\u219F": "Uarr", "\u2949": "Uarrocir", "\u040E": "Ubrcy", "\u045E": "ubrcy", "\u016C": "Ubreve", "\u016D": "ubreve", "\xDB": "Ucirc", "\xFB": "ucirc", "\u0423": "Ucy", "\u0443": "ucy", "\u21C5": "udarr", "\u0170": "Udblac", "\u0171": "udblac", "\u296E": "udhar", "\u297E": "ufisht", "\u{1D518}": "Ufr", "\u{1D532}": "ufr", "\xD9": "Ugrave", "\xF9": "ugrave", "\u2963": "uHar", "\u2580": "uhblk", "\u231C": "ulcorn", "\u230F": "ulcrop", "\u25F8": "ultri", "\u016A": "Umacr", "\u016B": "umacr", "\u23DF": "UnderBrace", "\u23DD": "UnderParenthesis", "\u228E": "uplus", "\u0172": "Uogon", "\u0173": "uogon", "\u{1D54C}": "Uopf", "\u{1D566}": "uopf", "\u2912": "UpArrowBar", "\u2195": "varr", "\u03C5": "upsi", "\u03D2": "Upsi", "\u03A5": "Upsilon", "\u21C8": "uuarr", "\u231D": "urcorn", "\u230E": "urcrop", "\u016E": "Uring", "\u016F": "uring", "\u25F9": "urtri", "\u{1D4B0}": "Uscr", "\u{1D4CA}": "uscr", "\u22F0": "utdot", "\u0168": "Utilde", "\u0169": "utilde", "\xDC": "Uuml", "\xFC": "uuml", "\u29A7": "uwangle", "\u299C": "vangrt", "\u228A\uFE00": "vsubne", "\u2ACB\uFE00": "vsubnE", "\u228B\uFE00": "vsupne", "\u2ACC\uFE00": "vsupnE", "\u2AE8": "vBar", "\u2AEB": "Vbar", "\u2AE9": "vBarv", "\u0412": "Vcy", "\u0432": "vcy", "\u22A9": "Vdash", "\u22AB": "VDash", "\u2AE6": "Vdashl", "\u22BB": "veebar", "\u225A": "veeeq", "\u22EE": "vellip", "|": "vert", "\u2016": "Vert", "\u2758": "VerticalSeparator", "\u2240": "wr", "\u{1D519}": "Vfr", "\u{1D533}": "vfr", "\u{1D54D}": "Vopf", "\u{1D567}": "vopf", "\u{1D4B1}": "Vscr", "\u{1D4CB}": "vscr", "\u22AA": "Vvdash", "\u299A": "vzigzag", "\u0174": "Wcirc", "\u0175": "wcirc", "\u2A5F": "wedbar", "\u2259": "wedgeq", "\u2118": "wp", "\u{1D51A}": "Wfr", "\u{1D534}": "wfr", "\u{1D54E}": "Wopf", "\u{1D568}": "wopf", "\u{1D4B2}": "Wscr", "\u{1D4CC}": "wscr", "\u{1D51B}": "Xfr", "\u{1D535}": "xfr", "\u039E": "Xi", "\u03BE": "xi", "\u22FB": "xnis", "\u{1D54F}": "Xopf", "\u{1D569}": "xopf", "\u{1D4B3}": "Xscr", "\u{1D4CD}": "xscr", "\xDD": "Yacute", "\xFD": "yacute", "\u042F": "YAcy", "\u044F": "yacy", "\u0176": "Ycirc", "\u0177": "ycirc", "\u042B": "Ycy", "\u044B": "ycy", "\xA5": "yen", "\u{1D51C}": "Yfr", "\u{1D536}": "yfr", "\u0407": "YIcy", "\u0457": "yicy", "\u{1D550}": "Yopf", "\u{1D56A}": "yopf", "\u{1D4B4}": "Yscr", "\u{1D4CE}": "yscr", "\u042E": "YUcy", "\u044E": "yucy", "\xFF": "yuml", "\u0178": "Yuml", "\u0179": "Zacute", "\u017A": "zacute", "\u017D": "Zcaron", "\u017E": "zcaron", "\u0417": "Zcy", "\u0437": "zcy", "\u017B": "Zdot", "\u017C": "zdot", "\u2128": "Zfr", "\u0396": "Zeta", "\u03B6": "zeta", "\u{1D537}": "zfr", "\u0416": "ZHcy", "\u0436": "zhcy", "\u21DD": "zigrarr", "\u{1D56B}": "zopf", "\u{1D4B5}": "Zscr", "\u{1D4CF}": "zscr", "\u200D": "zwj", "\u200C": "zwnj" };
+      var regexEscape = /["&'<>`]/g;
+      var escapeMap = {
+        '"': "&quot;",
+        "&": "&amp;",
+        "'": "&#x27;",
+        "<": "&lt;",
+        // See https://mathiasbynens.be/notes/ambiguous-ampersands: in HTML, the
+        // following is not strictly necessary unless it’s part of a tag or an
+        // unquoted attribute value. We’re only escaping it to support those
+        // situations, and for XML support.
+        ">": "&gt;",
+        // In Internet Explorer ≤ 8, the backtick character can be used
+        // to break out of (un)quoted attribute values or HTML comments.
+        // See http://html5sec.org/#102, http://html5sec.org/#108, and
+        // http://html5sec.org/#133.
+        "`": "&#x60;"
+      };
+      var regexInvalidEntity = /&#(?:[xX][^a-fA-F0-9]|[^0-9xX])/;
+      var regexInvalidRawCodePoint = /[\0-\x08\x0B\x0E-\x1F\x7F-\x9F\uFDD0-\uFDEF\uFFFE\uFFFF]|[\uD83F\uD87F\uD8BF\uD8FF\uD93F\uD97F\uD9BF\uD9FF\uDA3F\uDA7F\uDABF\uDAFF\uDB3F\uDB7F\uDBBF\uDBFF][\uDFFE\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
+      var regexDecode = /&#([0-9]+)(;?)|&#[xX]([a-fA-F0-9]+)(;?)|&([0-9a-zA-Z]+);|&(Aacute|iacute|Uacute|plusmn|otilde|Otilde|Agrave|agrave|yacute|Yacute|oslash|Oslash|Atilde|atilde|brvbar|Ccedil|ccedil|ograve|curren|divide|Eacute|eacute|Ograve|oacute|Egrave|egrave|ugrave|frac12|frac14|frac34|Ugrave|Oacute|Iacute|ntilde|Ntilde|uacute|middot|Igrave|igrave|iquest|aacute|laquo|THORN|micro|iexcl|icirc|Icirc|Acirc|ucirc|ecirc|Ocirc|ocirc|Ecirc|Ucirc|aring|Aring|aelig|AElig|acute|pound|raquo|acirc|times|thorn|szlig|cedil|COPY|Auml|ordf|ordm|uuml|macr|Uuml|auml|Ouml|ouml|para|nbsp|Euml|quot|QUOT|euml|yuml|cent|sect|copy|sup1|sup2|sup3|Iuml|iuml|shy|eth|reg|not|yen|amp|AMP|REG|uml|ETH|deg|gt|GT|LT|lt)([=a-zA-Z0-9])?/g;
+      var decodeMap = { "Aacute": "\xC1", "aacute": "\xE1", "Abreve": "\u0102", "abreve": "\u0103", "ac": "\u223E", "acd": "\u223F", "acE": "\u223E\u0333", "Acirc": "\xC2", "acirc": "\xE2", "acute": "\xB4", "Acy": "\u0410", "acy": "\u0430", "AElig": "\xC6", "aelig": "\xE6", "af": "\u2061", "Afr": "\u{1D504}", "afr": "\u{1D51E}", "Agrave": "\xC0", "agrave": "\xE0", "alefsym": "\u2135", "aleph": "\u2135", "Alpha": "\u0391", "alpha": "\u03B1", "Amacr": "\u0100", "amacr": "\u0101", "amalg": "\u2A3F", "amp": "&", "AMP": "&", "andand": "\u2A55", "And": "\u2A53", "and": "\u2227", "andd": "\u2A5C", "andslope": "\u2A58", "andv": "\u2A5A", "ang": "\u2220", "ange": "\u29A4", "angle": "\u2220", "angmsdaa": "\u29A8", "angmsdab": "\u29A9", "angmsdac": "\u29AA", "angmsdad": "\u29AB", "angmsdae": "\u29AC", "angmsdaf": "\u29AD", "angmsdag": "\u29AE", "angmsdah": "\u29AF", "angmsd": "\u2221", "angrt": "\u221F", "angrtvb": "\u22BE", "angrtvbd": "\u299D", "angsph": "\u2222", "angst": "\xC5", "angzarr": "\u237C", "Aogon": "\u0104", "aogon": "\u0105", "Aopf": "\u{1D538}", "aopf": "\u{1D552}", "apacir": "\u2A6F", "ap": "\u2248", "apE": "\u2A70", "ape": "\u224A", "apid": "\u224B", "apos": "'", "ApplyFunction": "\u2061", "approx": "\u2248", "approxeq": "\u224A", "Aring": "\xC5", "aring": "\xE5", "Ascr": "\u{1D49C}", "ascr": "\u{1D4B6}", "Assign": "\u2254", "ast": "*", "asymp": "\u2248", "asympeq": "\u224D", "Atilde": "\xC3", "atilde": "\xE3", "Auml": "\xC4", "auml": "\xE4", "awconint": "\u2233", "awint": "\u2A11", "backcong": "\u224C", "backepsilon": "\u03F6", "backprime": "\u2035", "backsim": "\u223D", "backsimeq": "\u22CD", "Backslash": "\u2216", "Barv": "\u2AE7", "barvee": "\u22BD", "barwed": "\u2305", "Barwed": "\u2306", "barwedge": "\u2305", "bbrk": "\u23B5", "bbrktbrk": "\u23B6", "bcong": "\u224C", "Bcy": "\u0411", "bcy": "\u0431", "bdquo": "\u201E", "becaus": "\u2235", "because": "\u2235", "Because": "\u2235", "bemptyv": "\u29B0", "bepsi": "\u03F6", "bernou": "\u212C", "Bernoullis": "\u212C", "Beta": "\u0392", "beta": "\u03B2", "beth": "\u2136", "between": "\u226C", "Bfr": "\u{1D505}", "bfr": "\u{1D51F}", "bigcap": "\u22C2", "bigcirc": "\u25EF", "bigcup": "\u22C3", "bigodot": "\u2A00", "bigoplus": "\u2A01", "bigotimes": "\u2A02", "bigsqcup": "\u2A06", "bigstar": "\u2605", "bigtriangledown": "\u25BD", "bigtriangleup": "\u25B3", "biguplus": "\u2A04", "bigvee": "\u22C1", "bigwedge": "\u22C0", "bkarow": "\u290D", "blacklozenge": "\u29EB", "blacksquare": "\u25AA", "blacktriangle": "\u25B4", "blacktriangledown": "\u25BE", "blacktriangleleft": "\u25C2", "blacktriangleright": "\u25B8", "blank": "\u2423", "blk12": "\u2592", "blk14": "\u2591", "blk34": "\u2593", "block": "\u2588", "bne": "=\u20E5", "bnequiv": "\u2261\u20E5", "bNot": "\u2AED", "bnot": "\u2310", "Bopf": "\u{1D539}", "bopf": "\u{1D553}", "bot": "\u22A5", "bottom": "\u22A5", "bowtie": "\u22C8", "boxbox": "\u29C9", "boxdl": "\u2510", "boxdL": "\u2555", "boxDl": "\u2556", "boxDL": "\u2557", "boxdr": "\u250C", "boxdR": "\u2552", "boxDr": "\u2553", "boxDR": "\u2554", "boxh": "\u2500", "boxH": "\u2550", "boxhd": "\u252C", "boxHd": "\u2564", "boxhD": "\u2565", "boxHD": "\u2566", "boxhu": "\u2534", "boxHu": "\u2567", "boxhU": "\u2568", "boxHU": "\u2569", "boxminus": "\u229F", "boxplus": "\u229E", "boxtimes": "\u22A0", "boxul": "\u2518", "boxuL": "\u255B", "boxUl": "\u255C", "boxUL": "\u255D", "boxur": "\u2514", "boxuR": "\u2558", "boxUr": "\u2559", "boxUR": "\u255A", "boxv": "\u2502", "boxV": "\u2551", "boxvh": "\u253C", "boxvH": "\u256A", "boxVh": "\u256B", "boxVH": "\u256C", "boxvl": "\u2524", "boxvL": "\u2561", "boxVl": "\u2562", "boxVL": "\u2563", "boxvr": "\u251C", "boxvR": "\u255E", "boxVr": "\u255F", "boxVR": "\u2560", "bprime": "\u2035", "breve": "\u02D8", "Breve": "\u02D8", "brvbar": "\xA6", "bscr": "\u{1D4B7}", "Bscr": "\u212C", "bsemi": "\u204F", "bsim": "\u223D", "bsime": "\u22CD", "bsolb": "\u29C5", "bsol": "\\", "bsolhsub": "\u27C8", "bull": "\u2022", "bullet": "\u2022", "bump": "\u224E", "bumpE": "\u2AAE", "bumpe": "\u224F", "Bumpeq": "\u224E", "bumpeq": "\u224F", "Cacute": "\u0106", "cacute": "\u0107", "capand": "\u2A44", "capbrcup": "\u2A49", "capcap": "\u2A4B", "cap": "\u2229", "Cap": "\u22D2", "capcup": "\u2A47", "capdot": "\u2A40", "CapitalDifferentialD": "\u2145", "caps": "\u2229\uFE00", "caret": "\u2041", "caron": "\u02C7", "Cayleys": "\u212D", "ccaps": "\u2A4D", "Ccaron": "\u010C", "ccaron": "\u010D", "Ccedil": "\xC7", "ccedil": "\xE7", "Ccirc": "\u0108", "ccirc": "\u0109", "Cconint": "\u2230", "ccups": "\u2A4C", "ccupssm": "\u2A50", "Cdot": "\u010A", "cdot": "\u010B", "cedil": "\xB8", "Cedilla": "\xB8", "cemptyv": "\u29B2", "cent": "\xA2", "centerdot": "\xB7", "CenterDot": "\xB7", "cfr": "\u{1D520}", "Cfr": "\u212D", "CHcy": "\u0427", "chcy": "\u0447", "check": "\u2713", "checkmark": "\u2713", "Chi": "\u03A7", "chi": "\u03C7", "circ": "\u02C6", "circeq": "\u2257", "circlearrowleft": "\u21BA", "circlearrowright": "\u21BB", "circledast": "\u229B", "circledcirc": "\u229A", "circleddash": "\u229D", "CircleDot": "\u2299", "circledR": "\xAE", "circledS": "\u24C8", "CircleMinus": "\u2296", "CirclePlus": "\u2295", "CircleTimes": "\u2297", "cir": "\u25CB", "cirE": "\u29C3", "cire": "\u2257", "cirfnint": "\u2A10", "cirmid": "\u2AEF", "cirscir": "\u29C2", "ClockwiseContourIntegral": "\u2232", "CloseCurlyDoubleQuote": "\u201D", "CloseCurlyQuote": "\u2019", "clubs": "\u2663", "clubsuit": "\u2663", "colon": ":", "Colon": "\u2237", "Colone": "\u2A74", "colone": "\u2254", "coloneq": "\u2254", "comma": ",", "commat": "@", "comp": "\u2201", "compfn": "\u2218", "complement": "\u2201", "complexes": "\u2102", "cong": "\u2245", "congdot": "\u2A6D", "Congruent": "\u2261", "conint": "\u222E", "Conint": "\u222F", "ContourIntegral": "\u222E", "copf": "\u{1D554}", "Copf": "\u2102", "coprod": "\u2210", "Coproduct": "\u2210", "copy": "\xA9", "COPY": "\xA9", "copysr": "\u2117", "CounterClockwiseContourIntegral": "\u2233", "crarr": "\u21B5", "cross": "\u2717", "Cross": "\u2A2F", "Cscr": "\u{1D49E}", "cscr": "\u{1D4B8}", "csub": "\u2ACF", "csube": "\u2AD1", "csup": "\u2AD0", "csupe": "\u2AD2", "ctdot": "\u22EF", "cudarrl": "\u2938", "cudarrr": "\u2935", "cuepr": "\u22DE", "cuesc": "\u22DF", "cularr": "\u21B6", "cularrp": "\u293D", "cupbrcap": "\u2A48", "cupcap": "\u2A46", "CupCap": "\u224D", "cup": "\u222A", "Cup": "\u22D3", "cupcup": "\u2A4A", "cupdot": "\u228D", "cupor": "\u2A45", "cups": "\u222A\uFE00", "curarr": "\u21B7", "curarrm": "\u293C", "curlyeqprec": "\u22DE", "curlyeqsucc": "\u22DF", "curlyvee": "\u22CE", "curlywedge": "\u22CF", "curren": "\xA4", "curvearrowleft": "\u21B6", "curvearrowright": "\u21B7", "cuvee": "\u22CE", "cuwed": "\u22CF", "cwconint": "\u2232", "cwint": "\u2231", "cylcty": "\u232D", "dagger": "\u2020", "Dagger": "\u2021", "daleth": "\u2138", "darr": "\u2193", "Darr": "\u21A1", "dArr": "\u21D3", "dash": "\u2010", "Dashv": "\u2AE4", "dashv": "\u22A3", "dbkarow": "\u290F", "dblac": "\u02DD", "Dcaron": "\u010E", "dcaron": "\u010F", "Dcy": "\u0414", "dcy": "\u0434", "ddagger": "\u2021", "ddarr": "\u21CA", "DD": "\u2145", "dd": "\u2146", "DDotrahd": "\u2911", "ddotseq": "\u2A77", "deg": "\xB0", "Del": "\u2207", "Delta": "\u0394", "delta": "\u03B4", "demptyv": "\u29B1", "dfisht": "\u297F", "Dfr": "\u{1D507}", "dfr": "\u{1D521}", "dHar": "\u2965", "dharl": "\u21C3", "dharr": "\u21C2", "DiacriticalAcute": "\xB4", "DiacriticalDot": "\u02D9", "DiacriticalDoubleAcute": "\u02DD", "DiacriticalGrave": "`", "DiacriticalTilde": "\u02DC", "diam": "\u22C4", "diamond": "\u22C4", "Diamond": "\u22C4", "diamondsuit": "\u2666", "diams": "\u2666", "die": "\xA8", "DifferentialD": "\u2146", "digamma": "\u03DD", "disin": "\u22F2", "div": "\xF7", "divide": "\xF7", "divideontimes": "\u22C7", "divonx": "\u22C7", "DJcy": "\u0402", "djcy": "\u0452", "dlcorn": "\u231E", "dlcrop": "\u230D", "dollar": "$", "Dopf": "\u{1D53B}", "dopf": "\u{1D555}", "Dot": "\xA8", "dot": "\u02D9", "DotDot": "\u20DC", "doteq": "\u2250", "doteqdot": "\u2251", "DotEqual": "\u2250", "dotminus": "\u2238", "dotplus": "\u2214", "dotsquare": "\u22A1", "doublebarwedge": "\u2306", "DoubleContourIntegral": "\u222F", "DoubleDot": "\xA8", "DoubleDownArrow": "\u21D3", "DoubleLeftArrow": "\u21D0", "DoubleLeftRightArrow": "\u21D4", "DoubleLeftTee": "\u2AE4", "DoubleLongLeftArrow": "\u27F8", "DoubleLongLeftRightArrow": "\u27FA", "DoubleLongRightArrow": "\u27F9", "DoubleRightArrow": "\u21D2", "DoubleRightTee": "\u22A8", "DoubleUpArrow": "\u21D1", "DoubleUpDownArrow": "\u21D5", "DoubleVerticalBar": "\u2225", "DownArrowBar": "\u2913", "downarrow": "\u2193", "DownArrow": "\u2193", "Downarrow": "\u21D3", "DownArrowUpArrow": "\u21F5", "DownBreve": "\u0311", "downdownarrows": "\u21CA", "downharpoonleft": "\u21C3", "downharpoonright": "\u21C2", "DownLeftRightVector": "\u2950", "DownLeftTeeVector": "\u295E", "DownLeftVectorBar": "\u2956", "DownLeftVector": "\u21BD", "DownRightTeeVector": "\u295F", "DownRightVectorBar": "\u2957", "DownRightVector": "\u21C1", "DownTeeArrow": "\u21A7", "DownTee": "\u22A4", "drbkarow": "\u2910", "drcorn": "\u231F", "drcrop": "\u230C", "Dscr": "\u{1D49F}", "dscr": "\u{1D4B9}", "DScy": "\u0405", "dscy": "\u0455", "dsol": "\u29F6", "Dstrok": "\u0110", "dstrok": "\u0111", "dtdot": "\u22F1", "dtri": "\u25BF", "dtrif": "\u25BE", "duarr": "\u21F5", "duhar": "\u296F", "dwangle": "\u29A6", "DZcy": "\u040F", "dzcy": "\u045F", "dzigrarr": "\u27FF", "Eacute": "\xC9", "eacute": "\xE9", "easter": "\u2A6E", "Ecaron": "\u011A", "ecaron": "\u011B", "Ecirc": "\xCA", "ecirc": "\xEA", "ecir": "\u2256", "ecolon": "\u2255", "Ecy": "\u042D", "ecy": "\u044D", "eDDot": "\u2A77", "Edot": "\u0116", "edot": "\u0117", "eDot": "\u2251", "ee": "\u2147", "efDot": "\u2252", "Efr": "\u{1D508}", "efr": "\u{1D522}", "eg": "\u2A9A", "Egrave": "\xC8", "egrave": "\xE8", "egs": "\u2A96", "egsdot": "\u2A98", "el": "\u2A99", "Element": "\u2208", "elinters": "\u23E7", "ell": "\u2113", "els": "\u2A95", "elsdot": "\u2A97", "Emacr": "\u0112", "emacr": "\u0113", "empty": "\u2205", "emptyset": "\u2205", "EmptySmallSquare": "\u25FB", "emptyv": "\u2205", "EmptyVerySmallSquare": "\u25AB", "emsp13": "\u2004", "emsp14": "\u2005", "emsp": "\u2003", "ENG": "\u014A", "eng": "\u014B", "ensp": "\u2002", "Eogon": "\u0118", "eogon": "\u0119", "Eopf": "\u{1D53C}", "eopf": "\u{1D556}", "epar": "\u22D5", "eparsl": "\u29E3", "eplus": "\u2A71", "epsi": "\u03B5", "Epsilon": "\u0395", "epsilon": "\u03B5", "epsiv": "\u03F5", "eqcirc": "\u2256", "eqcolon": "\u2255", "eqsim": "\u2242", "eqslantgtr": "\u2A96", "eqslantless": "\u2A95", "Equal": "\u2A75", "equals": "=", "EqualTilde": "\u2242", "equest": "\u225F", "Equilibrium": "\u21CC", "equiv": "\u2261", "equivDD": "\u2A78", "eqvparsl": "\u29E5", "erarr": "\u2971", "erDot": "\u2253", "escr": "\u212F", "Escr": "\u2130", "esdot": "\u2250", "Esim": "\u2A73", "esim": "\u2242", "Eta": "\u0397", "eta": "\u03B7", "ETH": "\xD0", "eth": "\xF0", "Euml": "\xCB", "euml": "\xEB", "euro": "\u20AC", "excl": "!", "exist": "\u2203", "Exists": "\u2203", "expectation": "\u2130", "exponentiale": "\u2147", "ExponentialE": "\u2147", "fallingdotseq": "\u2252", "Fcy": "\u0424", "fcy": "\u0444", "female": "\u2640", "ffilig": "\uFB03", "fflig": "\uFB00", "ffllig": "\uFB04", "Ffr": "\u{1D509}", "ffr": "\u{1D523}", "filig": "\uFB01", "FilledSmallSquare": "\u25FC", "FilledVerySmallSquare": "\u25AA", "fjlig": "fj", "flat": "\u266D", "fllig": "\uFB02", "fltns": "\u25B1", "fnof": "\u0192", "Fopf": "\u{1D53D}", "fopf": "\u{1D557}", "forall": "\u2200", "ForAll": "\u2200", "fork": "\u22D4", "forkv": "\u2AD9", "Fouriertrf": "\u2131", "fpartint": "\u2A0D", "frac12": "\xBD", "frac13": "\u2153", "frac14": "\xBC", "frac15": "\u2155", "frac16": "\u2159", "frac18": "\u215B", "frac23": "\u2154", "frac25": "\u2156", "frac34": "\xBE", "frac35": "\u2157", "frac38": "\u215C", "frac45": "\u2158", "frac56": "\u215A", "frac58": "\u215D", "frac78": "\u215E", "frasl": "\u2044", "frown": "\u2322", "fscr": "\u{1D4BB}", "Fscr": "\u2131", "gacute": "\u01F5", "Gamma": "\u0393", "gamma": "\u03B3", "Gammad": "\u03DC", "gammad": "\u03DD", "gap": "\u2A86", "Gbreve": "\u011E", "gbreve": "\u011F", "Gcedil": "\u0122", "Gcirc": "\u011C", "gcirc": "\u011D", "Gcy": "\u0413", "gcy": "\u0433", "Gdot": "\u0120", "gdot": "\u0121", "ge": "\u2265", "gE": "\u2267", "gEl": "\u2A8C", "gel": "\u22DB", "geq": "\u2265", "geqq": "\u2267", "geqslant": "\u2A7E", "gescc": "\u2AA9", "ges": "\u2A7E", "gesdot": "\u2A80", "gesdoto": "\u2A82", "gesdotol": "\u2A84", "gesl": "\u22DB\uFE00", "gesles": "\u2A94", "Gfr": "\u{1D50A}", "gfr": "\u{1D524}", "gg": "\u226B", "Gg": "\u22D9", "ggg": "\u22D9", "gimel": "\u2137", "GJcy": "\u0403", "gjcy": "\u0453", "gla": "\u2AA5", "gl": "\u2277", "glE": "\u2A92", "glj": "\u2AA4", "gnap": "\u2A8A", "gnapprox": "\u2A8A", "gne": "\u2A88", "gnE": "\u2269", "gneq": "\u2A88", "gneqq": "\u2269", "gnsim": "\u22E7", "Gopf": "\u{1D53E}", "gopf": "\u{1D558}", "grave": "`", "GreaterEqual": "\u2265", "GreaterEqualLess": "\u22DB", "GreaterFullEqual": "\u2267", "GreaterGreater": "\u2AA2", "GreaterLess": "\u2277", "GreaterSlantEqual": "\u2A7E", "GreaterTilde": "\u2273", "Gscr": "\u{1D4A2}", "gscr": "\u210A", "gsim": "\u2273", "gsime": "\u2A8E", "gsiml": "\u2A90", "gtcc": "\u2AA7", "gtcir": "\u2A7A", "gt": ">", "GT": ">", "Gt": "\u226B", "gtdot": "\u22D7", "gtlPar": "\u2995", "gtquest": "\u2A7C", "gtrapprox": "\u2A86", "gtrarr": "\u2978", "gtrdot": "\u22D7", "gtreqless": "\u22DB", "gtreqqless": "\u2A8C", "gtrless": "\u2277", "gtrsim": "\u2273", "gvertneqq": "\u2269\uFE00", "gvnE": "\u2269\uFE00", "Hacek": "\u02C7", "hairsp": "\u200A", "half": "\xBD", "hamilt": "\u210B", "HARDcy": "\u042A", "hardcy": "\u044A", "harrcir": "\u2948", "harr": "\u2194", "hArr": "\u21D4", "harrw": "\u21AD", "Hat": "^", "hbar": "\u210F", "Hcirc": "\u0124", "hcirc": "\u0125", "hearts": "\u2665", "heartsuit": "\u2665", "hellip": "\u2026", "hercon": "\u22B9", "hfr": "\u{1D525}", "Hfr": "\u210C", "HilbertSpace": "\u210B", "hksearow": "\u2925", "hkswarow": "\u2926", "hoarr": "\u21FF", "homtht": "\u223B", "hookleftarrow": "\u21A9", "hookrightarrow": "\u21AA", "hopf": "\u{1D559}", "Hopf": "\u210D", "horbar": "\u2015", "HorizontalLine": "\u2500", "hscr": "\u{1D4BD}", "Hscr": "\u210B", "hslash": "\u210F", "Hstrok": "\u0126", "hstrok": "\u0127", "HumpDownHump": "\u224E", "HumpEqual": "\u224F", "hybull": "\u2043", "hyphen": "\u2010", "Iacute": "\xCD", "iacute": "\xED", "ic": "\u2063", "Icirc": "\xCE", "icirc": "\xEE", "Icy": "\u0418", "icy": "\u0438", "Idot": "\u0130", "IEcy": "\u0415", "iecy": "\u0435", "iexcl": "\xA1", "iff": "\u21D4", "ifr": "\u{1D526}", "Ifr": "\u2111", "Igrave": "\xCC", "igrave": "\xEC", "ii": "\u2148", "iiiint": "\u2A0C", "iiint": "\u222D", "iinfin": "\u29DC", "iiota": "\u2129", "IJlig": "\u0132", "ijlig": "\u0133", "Imacr": "\u012A", "imacr": "\u012B", "image": "\u2111", "ImaginaryI": "\u2148", "imagline": "\u2110", "imagpart": "\u2111", "imath": "\u0131", "Im": "\u2111", "imof": "\u22B7", "imped": "\u01B5", "Implies": "\u21D2", "incare": "\u2105", "in": "\u2208", "infin": "\u221E", "infintie": "\u29DD", "inodot": "\u0131", "intcal": "\u22BA", "int": "\u222B", "Int": "\u222C", "integers": "\u2124", "Integral": "\u222B", "intercal": "\u22BA", "Intersection": "\u22C2", "intlarhk": "\u2A17", "intprod": "\u2A3C", "InvisibleComma": "\u2063", "InvisibleTimes": "\u2062", "IOcy": "\u0401", "iocy": "\u0451", "Iogon": "\u012E", "iogon": "\u012F", "Iopf": "\u{1D540}", "iopf": "\u{1D55A}", "Iota": "\u0399", "iota": "\u03B9", "iprod": "\u2A3C", "iquest": "\xBF", "iscr": "\u{1D4BE}", "Iscr": "\u2110", "isin": "\u2208", "isindot": "\u22F5", "isinE": "\u22F9", "isins": "\u22F4", "isinsv": "\u22F3", "isinv": "\u2208", "it": "\u2062", "Itilde": "\u0128", "itilde": "\u0129", "Iukcy": "\u0406", "iukcy": "\u0456", "Iuml": "\xCF", "iuml": "\xEF", "Jcirc": "\u0134", "jcirc": "\u0135", "Jcy": "\u0419", "jcy": "\u0439", "Jfr": "\u{1D50D}", "jfr": "\u{1D527}", "jmath": "\u0237", "Jopf": "\u{1D541}", "jopf": "\u{1D55B}", "Jscr": "\u{1D4A5}", "jscr": "\u{1D4BF}", "Jsercy": "\u0408", "jsercy": "\u0458", "Jukcy": "\u0404", "jukcy": "\u0454", "Kappa": "\u039A", "kappa": "\u03BA", "kappav": "\u03F0", "Kcedil": "\u0136", "kcedil": "\u0137", "Kcy": "\u041A", "kcy": "\u043A", "Kfr": "\u{1D50E}", "kfr": "\u{1D528}", "kgreen": "\u0138", "KHcy": "\u0425", "khcy": "\u0445", "KJcy": "\u040C", "kjcy": "\u045C", "Kopf": "\u{1D542}", "kopf": "\u{1D55C}", "Kscr": "\u{1D4A6}", "kscr": "\u{1D4C0}", "lAarr": "\u21DA", "Lacute": "\u0139", "lacute": "\u013A", "laemptyv": "\u29B4", "lagran": "\u2112", "Lambda": "\u039B", "lambda": "\u03BB", "lang": "\u27E8", "Lang": "\u27EA", "langd": "\u2991", "langle": "\u27E8", "lap": "\u2A85", "Laplacetrf": "\u2112", "laquo": "\xAB", "larrb": "\u21E4", "larrbfs": "\u291F", "larr": "\u2190", "Larr": "\u219E", "lArr": "\u21D0", "larrfs": "\u291D", "larrhk": "\u21A9", "larrlp": "\u21AB", "larrpl": "\u2939", "larrsim": "\u2973", "larrtl": "\u21A2", "latail": "\u2919", "lAtail": "\u291B", "lat": "\u2AAB", "late": "\u2AAD", "lates": "\u2AAD\uFE00", "lbarr": "\u290C", "lBarr": "\u290E", "lbbrk": "\u2772", "lbrace": "{", "lbrack": "[", "lbrke": "\u298B", "lbrksld": "\u298F", "lbrkslu": "\u298D", "Lcaron": "\u013D", "lcaron": "\u013E", "Lcedil": "\u013B", "lcedil": "\u013C", "lceil": "\u2308", "lcub": "{", "Lcy": "\u041B", "lcy": "\u043B", "ldca": "\u2936", "ldquo": "\u201C", "ldquor": "\u201E", "ldrdhar": "\u2967", "ldrushar": "\u294B", "ldsh": "\u21B2", "le": "\u2264", "lE": "\u2266", "LeftAngleBracket": "\u27E8", "LeftArrowBar": "\u21E4", "leftarrow": "\u2190", "LeftArrow": "\u2190", "Leftarrow": "\u21D0", "LeftArrowRightArrow": "\u21C6", "leftarrowtail": "\u21A2", "LeftCeiling": "\u2308", "LeftDoubleBracket": "\u27E6", "LeftDownTeeVector": "\u2961", "LeftDownVectorBar": "\u2959", "LeftDownVector": "\u21C3", "LeftFloor": "\u230A", "leftharpoondown": "\u21BD", "leftharpoonup": "\u21BC", "leftleftarrows": "\u21C7", "leftrightarrow": "\u2194", "LeftRightArrow": "\u2194", "Leftrightarrow": "\u21D4", "leftrightarrows": "\u21C6", "leftrightharpoons": "\u21CB", "leftrightsquigarrow": "\u21AD", "LeftRightVector": "\u294E", "LeftTeeArrow": "\u21A4", "LeftTee": "\u22A3", "LeftTeeVector": "\u295A", "leftthreetimes": "\u22CB", "LeftTriangleBar": "\u29CF", "LeftTriangle": "\u22B2", "LeftTriangleEqual": "\u22B4", "LeftUpDownVector": "\u2951", "LeftUpTeeVector": "\u2960", "LeftUpVectorBar": "\u2958", "LeftUpVector": "\u21BF", "LeftVectorBar": "\u2952", "LeftVector": "\u21BC", "lEg": "\u2A8B", "leg": "\u22DA", "leq": "\u2264", "leqq": "\u2266", "leqslant": "\u2A7D", "lescc": "\u2AA8", "les": "\u2A7D", "lesdot": "\u2A7F", "lesdoto": "\u2A81", "lesdotor": "\u2A83", "lesg": "\u22DA\uFE00", "lesges": "\u2A93", "lessapprox": "\u2A85", "lessdot": "\u22D6", "lesseqgtr": "\u22DA", "lesseqqgtr": "\u2A8B", "LessEqualGreater": "\u22DA", "LessFullEqual": "\u2266", "LessGreater": "\u2276", "lessgtr": "\u2276", "LessLess": "\u2AA1", "lesssim": "\u2272", "LessSlantEqual": "\u2A7D", "LessTilde": "\u2272", "lfisht": "\u297C", "lfloor": "\u230A", "Lfr": "\u{1D50F}", "lfr": "\u{1D529}", "lg": "\u2276", "lgE": "\u2A91", "lHar": "\u2962", "lhard": "\u21BD", "lharu": "\u21BC", "lharul": "\u296A", "lhblk": "\u2584", "LJcy": "\u0409", "ljcy": "\u0459", "llarr": "\u21C7", "ll": "\u226A", "Ll": "\u22D8", "llcorner": "\u231E", "Lleftarrow": "\u21DA", "llhard": "\u296B", "lltri": "\u25FA", "Lmidot": "\u013F", "lmidot": "\u0140", "lmoustache": "\u23B0", "lmoust": "\u23B0", "lnap": "\u2A89", "lnapprox": "\u2A89", "lne": "\u2A87", "lnE": "\u2268", "lneq": "\u2A87", "lneqq": "\u2268", "lnsim": "\u22E6", "loang": "\u27EC", "loarr": "\u21FD", "lobrk": "\u27E6", "longleftarrow": "\u27F5", "LongLeftArrow": "\u27F5", "Longleftarrow": "\u27F8", "longleftrightarrow": "\u27F7", "LongLeftRightArrow": "\u27F7", "Longleftrightarrow": "\u27FA", "longmapsto": "\u27FC", "longrightarrow": "\u27F6", "LongRightArrow": "\u27F6", "Longrightarrow": "\u27F9", "looparrowleft": "\u21AB", "looparrowright": "\u21AC", "lopar": "\u2985", "Lopf": "\u{1D543}", "lopf": "\u{1D55D}", "loplus": "\u2A2D", "lotimes": "\u2A34", "lowast": "\u2217", "lowbar": "_", "LowerLeftArrow": "\u2199", "LowerRightArrow": "\u2198", "loz": "\u25CA", "lozenge": "\u25CA", "lozf": "\u29EB", "lpar": "(", "lparlt": "\u2993", "lrarr": "\u21C6", "lrcorner": "\u231F", "lrhar": "\u21CB", "lrhard": "\u296D", "lrm": "\u200E", "lrtri": "\u22BF", "lsaquo": "\u2039", "lscr": "\u{1D4C1}", "Lscr": "\u2112", "lsh": "\u21B0", "Lsh": "\u21B0", "lsim": "\u2272", "lsime": "\u2A8D", "lsimg": "\u2A8F", "lsqb": "[", "lsquo": "\u2018", "lsquor": "\u201A", "Lstrok": "\u0141", "lstrok": "\u0142", "ltcc": "\u2AA6", "ltcir": "\u2A79", "lt": "<", "LT": "<", "Lt": "\u226A", "ltdot": "\u22D6", "lthree": "\u22CB", "ltimes": "\u22C9", "ltlarr": "\u2976", "ltquest": "\u2A7B", "ltri": "\u25C3", "ltrie": "\u22B4", "ltrif": "\u25C2", "ltrPar": "\u2996", "lurdshar": "\u294A", "luruhar": "\u2966", "lvertneqq": "\u2268\uFE00", "lvnE": "\u2268\uFE00", "macr": "\xAF", "male": "\u2642", "malt": "\u2720", "maltese": "\u2720", "Map": "\u2905", "map": "\u21A6", "mapsto": "\u21A6", "mapstodown": "\u21A7", "mapstoleft": "\u21A4", "mapstoup": "\u21A5", "marker": "\u25AE", "mcomma": "\u2A29", "Mcy": "\u041C", "mcy": "\u043C", "mdash": "\u2014", "mDDot": "\u223A", "measuredangle": "\u2221", "MediumSpace": "\u205F", "Mellintrf": "\u2133", "Mfr": "\u{1D510}", "mfr": "\u{1D52A}", "mho": "\u2127", "micro": "\xB5", "midast": "*", "midcir": "\u2AF0", "mid": "\u2223", "middot": "\xB7", "minusb": "\u229F", "minus": "\u2212", "minusd": "\u2238", "minusdu": "\u2A2A", "MinusPlus": "\u2213", "mlcp": "\u2ADB", "mldr": "\u2026", "mnplus": "\u2213", "models": "\u22A7", "Mopf": "\u{1D544}", "mopf": "\u{1D55E}", "mp": "\u2213", "mscr": "\u{1D4C2}", "Mscr": "\u2133", "mstpos": "\u223E", "Mu": "\u039C", "mu": "\u03BC", "multimap": "\u22B8", "mumap": "\u22B8", "nabla": "\u2207", "Nacute": "\u0143", "nacute": "\u0144", "nang": "\u2220\u20D2", "nap": "\u2249", "napE": "\u2A70\u0338", "napid": "\u224B\u0338", "napos": "\u0149", "napprox": "\u2249", "natural": "\u266E", "naturals": "\u2115", "natur": "\u266E", "nbsp": "\xA0", "nbump": "\u224E\u0338", "nbumpe": "\u224F\u0338", "ncap": "\u2A43", "Ncaron": "\u0147", "ncaron": "\u0148", "Ncedil": "\u0145", "ncedil": "\u0146", "ncong": "\u2247", "ncongdot": "\u2A6D\u0338", "ncup": "\u2A42", "Ncy": "\u041D", "ncy": "\u043D", "ndash": "\u2013", "nearhk": "\u2924", "nearr": "\u2197", "neArr": "\u21D7", "nearrow": "\u2197", "ne": "\u2260", "nedot": "\u2250\u0338", "NegativeMediumSpace": "\u200B", "NegativeThickSpace": "\u200B", "NegativeThinSpace": "\u200B", "NegativeVeryThinSpace": "\u200B", "nequiv": "\u2262", "nesear": "\u2928", "nesim": "\u2242\u0338", "NestedGreaterGreater": "\u226B", "NestedLessLess": "\u226A", "NewLine": "\n", "nexist": "\u2204", "nexists": "\u2204", "Nfr": "\u{1D511}", "nfr": "\u{1D52B}", "ngE": "\u2267\u0338", "nge": "\u2271", "ngeq": "\u2271", "ngeqq": "\u2267\u0338", "ngeqslant": "\u2A7E\u0338", "nges": "\u2A7E\u0338", "nGg": "\u22D9\u0338", "ngsim": "\u2275", "nGt": "\u226B\u20D2", "ngt": "\u226F", "ngtr": "\u226F", "nGtv": "\u226B\u0338", "nharr": "\u21AE", "nhArr": "\u21CE", "nhpar": "\u2AF2", "ni": "\u220B", "nis": "\u22FC", "nisd": "\u22FA", "niv": "\u220B", "NJcy": "\u040A", "njcy": "\u045A", "nlarr": "\u219A", "nlArr": "\u21CD", "nldr": "\u2025", "nlE": "\u2266\u0338", "nle": "\u2270", "nleftarrow": "\u219A", "nLeftarrow": "\u21CD", "nleftrightarrow": "\u21AE", "nLeftrightarrow": "\u21CE", "nleq": "\u2270", "nleqq": "\u2266\u0338", "nleqslant": "\u2A7D\u0338", "nles": "\u2A7D\u0338", "nless": "\u226E", "nLl": "\u22D8\u0338", "nlsim": "\u2274", "nLt": "\u226A\u20D2", "nlt": "\u226E", "nltri": "\u22EA", "nltrie": "\u22EC", "nLtv": "\u226A\u0338", "nmid": "\u2224", "NoBreak": "\u2060", "NonBreakingSpace": "\xA0", "nopf": "\u{1D55F}", "Nopf": "\u2115", "Not": "\u2AEC", "not": "\xAC", "NotCongruent": "\u2262", "NotCupCap": "\u226D", "NotDoubleVerticalBar": "\u2226", "NotElement": "\u2209", "NotEqual": "\u2260", "NotEqualTilde": "\u2242\u0338", "NotExists": "\u2204", "NotGreater": "\u226F", "NotGreaterEqual": "\u2271", "NotGreaterFullEqual": "\u2267\u0338", "NotGreaterGreater": "\u226B\u0338", "NotGreaterLess": "\u2279", "NotGreaterSlantEqual": "\u2A7E\u0338", "NotGreaterTilde": "\u2275", "NotHumpDownHump": "\u224E\u0338", "NotHumpEqual": "\u224F\u0338", "notin": "\u2209", "notindot": "\u22F5\u0338", "notinE": "\u22F9\u0338", "notinva": "\u2209", "notinvb": "\u22F7", "notinvc": "\u22F6", "NotLeftTriangleBar": "\u29CF\u0338", "NotLeftTriangle": "\u22EA", "NotLeftTriangleEqual": "\u22EC", "NotLess": "\u226E", "NotLessEqual": "\u2270", "NotLessGreater": "\u2278", "NotLessLess": "\u226A\u0338", "NotLessSlantEqual": "\u2A7D\u0338", "NotLessTilde": "\u2274", "NotNestedGreaterGreater": "\u2AA2\u0338", "NotNestedLessLess": "\u2AA1\u0338", "notni": "\u220C", "notniva": "\u220C", "notnivb": "\u22FE", "notnivc": "\u22FD", "NotPrecedes": "\u2280", "NotPrecedesEqual": "\u2AAF\u0338", "NotPrecedesSlantEqual": "\u22E0", "NotReverseElement": "\u220C", "NotRightTriangleBar": "\u29D0\u0338", "NotRightTriangle": "\u22EB", "NotRightTriangleEqual": "\u22ED", "NotSquareSubset": "\u228F\u0338", "NotSquareSubsetEqual": "\u22E2", "NotSquareSuperset": "\u2290\u0338", "NotSquareSupersetEqual": "\u22E3", "NotSubset": "\u2282\u20D2", "NotSubsetEqual": "\u2288", "NotSucceeds": "\u2281", "NotSucceedsEqual": "\u2AB0\u0338", "NotSucceedsSlantEqual": "\u22E1", "NotSucceedsTilde": "\u227F\u0338", "NotSuperset": "\u2283\u20D2", "NotSupersetEqual": "\u2289", "NotTilde": "\u2241", "NotTildeEqual": "\u2244", "NotTildeFullEqual": "\u2247", "NotTildeTilde": "\u2249", "NotVerticalBar": "\u2224", "nparallel": "\u2226", "npar": "\u2226", "nparsl": "\u2AFD\u20E5", "npart": "\u2202\u0338", "npolint": "\u2A14", "npr": "\u2280", "nprcue": "\u22E0", "nprec": "\u2280", "npreceq": "\u2AAF\u0338", "npre": "\u2AAF\u0338", "nrarrc": "\u2933\u0338", "nrarr": "\u219B", "nrArr": "\u21CF", "nrarrw": "\u219D\u0338", "nrightarrow": "\u219B", "nRightarrow": "\u21CF", "nrtri": "\u22EB", "nrtrie": "\u22ED", "nsc": "\u2281", "nsccue": "\u22E1", "nsce": "\u2AB0\u0338", "Nscr": "\u{1D4A9}", "nscr": "\u{1D4C3}", "nshortmid": "\u2224", "nshortparallel": "\u2226", "nsim": "\u2241", "nsime": "\u2244", "nsimeq": "\u2244", "nsmid": "\u2224", "nspar": "\u2226", "nsqsube": "\u22E2", "nsqsupe": "\u22E3", "nsub": "\u2284", "nsubE": "\u2AC5\u0338", "nsube": "\u2288", "nsubset": "\u2282\u20D2", "nsubseteq": "\u2288", "nsubseteqq": "\u2AC5\u0338", "nsucc": "\u2281", "nsucceq": "\u2AB0\u0338", "nsup": "\u2285", "nsupE": "\u2AC6\u0338", "nsupe": "\u2289", "nsupset": "\u2283\u20D2", "nsupseteq": "\u2289", "nsupseteqq": "\u2AC6\u0338", "ntgl": "\u2279", "Ntilde": "\xD1", "ntilde": "\xF1", "ntlg": "\u2278", "ntriangleleft": "\u22EA", "ntrianglelefteq": "\u22EC", "ntriangleright": "\u22EB", "ntrianglerighteq": "\u22ED", "Nu": "\u039D", "nu": "\u03BD", "num": "#", "numero": "\u2116", "numsp": "\u2007", "nvap": "\u224D\u20D2", "nvdash": "\u22AC", "nvDash": "\u22AD", "nVdash": "\u22AE", "nVDash": "\u22AF", "nvge": "\u2265\u20D2", "nvgt": ">\u20D2", "nvHarr": "\u2904", "nvinfin": "\u29DE", "nvlArr": "\u2902", "nvle": "\u2264\u20D2", "nvlt": "<\u20D2", "nvltrie": "\u22B4\u20D2", "nvrArr": "\u2903", "nvrtrie": "\u22B5\u20D2", "nvsim": "\u223C\u20D2", "nwarhk": "\u2923", "nwarr": "\u2196", "nwArr": "\u21D6", "nwarrow": "\u2196", "nwnear": "\u2927", "Oacute": "\xD3", "oacute": "\xF3", "oast": "\u229B", "Ocirc": "\xD4", "ocirc": "\xF4", "ocir": "\u229A", "Ocy": "\u041E", "ocy": "\u043E", "odash": "\u229D", "Odblac": "\u0150", "odblac": "\u0151", "odiv": "\u2A38", "odot": "\u2299", "odsold": "\u29BC", "OElig": "\u0152", "oelig": "\u0153", "ofcir": "\u29BF", "Ofr": "\u{1D512}", "ofr": "\u{1D52C}", "ogon": "\u02DB", "Ograve": "\xD2", "ograve": "\xF2", "ogt": "\u29C1", "ohbar": "\u29B5", "ohm": "\u03A9", "oint": "\u222E", "olarr": "\u21BA", "olcir": "\u29BE", "olcross": "\u29BB", "oline": "\u203E", "olt": "\u29C0", "Omacr": "\u014C", "omacr": "\u014D", "Omega": "\u03A9", "omega": "\u03C9", "Omicron": "\u039F", "omicron": "\u03BF", "omid": "\u29B6", "ominus": "\u2296", "Oopf": "\u{1D546}", "oopf": "\u{1D560}", "opar": "\u29B7", "OpenCurlyDoubleQuote": "\u201C", "OpenCurlyQuote": "\u2018", "operp": "\u29B9", "oplus": "\u2295", "orarr": "\u21BB", "Or": "\u2A54", "or": "\u2228", "ord": "\u2A5D", "order": "\u2134", "orderof": "\u2134", "ordf": "\xAA", "ordm": "\xBA", "origof": "\u22B6", "oror": "\u2A56", "orslope": "\u2A57", "orv": "\u2A5B", "oS": "\u24C8", "Oscr": "\u{1D4AA}", "oscr": "\u2134", "Oslash": "\xD8", "oslash": "\xF8", "osol": "\u2298", "Otilde": "\xD5", "otilde": "\xF5", "otimesas": "\u2A36", "Otimes": "\u2A37", "otimes": "\u2297", "Ouml": "\xD6", "ouml": "\xF6", "ovbar": "\u233D", "OverBar": "\u203E", "OverBrace": "\u23DE", "OverBracket": "\u23B4", "OverParenthesis": "\u23DC", "para": "\xB6", "parallel": "\u2225", "par": "\u2225", "parsim": "\u2AF3", "parsl": "\u2AFD", "part": "\u2202", "PartialD": "\u2202", "Pcy": "\u041F", "pcy": "\u043F", "percnt": "%", "period": ".", "permil": "\u2030", "perp": "\u22A5", "pertenk": "\u2031", "Pfr": "\u{1D513}", "pfr": "\u{1D52D}", "Phi": "\u03A6", "phi": "\u03C6", "phiv": "\u03D5", "phmmat": "\u2133", "phone": "\u260E", "Pi": "\u03A0", "pi": "\u03C0", "pitchfork": "\u22D4", "piv": "\u03D6", "planck": "\u210F", "planckh": "\u210E", "plankv": "\u210F", "plusacir": "\u2A23", "plusb": "\u229E", "pluscir": "\u2A22", "plus": "+", "plusdo": "\u2214", "plusdu": "\u2A25", "pluse": "\u2A72", "PlusMinus": "\xB1", "plusmn": "\xB1", "plussim": "\u2A26", "plustwo": "\u2A27", "pm": "\xB1", "Poincareplane": "\u210C", "pointint": "\u2A15", "popf": "\u{1D561}", "Popf": "\u2119", "pound": "\xA3", "prap": "\u2AB7", "Pr": "\u2ABB", "pr": "\u227A", "prcue": "\u227C", "precapprox": "\u2AB7", "prec": "\u227A", "preccurlyeq": "\u227C", "Precedes": "\u227A", "PrecedesEqual": "\u2AAF", "PrecedesSlantEqual": "\u227C", "PrecedesTilde": "\u227E", "preceq": "\u2AAF", "precnapprox": "\u2AB9", "precneqq": "\u2AB5", "precnsim": "\u22E8", "pre": "\u2AAF", "prE": "\u2AB3", "precsim": "\u227E", "prime": "\u2032", "Prime": "\u2033", "primes": "\u2119", "prnap": "\u2AB9", "prnE": "\u2AB5", "prnsim": "\u22E8", "prod": "\u220F", "Product": "\u220F", "profalar": "\u232E", "profline": "\u2312", "profsurf": "\u2313", "prop": "\u221D", "Proportional": "\u221D", "Proportion": "\u2237", "propto": "\u221D", "prsim": "\u227E", "prurel": "\u22B0", "Pscr": "\u{1D4AB}", "pscr": "\u{1D4C5}", "Psi": "\u03A8", "psi": "\u03C8", "puncsp": "\u2008", "Qfr": "\u{1D514}", "qfr": "\u{1D52E}", "qint": "\u2A0C", "qopf": "\u{1D562}", "Qopf": "\u211A", "qprime": "\u2057", "Qscr": "\u{1D4AC}", "qscr": "\u{1D4C6}", "quaternions": "\u210D", "quatint": "\u2A16", "quest": "?", "questeq": "\u225F", "quot": '"', "QUOT": '"', "rAarr": "\u21DB", "race": "\u223D\u0331", "Racute": "\u0154", "racute": "\u0155", "radic": "\u221A", "raemptyv": "\u29B3", "rang": "\u27E9", "Rang": "\u27EB", "rangd": "\u2992", "range": "\u29A5", "rangle": "\u27E9", "raquo": "\xBB", "rarrap": "\u2975", "rarrb": "\u21E5", "rarrbfs": "\u2920", "rarrc": "\u2933", "rarr": "\u2192", "Rarr": "\u21A0", "rArr": "\u21D2", "rarrfs": "\u291E", "rarrhk": "\u21AA", "rarrlp": "\u21AC", "rarrpl": "\u2945", "rarrsim": "\u2974", "Rarrtl": "\u2916", "rarrtl": "\u21A3", "rarrw": "\u219D", "ratail": "\u291A", "rAtail": "\u291C", "ratio": "\u2236", "rationals": "\u211A", "rbarr": "\u290D", "rBarr": "\u290F", "RBarr": "\u2910", "rbbrk": "\u2773", "rbrace": "}", "rbrack": "]", "rbrke": "\u298C", "rbrksld": "\u298E", "rbrkslu": "\u2990", "Rcaron": "\u0158", "rcaron": "\u0159", "Rcedil": "\u0156", "rcedil": "\u0157", "rceil": "\u2309", "rcub": "}", "Rcy": "\u0420", "rcy": "\u0440", "rdca": "\u2937", "rdldhar": "\u2969", "rdquo": "\u201D", "rdquor": "\u201D", "rdsh": "\u21B3", "real": "\u211C", "realine": "\u211B", "realpart": "\u211C", "reals": "\u211D", "Re": "\u211C", "rect": "\u25AD", "reg": "\xAE", "REG": "\xAE", "ReverseElement": "\u220B", "ReverseEquilibrium": "\u21CB", "ReverseUpEquilibrium": "\u296F", "rfisht": "\u297D", "rfloor": "\u230B", "rfr": "\u{1D52F}", "Rfr": "\u211C", "rHar": "\u2964", "rhard": "\u21C1", "rharu": "\u21C0", "rharul": "\u296C", "Rho": "\u03A1", "rho": "\u03C1", "rhov": "\u03F1", "RightAngleBracket": "\u27E9", "RightArrowBar": "\u21E5", "rightarrow": "\u2192", "RightArrow": "\u2192", "Rightarrow": "\u21D2", "RightArrowLeftArrow": "\u21C4", "rightarrowtail": "\u21A3", "RightCeiling": "\u2309", "RightDoubleBracket": "\u27E7", "RightDownTeeVector": "\u295D", "RightDownVectorBar": "\u2955", "RightDownVector": "\u21C2", "RightFloor": "\u230B", "rightharpoondown": "\u21C1", "rightharpoonup": "\u21C0", "rightleftarrows": "\u21C4", "rightleftharpoons": "\u21CC", "rightrightarrows": "\u21C9", "rightsquigarrow": "\u219D", "RightTeeArrow": "\u21A6", "RightTee": "\u22A2", "RightTeeVector": "\u295B", "rightthreetimes": "\u22CC", "RightTriangleBar": "\u29D0", "RightTriangle": "\u22B3", "RightTriangleEqual": "\u22B5", "RightUpDownVector": "\u294F", "RightUpTeeVector": "\u295C", "RightUpVectorBar": "\u2954", "RightUpVector": "\u21BE", "RightVectorBar": "\u2953", "RightVector": "\u21C0", "ring": "\u02DA", "risingdotseq": "\u2253", "rlarr": "\u21C4", "rlhar": "\u21CC", "rlm": "\u200F", "rmoustache": "\u23B1", "rmoust": "\u23B1", "rnmid": "\u2AEE", "roang": "\u27ED", "roarr": "\u21FE", "robrk": "\u27E7", "ropar": "\u2986", "ropf": "\u{1D563}", "Ropf": "\u211D", "roplus": "\u2A2E", "rotimes": "\u2A35", "RoundImplies": "\u2970", "rpar": ")", "rpargt": "\u2994", "rppolint": "\u2A12", "rrarr": "\u21C9", "Rrightarrow": "\u21DB", "rsaquo": "\u203A", "rscr": "\u{1D4C7}", "Rscr": "\u211B", "rsh": "\u21B1", "Rsh": "\u21B1", "rsqb": "]", "rsquo": "\u2019", "rsquor": "\u2019", "rthree": "\u22CC", "rtimes": "\u22CA", "rtri": "\u25B9", "rtrie": "\u22B5", "rtrif": "\u25B8", "rtriltri": "\u29CE", "RuleDelayed": "\u29F4", "ruluhar": "\u2968", "rx": "\u211E", "Sacute": "\u015A", "sacute": "\u015B", "sbquo": "\u201A", "scap": "\u2AB8", "Scaron": "\u0160", "scaron": "\u0161", "Sc": "\u2ABC", "sc": "\u227B", "sccue": "\u227D", "sce": "\u2AB0", "scE": "\u2AB4", "Scedil": "\u015E", "scedil": "\u015F", "Scirc": "\u015C", "scirc": "\u015D", "scnap": "\u2ABA", "scnE": "\u2AB6", "scnsim": "\u22E9", "scpolint": "\u2A13", "scsim": "\u227F", "Scy": "\u0421", "scy": "\u0441", "sdotb": "\u22A1", "sdot": "\u22C5", "sdote": "\u2A66", "searhk": "\u2925", "searr": "\u2198", "seArr": "\u21D8", "searrow": "\u2198", "sect": "\xA7", "semi": ";", "seswar": "\u2929", "setminus": "\u2216", "setmn": "\u2216", "sext": "\u2736", "Sfr": "\u{1D516}", "sfr": "\u{1D530}", "sfrown": "\u2322", "sharp": "\u266F", "SHCHcy": "\u0429", "shchcy": "\u0449", "SHcy": "\u0428", "shcy": "\u0448", "ShortDownArrow": "\u2193", "ShortLeftArrow": "\u2190", "shortmid": "\u2223", "shortparallel": "\u2225", "ShortRightArrow": "\u2192", "ShortUpArrow": "\u2191", "shy": "\xAD", "Sigma": "\u03A3", "sigma": "\u03C3", "sigmaf": "\u03C2", "sigmav": "\u03C2", "sim": "\u223C", "simdot": "\u2A6A", "sime": "\u2243", "simeq": "\u2243", "simg": "\u2A9E", "simgE": "\u2AA0", "siml": "\u2A9D", "simlE": "\u2A9F", "simne": "\u2246", "simplus": "\u2A24", "simrarr": "\u2972", "slarr": "\u2190", "SmallCircle": "\u2218", "smallsetminus": "\u2216", "smashp": "\u2A33", "smeparsl": "\u29E4", "smid": "\u2223", "smile": "\u2323", "smt": "\u2AAA", "smte": "\u2AAC", "smtes": "\u2AAC\uFE00", "SOFTcy": "\u042C", "softcy": "\u044C", "solbar": "\u233F", "solb": "\u29C4", "sol": "/", "Sopf": "\u{1D54A}", "sopf": "\u{1D564}", "spades": "\u2660", "spadesuit": "\u2660", "spar": "\u2225", "sqcap": "\u2293", "sqcaps": "\u2293\uFE00", "sqcup": "\u2294", "sqcups": "\u2294\uFE00", "Sqrt": "\u221A", "sqsub": "\u228F", "sqsube": "\u2291", "sqsubset": "\u228F", "sqsubseteq": "\u2291", "sqsup": "\u2290", "sqsupe": "\u2292", "sqsupset": "\u2290", "sqsupseteq": "\u2292", "square": "\u25A1", "Square": "\u25A1", "SquareIntersection": "\u2293", "SquareSubset": "\u228F", "SquareSubsetEqual": "\u2291", "SquareSuperset": "\u2290", "SquareSupersetEqual": "\u2292", "SquareUnion": "\u2294", "squarf": "\u25AA", "squ": "\u25A1", "squf": "\u25AA", "srarr": "\u2192", "Sscr": "\u{1D4AE}", "sscr": "\u{1D4C8}", "ssetmn": "\u2216", "ssmile": "\u2323", "sstarf": "\u22C6", "Star": "\u22C6", "star": "\u2606", "starf": "\u2605", "straightepsilon": "\u03F5", "straightphi": "\u03D5", "strns": "\xAF", "sub": "\u2282", "Sub": "\u22D0", "subdot": "\u2ABD", "subE": "\u2AC5", "sube": "\u2286", "subedot": "\u2AC3", "submult": "\u2AC1", "subnE": "\u2ACB", "subne": "\u228A", "subplus": "\u2ABF", "subrarr": "\u2979", "subset": "\u2282", "Subset": "\u22D0", "subseteq": "\u2286", "subseteqq": "\u2AC5", "SubsetEqual": "\u2286", "subsetneq": "\u228A", "subsetneqq": "\u2ACB", "subsim": "\u2AC7", "subsub": "\u2AD5", "subsup": "\u2AD3", "succapprox": "\u2AB8", "succ": "\u227B", "succcurlyeq": "\u227D", "Succeeds": "\u227B", "SucceedsEqual": "\u2AB0", "SucceedsSlantEqual": "\u227D", "SucceedsTilde": "\u227F", "succeq": "\u2AB0", "succnapprox": "\u2ABA", "succneqq": "\u2AB6", "succnsim": "\u22E9", "succsim": "\u227F", "SuchThat": "\u220B", "sum": "\u2211", "Sum": "\u2211", "sung": "\u266A", "sup1": "\xB9", "sup2": "\xB2", "sup3": "\xB3", "sup": "\u2283", "Sup": "\u22D1", "supdot": "\u2ABE", "supdsub": "\u2AD8", "supE": "\u2AC6", "supe": "\u2287", "supedot": "\u2AC4", "Superset": "\u2283", "SupersetEqual": "\u2287", "suphsol": "\u27C9", "suphsub": "\u2AD7", "suplarr": "\u297B", "supmult": "\u2AC2", "supnE": "\u2ACC", "supne": "\u228B", "supplus": "\u2AC0", "supset": "\u2283", "Supset": "\u22D1", "supseteq": "\u2287", "supseteqq": "\u2AC6", "supsetneq": "\u228B", "supsetneqq": "\u2ACC", "supsim": "\u2AC8", "supsub": "\u2AD4", "supsup": "\u2AD6", "swarhk": "\u2926", "swarr": "\u2199", "swArr": "\u21D9", "swarrow": "\u2199", "swnwar": "\u292A", "szlig": "\xDF", "Tab": "	", "target": "\u2316", "Tau": "\u03A4", "tau": "\u03C4", "tbrk": "\u23B4", "Tcaron": "\u0164", "tcaron": "\u0165", "Tcedil": "\u0162", "tcedil": "\u0163", "Tcy": "\u0422", "tcy": "\u0442", "tdot": "\u20DB", "telrec": "\u2315", "Tfr": "\u{1D517}", "tfr": "\u{1D531}", "there4": "\u2234", "therefore": "\u2234", "Therefore": "\u2234", "Theta": "\u0398", "theta": "\u03B8", "thetasym": "\u03D1", "thetav": "\u03D1", "thickapprox": "\u2248", "thicksim": "\u223C", "ThickSpace": "\u205F\u200A", "ThinSpace": "\u2009", "thinsp": "\u2009", "thkap": "\u2248", "thksim": "\u223C", "THORN": "\xDE", "thorn": "\xFE", "tilde": "\u02DC", "Tilde": "\u223C", "TildeEqual": "\u2243", "TildeFullEqual": "\u2245", "TildeTilde": "\u2248", "timesbar": "\u2A31", "timesb": "\u22A0", "times": "\xD7", "timesd": "\u2A30", "tint": "\u222D", "toea": "\u2928", "topbot": "\u2336", "topcir": "\u2AF1", "top": "\u22A4", "Topf": "\u{1D54B}", "topf": "\u{1D565}", "topfork": "\u2ADA", "tosa": "\u2929", "tprime": "\u2034", "trade": "\u2122", "TRADE": "\u2122", "triangle": "\u25B5", "triangledown": "\u25BF", "triangleleft": "\u25C3", "trianglelefteq": "\u22B4", "triangleq": "\u225C", "triangleright": "\u25B9", "trianglerighteq": "\u22B5", "tridot": "\u25EC", "trie": "\u225C", "triminus": "\u2A3A", "TripleDot": "\u20DB", "triplus": "\u2A39", "trisb": "\u29CD", "tritime": "\u2A3B", "trpezium": "\u23E2", "Tscr": "\u{1D4AF}", "tscr": "\u{1D4C9}", "TScy": "\u0426", "tscy": "\u0446", "TSHcy": "\u040B", "tshcy": "\u045B", "Tstrok": "\u0166", "tstrok": "\u0167", "twixt": "\u226C", "twoheadleftarrow": "\u219E", "twoheadrightarrow": "\u21A0", "Uacute": "\xDA", "uacute": "\xFA", "uarr": "\u2191", "Uarr": "\u219F", "uArr": "\u21D1", "Uarrocir": "\u2949", "Ubrcy": "\u040E", "ubrcy": "\u045E", "Ubreve": "\u016C", "ubreve": "\u016D", "Ucirc": "\xDB", "ucirc": "\xFB", "Ucy": "\u0423", "ucy": "\u0443", "udarr": "\u21C5", "Udblac": "\u0170", "udblac": "\u0171", "udhar": "\u296E", "ufisht": "\u297E", "Ufr": "\u{1D518}", "ufr": "\u{1D532}", "Ugrave": "\xD9", "ugrave": "\xF9", "uHar": "\u2963", "uharl": "\u21BF", "uharr": "\u21BE", "uhblk": "\u2580", "ulcorn": "\u231C", "ulcorner": "\u231C", "ulcrop": "\u230F", "ultri": "\u25F8", "Umacr": "\u016A", "umacr": "\u016B", "uml": "\xA8", "UnderBar": "_", "UnderBrace": "\u23DF", "UnderBracket": "\u23B5", "UnderParenthesis": "\u23DD", "Union": "\u22C3", "UnionPlus": "\u228E", "Uogon": "\u0172", "uogon": "\u0173", "Uopf": "\u{1D54C}", "uopf": "\u{1D566}", "UpArrowBar": "\u2912", "uparrow": "\u2191", "UpArrow": "\u2191", "Uparrow": "\u21D1", "UpArrowDownArrow": "\u21C5", "updownarrow": "\u2195", "UpDownArrow": "\u2195", "Updownarrow": "\u21D5", "UpEquilibrium": "\u296E", "upharpoonleft": "\u21BF", "upharpoonright": "\u21BE", "uplus": "\u228E", "UpperLeftArrow": "\u2196", "UpperRightArrow": "\u2197", "upsi": "\u03C5", "Upsi": "\u03D2", "upsih": "\u03D2", "Upsilon": "\u03A5", "upsilon": "\u03C5", "UpTeeArrow": "\u21A5", "UpTee": "\u22A5", "upuparrows": "\u21C8", "urcorn": "\u231D", "urcorner": "\u231D", "urcrop": "\u230E", "Uring": "\u016E", "uring": "\u016F", "urtri": "\u25F9", "Uscr": "\u{1D4B0}", "uscr": "\u{1D4CA}", "utdot": "\u22F0", "Utilde": "\u0168", "utilde": "\u0169", "utri": "\u25B5", "utrif": "\u25B4", "uuarr": "\u21C8", "Uuml": "\xDC", "uuml": "\xFC", "uwangle": "\u29A7", "vangrt": "\u299C", "varepsilon": "\u03F5", "varkappa": "\u03F0", "varnothing": "\u2205", "varphi": "\u03D5", "varpi": "\u03D6", "varpropto": "\u221D", "varr": "\u2195", "vArr": "\u21D5", "varrho": "\u03F1", "varsigma": "\u03C2", "varsubsetneq": "\u228A\uFE00", "varsubsetneqq": "\u2ACB\uFE00", "varsupsetneq": "\u228B\uFE00", "varsupsetneqq": "\u2ACC\uFE00", "vartheta": "\u03D1", "vartriangleleft": "\u22B2", "vartriangleright": "\u22B3", "vBar": "\u2AE8", "Vbar": "\u2AEB", "vBarv": "\u2AE9", "Vcy": "\u0412", "vcy": "\u0432", "vdash": "\u22A2", "vDash": "\u22A8", "Vdash": "\u22A9", "VDash": "\u22AB", "Vdashl": "\u2AE6", "veebar": "\u22BB", "vee": "\u2228", "Vee": "\u22C1", "veeeq": "\u225A", "vellip": "\u22EE", "verbar": "|", "Verbar": "\u2016", "vert": "|", "Vert": "\u2016", "VerticalBar": "\u2223", "VerticalLine": "|", "VerticalSeparator": "\u2758", "VerticalTilde": "\u2240", "VeryThinSpace": "\u200A", "Vfr": "\u{1D519}", "vfr": "\u{1D533}", "vltri": "\u22B2", "vnsub": "\u2282\u20D2", "vnsup": "\u2283\u20D2", "Vopf": "\u{1D54D}", "vopf": "\u{1D567}", "vprop": "\u221D", "vrtri": "\u22B3", "Vscr": "\u{1D4B1}", "vscr": "\u{1D4CB}", "vsubnE": "\u2ACB\uFE00", "vsubne": "\u228A\uFE00", "vsupnE": "\u2ACC\uFE00", "vsupne": "\u228B\uFE00", "Vvdash": "\u22AA", "vzigzag": "\u299A", "Wcirc": "\u0174", "wcirc": "\u0175", "wedbar": "\u2A5F", "wedge": "\u2227", "Wedge": "\u22C0", "wedgeq": "\u2259", "weierp": "\u2118", "Wfr": "\u{1D51A}", "wfr": "\u{1D534}", "Wopf": "\u{1D54E}", "wopf": "\u{1D568}", "wp": "\u2118", "wr": "\u2240", "wreath": "\u2240", "Wscr": "\u{1D4B2}", "wscr": "\u{1D4CC}", "xcap": "\u22C2", "xcirc": "\u25EF", "xcup": "\u22C3", "xdtri": "\u25BD", "Xfr": "\u{1D51B}", "xfr": "\u{1D535}", "xharr": "\u27F7", "xhArr": "\u27FA", "Xi": "\u039E", "xi": "\u03BE", "xlarr": "\u27F5", "xlArr": "\u27F8", "xmap": "\u27FC", "xnis": "\u22FB", "xodot": "\u2A00", "Xopf": "\u{1D54F}", "xopf": "\u{1D569}", "xoplus": "\u2A01", "xotime": "\u2A02", "xrarr": "\u27F6", "xrArr": "\u27F9", "Xscr": "\u{1D4B3}", "xscr": "\u{1D4CD}", "xsqcup": "\u2A06", "xuplus": "\u2A04", "xutri": "\u25B3", "xvee": "\u22C1", "xwedge": "\u22C0", "Yacute": "\xDD", "yacute": "\xFD", "YAcy": "\u042F", "yacy": "\u044F", "Ycirc": "\u0176", "ycirc": "\u0177", "Ycy": "\u042B", "ycy": "\u044B", "yen": "\xA5", "Yfr": "\u{1D51C}", "yfr": "\u{1D536}", "YIcy": "\u0407", "yicy": "\u0457", "Yopf": "\u{1D550}", "yopf": "\u{1D56A}", "Yscr": "\u{1D4B4}", "yscr": "\u{1D4CE}", "YUcy": "\u042E", "yucy": "\u044E", "yuml": "\xFF", "Yuml": "\u0178", "Zacute": "\u0179", "zacute": "\u017A", "Zcaron": "\u017D", "zcaron": "\u017E", "Zcy": "\u0417", "zcy": "\u0437", "Zdot": "\u017B", "zdot": "\u017C", "zeetrf": "\u2128", "ZeroWidthSpace": "\u200B", "Zeta": "\u0396", "zeta": "\u03B6", "zfr": "\u{1D537}", "Zfr": "\u2128", "ZHcy": "\u0416", "zhcy": "\u0436", "zigrarr": "\u21DD", "zopf": "\u{1D56B}", "Zopf": "\u2124", "Zscr": "\u{1D4B5}", "zscr": "\u{1D4CF}", "zwj": "\u200D", "zwnj": "\u200C" };
+      var decodeMapLegacy = { "Aacute": "\xC1", "aacute": "\xE1", "Acirc": "\xC2", "acirc": "\xE2", "acute": "\xB4", "AElig": "\xC6", "aelig": "\xE6", "Agrave": "\xC0", "agrave": "\xE0", "amp": "&", "AMP": "&", "Aring": "\xC5", "aring": "\xE5", "Atilde": "\xC3", "atilde": "\xE3", "Auml": "\xC4", "auml": "\xE4", "brvbar": "\xA6", "Ccedil": "\xC7", "ccedil": "\xE7", "cedil": "\xB8", "cent": "\xA2", "copy": "\xA9", "COPY": "\xA9", "curren": "\xA4", "deg": "\xB0", "divide": "\xF7", "Eacute": "\xC9", "eacute": "\xE9", "Ecirc": "\xCA", "ecirc": "\xEA", "Egrave": "\xC8", "egrave": "\xE8", "ETH": "\xD0", "eth": "\xF0", "Euml": "\xCB", "euml": "\xEB", "frac12": "\xBD", "frac14": "\xBC", "frac34": "\xBE", "gt": ">", "GT": ">", "Iacute": "\xCD", "iacute": "\xED", "Icirc": "\xCE", "icirc": "\xEE", "iexcl": "\xA1", "Igrave": "\xCC", "igrave": "\xEC", "iquest": "\xBF", "Iuml": "\xCF", "iuml": "\xEF", "laquo": "\xAB", "lt": "<", "LT": "<", "macr": "\xAF", "micro": "\xB5", "middot": "\xB7", "nbsp": "\xA0", "not": "\xAC", "Ntilde": "\xD1", "ntilde": "\xF1", "Oacute": "\xD3", "oacute": "\xF3", "Ocirc": "\xD4", "ocirc": "\xF4", "Ograve": "\xD2", "ograve": "\xF2", "ordf": "\xAA", "ordm": "\xBA", "Oslash": "\xD8", "oslash": "\xF8", "Otilde": "\xD5", "otilde": "\xF5", "Ouml": "\xD6", "ouml": "\xF6", "para": "\xB6", "plusmn": "\xB1", "pound": "\xA3", "quot": '"', "QUOT": '"', "raquo": "\xBB", "reg": "\xAE", "REG": "\xAE", "sect": "\xA7", "shy": "\xAD", "sup1": "\xB9", "sup2": "\xB2", "sup3": "\xB3", "szlig": "\xDF", "THORN": "\xDE", "thorn": "\xFE", "times": "\xD7", "Uacute": "\xDA", "uacute": "\xFA", "Ucirc": "\xDB", "ucirc": "\xFB", "Ugrave": "\xD9", "ugrave": "\xF9", "uml": "\xA8", "Uuml": "\xDC", "uuml": "\xFC", "Yacute": "\xDD", "yacute": "\xFD", "yen": "\xA5", "yuml": "\xFF" };
+      var decodeMapNumeric = { "0": "\uFFFD", "128": "\u20AC", "130": "\u201A", "131": "\u0192", "132": "\u201E", "133": "\u2026", "134": "\u2020", "135": "\u2021", "136": "\u02C6", "137": "\u2030", "138": "\u0160", "139": "\u2039", "140": "\u0152", "142": "\u017D", "145": "\u2018", "146": "\u2019", "147": "\u201C", "148": "\u201D", "149": "\u2022", "150": "\u2013", "151": "\u2014", "152": "\u02DC", "153": "\u2122", "154": "\u0161", "155": "\u203A", "156": "\u0153", "158": "\u017E", "159": "\u0178" };
+      var invalidReferenceCodePoints = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 64976, 64977, 64978, 64979, 64980, 64981, 64982, 64983, 64984, 64985, 64986, 64987, 64988, 64989, 64990, 64991, 64992, 64993, 64994, 64995, 64996, 64997, 64998, 64999, 65e3, 65001, 65002, 65003, 65004, 65005, 65006, 65007, 65534, 65535, 131070, 131071, 196606, 196607, 262142, 262143, 327678, 327679, 393214, 393215, 458750, 458751, 524286, 524287, 589822, 589823, 655358, 655359, 720894, 720895, 786430, 786431, 851966, 851967, 917502, 917503, 983038, 983039, 1048574, 1048575, 1114110, 1114111];
+      var stringFromCharCode = String.fromCharCode;
+      var object = {};
+      var hasOwnProperty = object.hasOwnProperty;
+      var has = function(object2, propertyName) {
+        return hasOwnProperty.call(object2, propertyName);
+      };
+      var contains = function(array, value) {
+        var index = -1;
+        var length = array.length;
+        while (++index < length) {
+          if (array[index] == value) {
+            return true;
+          }
+        }
+        return false;
+      };
+      var merge2 = function(options2, defaults) {
+        if (!options2) {
+          return defaults;
+        }
+        var result = {};
+        var key2;
+        for (key2 in defaults) {
+          result[key2] = has(options2, key2) ? options2[key2] : defaults[key2];
+        }
+        return result;
+      };
+      var codePointToSymbol = function(codePoint, strict) {
+        var output = "";
+        if (codePoint >= 55296 && codePoint <= 57343 || codePoint > 1114111) {
+          if (strict) {
+            parseError("character reference outside the permissible Unicode range");
+          }
+          return "\uFFFD";
+        }
+        if (has(decodeMapNumeric, codePoint)) {
+          if (strict) {
+            parseError("disallowed character reference");
+          }
+          return decodeMapNumeric[codePoint];
+        }
+        if (strict && contains(invalidReferenceCodePoints, codePoint)) {
+          parseError("disallowed character reference");
+        }
+        if (codePoint > 65535) {
+          codePoint -= 65536;
+          output += stringFromCharCode(codePoint >>> 10 & 1023 | 55296);
+          codePoint = 56320 | codePoint & 1023;
+        }
+        output += stringFromCharCode(codePoint);
+        return output;
+      };
+      var hexEscape = function(symbol2) {
+        return "&#x" + symbol2.charCodeAt(0).toString(16).toUpperCase() + ";";
+      };
+      var parseError = function(message) {
+        throw Error("Parse error: " + message);
+      };
+      var encode = function(string, options2) {
+        options2 = merge2(options2, encode.options);
+        var strict = options2.strict;
+        if (strict && regexInvalidRawCodePoint.test(string)) {
+          parseError("forbidden code point");
+        }
+        var encodeEverything = options2.encodeEverything;
+        var useNamedReferences = options2.useNamedReferences;
+        var allowUnsafeSymbols = options2.allowUnsafeSymbols;
+        if (encodeEverything) {
+          string = string.replace(regexAsciiWhitelist, function(symbol2) {
+            if (useNamedReferences && has(encodeMap, symbol2)) {
+              return "&" + encodeMap[symbol2] + ";";
+            }
+            return hexEscape(symbol2);
+          });
+          if (useNamedReferences) {
+            string = string.replace(/&gt;\u20D2/g, "&nvgt;").replace(/&lt;\u20D2/g, "&nvlt;").replace(/&#x66;&#x6A;/g, "&fjlig;");
+          }
+          if (useNamedReferences) {
+            string = string.replace(regexEncodeNonAscii, function(string2) {
+              return "&" + encodeMap[string2] + ";";
+            });
+          }
+        } else if (useNamedReferences) {
+          if (!allowUnsafeSymbols) {
+            string = string.replace(regexEscape, function(string2) {
+              return "&" + encodeMap[string2] + ";";
+            });
+          }
+          string = string.replace(/&gt;\u20D2/g, "&nvgt;").replace(/&lt;\u20D2/g, "&nvlt;");
+          string = string.replace(regexEncodeNonAscii, function(string2) {
+            return "&" + encodeMap[string2] + ";";
+          });
+        } else if (!allowUnsafeSymbols) {
+          string = string.replace(regexEscape, hexEscape);
+        }
+        return string.replace(regexAstralSymbols, function($0) {
+          var high = $0.charCodeAt(0);
+          var low = $0.charCodeAt(1);
+          var codePoint = (high - 55296) * 1024 + low - 56320 + 65536;
+          return "&#x" + codePoint.toString(16).toUpperCase() + ";";
+        }).replace(regexBmpWhitelist, hexEscape);
+      };
+      encode.options = {
+        "allowUnsafeSymbols": false,
+        "encodeEverything": false,
+        "strict": false,
+        "useNamedReferences": false
+      };
+      var decode = function(html, options2) {
+        options2 = merge2(options2, decode.options);
+        var strict = options2.strict;
+        if (strict && regexInvalidEntity.test(html)) {
+          parseError("malformed character reference");
+        }
+        return html.replace(regexDecode, function($0, $1, $2, $3, $4, $5, $6, $7) {
+          var codePoint;
+          var semicolon;
+          var hexDigits;
+          var reference;
+          var next;
+          if ($1) {
+            codePoint = $1;
+            semicolon = $2;
+            if (strict && !semicolon) {
+              parseError("character reference was not terminated by a semicolon");
+            }
+            return codePointToSymbol(codePoint, strict);
+          }
+          if ($3) {
+            hexDigits = $3;
+            semicolon = $4;
+            if (strict && !semicolon) {
+              parseError("character reference was not terminated by a semicolon");
+            }
+            codePoint = parseInt(hexDigits, 16);
+            return codePointToSymbol(codePoint, strict);
+          }
+          if ($5) {
+            reference = $5;
+            if (has(decodeMap, reference)) {
+              return decodeMap[reference];
+            } else {
+              if (strict) {
+                parseError(
+                  "named character reference was not terminated by a semicolon"
+                );
+              }
+              return $0;
+            }
+          }
+          reference = $6;
+          next = $7;
+          if (next && options2.isAttributeValue) {
+            if (strict && next == "=") {
+              parseError("`&` did not start a character reference");
+            }
+            return $0;
+          } else {
+            if (strict) {
+              parseError(
+                "named character reference was not terminated by a semicolon"
+              );
+            }
+            return decodeMapLegacy[reference] + (next || "");
+          }
+        });
+      };
+      decode.options = {
+        "isAttributeValue": false,
+        "strict": false
+      };
+      var escape = function(string) {
+        return string.replace(regexEscape, function($0) {
+          return escapeMap[$0];
+        });
+      };
+      var he = {
+        "version": "0.5.0",
+        "encode": encode,
+        "decode": decode,
+        "escape": escape,
+        "unescape": decode
+      };
+      if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
+        define(function() {
+          return he;
+        });
+      } else if (freeExports && !freeExports.nodeType) {
+        if (freeModule) {
+          freeModule.exports = he;
+        } else {
+          for (var key in he) {
+            has(he, key) && (freeExports[key] = he[key]);
+          }
+        }
+      } else {
+        root.he = he;
+      }
+    })(exports);
   }
-};
+});
+var require_assignment = __commonJS2({
+  "../../node_modules/assignment/assignment.js"(exports, module) {
+    "use strict";
+    function assignment(result) {
+      var stack = Array.prototype.slice.call(arguments, 1);
+      var item;
+      var key;
+      while (stack.length) {
+        item = stack.shift();
+        for (key in item) {
+          if (item.hasOwnProperty(key)) {
+            if (Object.prototype.toString.call(result[key]) === "[object Object]") {
+              result[key] = assignment(result[key], item[key]);
+            } else {
+              result[key] = item[key];
+            }
+          }
+        }
+      }
+      return result;
+    }
+    module.exports = assignment;
+  }
+});
+var require_lowercase = __commonJS2({
+  "../../node_modules/insane/lowercase.js"(exports, module) {
+    "use strict";
+    module.exports = function lowercase(string) {
+      return typeof string === "string" ? string.toLowerCase() : string;
+    };
+  }
+});
+var require_toMap = __commonJS2({
+  "../../node_modules/insane/toMap.js"(exports, module) {
+    "use strict";
+    function toMap(list) {
+      return list.reduce(asKey, {});
+    }
+    function asKey(accumulator, item) {
+      accumulator[item] = true;
+      return accumulator;
+    }
+    module.exports = toMap;
+  }
+});
+var require_attributes = __commonJS2({
+  "../../node_modules/insane/attributes.js"(exports, module) {
+    "use strict";
+    var toMap = require_toMap();
+    var uris = ["background", "base", "cite", "href", "longdesc", "src", "usemap"];
+    module.exports = {
+      uris: toMap(uris)
+      // attributes that have an href and hence need to be sanitized
+    };
+  }
+});
+var require_elements = __commonJS2({
+  "../../node_modules/insane/elements.js"(exports, module) {
+    "use strict";
+    var toMap = require_toMap();
+    var voids = ["area", "br", "col", "hr", "img", "wbr", "input", "base", "basefont", "link", "meta"];
+    module.exports = {
+      voids: toMap(voids)
+    };
+  }
+});
+var require_parser = __commonJS2({
+  "../../node_modules/insane/parser.js"(exports, module) {
+    "use strict";
+    var he = require_he();
+    var lowercase = require_lowercase();
+    var attributes = require_attributes();
+    var elements = require_elements();
+    var rstart = /^<\s*([\w:-]+)((?:\s+[\w:-]+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)\s*>/;
+    var rend = /^<\s*\/\s*([\w:-]+)[^>]*>/;
+    var rattrs = /([\w:-]+)(?:\s*=\s*(?:(?:"((?:[^"])*)")|(?:'((?:[^'])*)')|([^>\s]+)))?/g;
+    var rtag = /^</;
+    var rtagend = /^<\s*\//;
+    function createStack() {
+      var stack = [];
+      stack.lastItem = function lastItem() {
+        return stack[stack.length - 1];
+      };
+      return stack;
+    }
+    function parser(html, handler) {
+      var stack = createStack();
+      var last = html;
+      var chars;
+      while (html) {
+        parsePart();
+      }
+      parseEndTag();
+      function parsePart() {
+        chars = true;
+        parseTag();
+        var same = html === last;
+        last = html;
+        if (same) {
+          html = "";
+        }
+      }
+      function parseTag() {
+        if (html.substr(0, 4) === "<!--") {
+          parseComment();
+        } else if (rtagend.test(html)) {
+          parseEdge(rend, parseEndTag);
+        } else if (rtag.test(html)) {
+          parseEdge(rstart, parseStartTag);
+        }
+        parseTagDecode();
+      }
+      function parseEdge(regex2, parser2) {
+        var match = html.match(regex2);
+        if (match) {
+          html = html.substring(match[0].length);
+          match[0].replace(regex2, parser2);
+          chars = false;
+        }
+      }
+      function parseComment() {
+        var index = html.indexOf("-->");
+        if (index >= 0) {
+          if (handler.comment) {
+            handler.comment(html.substring(4, index));
+          }
+          html = html.substring(index + 3);
+          chars = false;
+        }
+      }
+      function parseTagDecode() {
+        if (!chars) {
+          return;
+        }
+        var text2;
+        var index = html.indexOf("<");
+        if (index >= 0) {
+          text2 = html.substring(0, index);
+          html = html.substring(index);
+        } else {
+          text2 = html;
+          html = "";
+        }
+        if (handler.chars) {
+          handler.chars(text2);
+        }
+      }
+      function parseStartTag(tag, tagName, rest, unary) {
+        var attrs = {};
+        var low = lowercase(tagName);
+        var u = elements.voids[low] || !!unary;
+        rest.replace(rattrs, attrReplacer);
+        if (!u) {
+          stack.push(low);
+        }
+        if (handler.start) {
+          handler.start(low, attrs, u);
+        }
+        function attrReplacer(match, name, doubleQuotedValue, singleQuotedValue, unquotedValue) {
+          if (doubleQuotedValue === void 0 && singleQuotedValue === void 0 && unquotedValue === void 0) {
+            attrs[name] = void 0;
+          } else {
+            attrs[name] = he.decode(doubleQuotedValue || singleQuotedValue || unquotedValue || "");
+          }
+        }
+      }
+      function parseEndTag(tag, tagName) {
+        var i;
+        var pos = 0;
+        var low = lowercase(tagName);
+        if (low) {
+          for (pos = stack.length - 1; pos >= 0; pos--) {
+            if (stack[pos] === low) {
+              break;
+            }
+          }
+        }
+        if (pos >= 0) {
+          for (i = stack.length - 1; i >= pos; i--) {
+            if (handler.end) {
+              handler.end(stack[i]);
+            }
+          }
+          stack.length = pos;
+        }
+      }
+    }
+    module.exports = parser;
+  }
+});
+var require_sanitizer = __commonJS2({
+  "../../node_modules/insane/sanitizer.js"(exports, module) {
+    "use strict";
+    var he = require_he();
+    var lowercase = require_lowercase();
+    var attributes = require_attributes();
+    var elements = require_elements();
+    function sanitizer(buffer, options2) {
+      var last;
+      var context;
+      var o = options2 || {};
+      reset();
+      return {
+        start,
+        end,
+        chars
+      };
+      function out(value) {
+        buffer.push(value);
+      }
+      function start(tag, attrs, unary) {
+        var low = lowercase(tag);
+        if (context.ignoring) {
+          ignore(low);
+          return;
+        }
+        if ((o.allowedTags || []).indexOf(low) === -1) {
+          ignore(low);
+          return;
+        }
+        if (o.filter && !o.filter({ tag: low, attrs })) {
+          ignore(low);
+          return;
+        }
+        out("<");
+        out(low);
+        Object.keys(attrs).forEach(parse2);
+        out(unary ? "/>" : ">");
+        function parse2(key) {
+          var value = attrs[key];
+          var classesOk = (o.allowedClasses || {})[low] || [];
+          var attrsOk = (o.allowedAttributes || {})[low] || [];
+          var valid;
+          var lkey = lowercase(key);
+          if (lkey === "class" && attrsOk.indexOf(lkey) === -1) {
+            value = value.split(" ").filter(isValidClass).join(" ").trim();
+            valid = value.length;
+          } else {
+            valid = attrsOk.indexOf(lkey) !== -1 && (attributes.uris[lkey] !== true || testUrl(value));
+          }
+          if (valid) {
+            out(" ");
+            out(key);
+            if (typeof value === "string") {
+              out('="');
+              out(he.encode(value));
+              out('"');
+            }
+          }
+          function isValidClass(className) {
+            return classesOk && classesOk.indexOf(className) !== -1;
+          }
+        }
+      }
+      function end(tag) {
+        var low = lowercase(tag);
+        var allowed = (o.allowedTags || []).indexOf(low) !== -1;
+        if (allowed) {
+          if (context.ignoring === false) {
+            out("</");
+            out(low);
+            out(">");
+          } else {
+            unignore(low);
+          }
+        } else {
+          unignore(low);
+        }
+      }
+      function testUrl(text2) {
+        var start2 = text2[0];
+        if (start2 === "#" || start2 === "/") {
+          return true;
+        }
+        var colon = text2.indexOf(":");
+        if (colon === -1) {
+          return true;
+        }
+        var questionmark = text2.indexOf("?");
+        if (questionmark !== -1 && colon > questionmark) {
+          return true;
+        }
+        var hash = text2.indexOf("#");
+        if (hash !== -1 && colon > hash) {
+          return true;
+        }
+        return o.allowedSchemes.some(matches);
+        function matches(scheme) {
+          return text2.indexOf(scheme + ":") === 0;
+        }
+      }
+      function chars(text2) {
+        if (context.ignoring === false) {
+          out(o.transformText ? o.transformText(text2) : text2);
+        }
+      }
+      function ignore(tag) {
+        if (elements.voids[tag]) {
+          return;
+        }
+        if (context.ignoring === false) {
+          context = { ignoring: tag, depth: 1 };
+        } else if (context.ignoring === tag) {
+          context.depth++;
+        }
+      }
+      function unignore(tag) {
+        if (context.ignoring === tag) {
+          if (--context.depth <= 0) {
+            reset();
+          }
+        }
+      }
+      function reset() {
+        context = { ignoring: false, depth: 0 };
+      }
+    }
+    module.exports = sanitizer;
+  }
+});
+var require_defaults = __commonJS2({
+  "../../node_modules/insane/defaults.js"(exports, module) {
+    "use strict";
+    var defaults = {
+      allowedAttributes: {
+        a: ["href", "name", "target", "title", "aria-label"],
+        iframe: ["allowfullscreen", "frameborder", "src"],
+        img: ["src", "alt", "title", "aria-label"]
+      },
+      allowedClasses: {},
+      allowedSchemes: ["http", "https", "mailto"],
+      allowedTags: [
+        "a",
+        "abbr",
+        "article",
+        "b",
+        "blockquote",
+        "br",
+        "caption",
+        "code",
+        "del",
+        "details",
+        "div",
+        "em",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "hr",
+        "i",
+        "img",
+        "ins",
+        "kbd",
+        "li",
+        "main",
+        "mark",
+        "ol",
+        "p",
+        "pre",
+        "section",
+        "span",
+        "strike",
+        "strong",
+        "sub",
+        "summary",
+        "sup",
+        "table",
+        "tbody",
+        "td",
+        "th",
+        "thead",
+        "tr",
+        "u",
+        "ul"
+      ],
+      filter: null
+    };
+    module.exports = defaults;
+  }
+});
+var require_insane = __commonJS2({
+  "../../node_modules/insane/insane.js"(exports, module) {
+    "use strict";
+    var he = require_he();
+    var assign = require_assignment();
+    var parser = require_parser();
+    var sanitizer = require_sanitizer();
+    var defaults = require_defaults();
+    function insane2(html, options2, strict) {
+      var buffer = [];
+      var configuration = strict === true ? options2 : assign({}, defaults, options2);
+      var handler = sanitizer(buffer, configuration);
+      parser(html, handler);
+      return buffer.join("");
+    }
+    insane2.defaults = defaults;
+    module.exports = insane2;
+  }
+});
+var require_rete_common = __commonJS2({
+  "../../node_modules/rete/build/rete.common.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    function ownKeys(object, enumerableOnly) {
+      var keys2 = Object.keys(object);
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(object);
+        enumerableOnly && (symbols = symbols.filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        })), keys2.push.apply(keys2, symbols);
+      }
+      return keys2;
+    }
+    function _objectSpread2(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = null != arguments[i] ? arguments[i] : {};
+        i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+          _defineProperty(target, key, source[key]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+      return target;
+    }
+    function _regeneratorRuntime() {
+      _regeneratorRuntime = function() {
+        return exports2;
+      };
+      var exports2 = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+      function define2(obj, key, value) {
+        return Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        }), obj[key];
+      }
+      try {
+        define2({}, "");
+      } catch (err) {
+        define2 = function(obj, key, value) {
+          return obj[key] = value;
+        };
+      }
+      function wrap(innerFn, outerFn, self2, tryLocsList) {
+        var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context2(tryLocsList || []);
+        return generator._invoke = function(innerFn2, self3, context2) {
+          var state = "suspendedStart";
+          return function(method, arg) {
+            if ("executing" === state)
+              throw new Error("Generator is already running");
+            if ("completed" === state) {
+              if ("throw" === method)
+                throw arg;
+              return doneResult();
+            }
+            for (context2.method = method, context2.arg = arg; ; ) {
+              var delegate = context2.delegate;
+              if (delegate) {
+                var delegateResult = maybeInvokeDelegate(delegate, context2);
+                if (delegateResult) {
+                  if (delegateResult === ContinueSentinel)
+                    continue;
+                  return delegateResult;
+                }
+              }
+              if ("next" === context2.method)
+                context2.sent = context2._sent = context2.arg;
+              else if ("throw" === context2.method) {
+                if ("suspendedStart" === state)
+                  throw state = "completed", context2.arg;
+                context2.dispatchException(context2.arg);
+              } else
+                "return" === context2.method && context2.abrupt("return", context2.arg);
+              state = "executing";
+              var record = tryCatch(innerFn2, self3, context2);
+              if ("normal" === record.type) {
+                if (state = context2.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel)
+                  continue;
+                return {
+                  value: record.arg,
+                  done: context2.done
+                };
+              }
+              "throw" === record.type && (state = "completed", context2.method = "throw", context2.arg = record.arg);
+            }
+          };
+        }(innerFn, self2, context), generator;
+      }
+      function tryCatch(fn, obj, arg) {
+        try {
+          return {
+            type: "normal",
+            arg: fn.call(obj, arg)
+          };
+        } catch (err) {
+          return {
+            type: "throw",
+            arg: err
+          };
+        }
+      }
+      exports2.wrap = wrap;
+      var ContinueSentinel = {};
+      function Generator() {
+      }
+      function GeneratorFunction() {
+      }
+      function GeneratorFunctionPrototype() {
+      }
+      var IteratorPrototype = {};
+      define2(IteratorPrototype, iteratorSymbol, function() {
+        return this;
+      });
+      var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+      NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+      var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+      function defineIteratorMethods(prototype) {
+        ["next", "throw", "return"].forEach(function(method) {
+          define2(prototype, method, function(arg) {
+            return this._invoke(method, arg);
+          });
+        });
+      }
+      function AsyncIterator(generator, PromiseImpl) {
+        function invoke(method, arg, resolve, reject) {
+          var record = tryCatch(generator[method], generator, arg);
+          if ("throw" !== record.type) {
+            var result = record.arg, value = result.value;
+            return value && "object" == typeof value && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function(value2) {
+              invoke("next", value2, resolve, reject);
+            }, function(err) {
+              invoke("throw", err, resolve, reject);
+            }) : PromiseImpl.resolve(value).then(function(unwrapped) {
+              result.value = unwrapped, resolve(result);
+            }, function(error) {
+              return invoke("throw", error, resolve, reject);
+            });
+          }
+          reject(record.arg);
+        }
+        var previousPromise;
+        this._invoke = function(method, arg) {
+          function callInvokeWithMethodAndArg() {
+            return new PromiseImpl(function(resolve, reject) {
+              invoke(method, arg, resolve, reject);
+            });
+          }
+          return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+        };
+      }
+      function maybeInvokeDelegate(delegate, context) {
+        var method = delegate.iterator[context.method];
+        if (void 0 === method) {
+          if (context.delegate = null, "throw" === context.method) {
+            if (delegate.iterator.return && (context.method = "return", context.arg = void 0, maybeInvokeDelegate(delegate, context), "throw" === context.method))
+              return ContinueSentinel;
+            context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+          }
+          return ContinueSentinel;
+        }
+        var record = tryCatch(method, delegate.iterator, context.arg);
+        if ("throw" === record.type)
+          return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+        var info = record.arg;
+        return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = void 0), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+      }
+      function pushTryEntry(locs) {
+        var entry = {
+          tryLoc: locs[0]
+        };
+        1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+      }
+      function resetTryEntry(entry) {
+        var record = entry.completion || {};
+        record.type = "normal", delete record.arg, entry.completion = record;
+      }
+      function Context2(tryLocsList) {
+        this.tryEntries = [{
+          tryLoc: "root"
+        }], tryLocsList.forEach(pushTryEntry, this), this.reset(true);
+      }
+      function values(iterable) {
+        if (iterable) {
+          var iteratorMethod = iterable[iteratorSymbol];
+          if (iteratorMethod)
+            return iteratorMethod.call(iterable);
+          if ("function" == typeof iterable.next)
+            return iterable;
+          if (!isNaN(iterable.length)) {
+            var i = -1, next = function next2() {
+              for (; ++i < iterable.length; )
+                if (hasOwn.call(iterable, i))
+                  return next2.value = iterable[i], next2.done = false, next2;
+              return next2.value = void 0, next2.done = true, next2;
+            };
+            return next.next = next;
+          }
+        }
+        return {
+          next: doneResult
+        };
+      }
+      function doneResult() {
+        return {
+          value: void 0,
+          done: true
+        };
+      }
+      return GeneratorFunction.prototype = GeneratorFunctionPrototype, define2(Gp, "constructor", GeneratorFunctionPrototype), define2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define2(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports2.isGeneratorFunction = function(genFun) {
+        var ctor = "function" == typeof genFun && genFun.constructor;
+        return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+      }, exports2.mark = function(genFun) {
+        return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define2(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+      }, exports2.awrap = function(arg) {
+        return {
+          __await: arg
+        };
+      }, defineIteratorMethods(AsyncIterator.prototype), define2(AsyncIterator.prototype, asyncIteratorSymbol, function() {
+        return this;
+      }), exports2.AsyncIterator = AsyncIterator, exports2.async = function(innerFn, outerFn, self2, tryLocsList, PromiseImpl) {
+        void 0 === PromiseImpl && (PromiseImpl = Promise);
+        var iter = new AsyncIterator(wrap(innerFn, outerFn, self2, tryLocsList), PromiseImpl);
+        return exports2.isGeneratorFunction(outerFn) ? iter : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+      }, defineIteratorMethods(Gp), define2(Gp, toStringTagSymbol, "Generator"), define2(Gp, iteratorSymbol, function() {
+        return this;
+      }), define2(Gp, "toString", function() {
+        return "[object Generator]";
+      }), exports2.keys = function(object) {
+        var keys2 = [];
+        for (var key in object)
+          keys2.push(key);
+        return keys2.reverse(), function next() {
+          for (; keys2.length; ) {
+            var key2 = keys2.pop();
+            if (key2 in object)
+              return next.value = key2, next.done = false, next;
+          }
+          return next.done = true, next;
+        };
+      }, exports2.values = values, Context2.prototype = {
+        constructor: Context2,
+        reset: function(skipTempReset) {
+          if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = false, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(resetTryEntry), !skipTempReset)
+            for (var name in this)
+              "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = void 0);
+        },
+        stop: function() {
+          this.done = true;
+          var rootRecord = this.tryEntries[0].completion;
+          if ("throw" === rootRecord.type)
+            throw rootRecord.arg;
+          return this.rval;
+        },
+        dispatchException: function(exception) {
+          if (this.done)
+            throw exception;
+          var context = this;
+          function handle(loc, caught) {
+            return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = void 0), !!caught;
+          }
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i], record = entry.completion;
+            if ("root" === entry.tryLoc)
+              return handle("end");
+            if (entry.tryLoc <= this.prev) {
+              var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc");
+              if (hasCatch && hasFinally) {
+                if (this.prev < entry.catchLoc)
+                  return handle(entry.catchLoc, true);
+                if (this.prev < entry.finallyLoc)
+                  return handle(entry.finallyLoc);
+              } else if (hasCatch) {
+                if (this.prev < entry.catchLoc)
+                  return handle(entry.catchLoc, true);
+              } else {
+                if (!hasFinally)
+                  throw new Error("try statement without catch or finally");
+                if (this.prev < entry.finallyLoc)
+                  return handle(entry.finallyLoc);
+              }
+            }
+          }
+        },
+        abrupt: function(type, arg) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+              var finallyEntry = entry;
+              break;
+            }
+          }
+          finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+          var record = finallyEntry ? finallyEntry.completion : {};
+          return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+        },
+        complete: function(record, afterLoc) {
+          if ("throw" === record.type)
+            throw record.arg;
+          return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+        },
+        finish: function(finallyLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.finallyLoc === finallyLoc)
+              return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+          }
+        },
+        catch: function(tryLoc) {
+          for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+            var entry = this.tryEntries[i];
+            if (entry.tryLoc === tryLoc) {
+              var record = entry.completion;
+              if ("throw" === record.type) {
+                var thrown = record.arg;
+                resetTryEntry(entry);
+              }
+              return thrown;
+            }
+          }
+          throw new Error("illegal catch attempt");
+        },
+        delegateYield: function(iterable, resultName, nextLoc) {
+          return this.delegate = {
+            iterator: values(iterable),
+            resultName,
+            nextLoc
+          }, "next" === this.method && (this.arg = void 0), ContinueSentinel;
+        }
+      }, exports2;
+    }
+    function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+      try {
+        var info = gen[key](arg);
+        var value = info.value;
+      } catch (error) {
+        reject(error);
+        return;
+      }
+      if (info.done) {
+        resolve(value);
+      } else {
+        Promise.resolve(value).then(_next, _throw);
+      }
+    }
+    function _asyncToGenerator(fn) {
+      return function() {
+        var self2 = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+          var gen = fn.apply(self2, args);
+          function _next(value) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+          }
+          function _throw(err) {
+            asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+          }
+          _next(void 0);
+        });
+      };
+    }
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
+    }
+    function _defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor)
+          descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+    function _createClass(Constructor, protoProps, staticProps) {
+      if (protoProps)
+        _defineProperties(Constructor.prototype, protoProps);
+      if (staticProps)
+        _defineProperties(Constructor, staticProps);
+      Object.defineProperty(Constructor, "prototype", {
+        writable: false
+      });
+      return Constructor;
+    }
+    function _defineProperty(obj, key, value) {
+      if (key in obj) {
+        Object.defineProperty(obj, key, {
+          value,
+          enumerable: true,
+          configurable: true,
+          writable: true
+        });
+      } else {
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function");
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+          value: subClass,
+          writable: true,
+          configurable: true
+        }
+      });
+      Object.defineProperty(subClass, "prototype", {
+        writable: false
+      });
+      if (superClass)
+        _setPrototypeOf(subClass, superClass);
+    }
+    function _getPrototypeOf(o) {
+      _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf2(o2) {
+        return o2.__proto__ || Object.getPrototypeOf(o2);
+      };
+      return _getPrototypeOf(o);
+    }
+    function _setPrototypeOf(o, p2) {
+      _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p3) {
+        o2.__proto__ = p3;
+        return o2;
+      };
+      return _setPrototypeOf(o, p2);
+    }
+    function _isNativeReflectConstruct() {
+      if (typeof Reflect === "undefined" || !Reflect.construct)
+        return false;
+      if (Reflect.construct.sham)
+        return false;
+      if (typeof Proxy === "function")
+        return true;
+      try {
+        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+        }));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function _assertThisInitialized(self2) {
+      if (self2 === void 0) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return self2;
+    }
+    function _possibleConstructorReturn(self2, call) {
+      if (call && (typeof call === "object" || typeof call === "function")) {
+        return call;
+      } else if (call !== void 0) {
+        throw new TypeError("Derived constructors may only return object or undefined");
+      }
+      return _assertThisInitialized(self2);
+    }
+    function _createSuper(Derived) {
+      var hasNativeReflectConstruct = _isNativeReflectConstruct();
+      return function _createSuperInternal() {
+        var Super = _getPrototypeOf(Derived), result;
+        if (hasNativeReflectConstruct) {
+          var NewTarget = _getPrototypeOf(this).constructor;
+          result = Reflect.construct(Super, arguments, NewTarget);
+        } else {
+          result = Super.apply(this, arguments);
+        }
+        return _possibleConstructorReturn(this, result);
+      };
+    }
+    function _superPropBase(object, property) {
+      while (!Object.prototype.hasOwnProperty.call(object, property)) {
+        object = _getPrototypeOf(object);
+        if (object === null)
+          break;
+      }
+      return object;
+    }
+    function _get() {
+      if (typeof Reflect !== "undefined" && Reflect.get) {
+        _get = Reflect.get.bind();
+      } else {
+        _get = function _get2(target, property, receiver) {
+          var base = _superPropBase(target, property);
+          if (!base)
+            return;
+          var desc = Object.getOwnPropertyDescriptor(base, property);
+          if (desc.get) {
+            return desc.get.call(arguments.length < 3 ? target : receiver);
+          }
+          return desc.value;
+        };
+      }
+      return _get.apply(this, arguments);
+    }
+    function _slicedToArray(arr, i) {
+      return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+    }
+    function _toConsumableArray(arr) {
+      return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+    }
+    function _arrayWithoutHoles(arr) {
+      if (Array.isArray(arr))
+        return _arrayLikeToArray(arr);
+    }
+    function _arrayWithHoles(arr) {
+      if (Array.isArray(arr))
+        return arr;
+    }
+    function _iterableToArray(iter) {
+      if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+        return Array.from(iter);
+    }
+    function _iterableToArrayLimit(arr, i) {
+      var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+      if (_i == null)
+        return;
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _s, _e;
+      try {
+        for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+          if (i && _arr.length === i)
+            break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"] != null)
+            _i["return"]();
+        } finally {
+          if (_d)
+            throw _e;
+        }
+      }
+      return _arr;
+    }
+    function _unsupportedIterableToArray(o, minLen) {
+      if (!o)
+        return;
+      if (typeof o === "string")
+        return _arrayLikeToArray(o, minLen);
+      var n = Object.prototype.toString.call(o).slice(8, -1);
+      if (n === "Object" && o.constructor)
+        n = o.constructor.name;
+      if (n === "Map" || n === "Set")
+        return Array.from(o);
+      if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+        return _arrayLikeToArray(o, minLen);
+    }
+    function _arrayLikeToArray(arr, len) {
+      if (len == null || len > arr.length)
+        len = arr.length;
+      for (var i = 0, arr2 = new Array(len); i < len; i++)
+        arr2[i] = arr[i];
+      return arr2;
+    }
+    function _nonIterableSpread() {
+      throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    function _nonIterableRest() {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    function _createForOfIteratorHelper(o, allowArrayLike) {
+      var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+      if (!it) {
+        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+          if (it)
+            o = it;
+          var i = 0;
+          var F = function() {
+          };
+          return {
+            s: F,
+            n: function() {
+              if (i >= o.length)
+                return {
+                  done: true
+                };
+              return {
+                done: false,
+                value: o[i++]
+              };
+            },
+            e: function(e) {
+              throw e;
+            },
+            f: F
+          };
+        }
+        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+      }
+      var normalCompletion = true, didErr = false, err;
+      return {
+        s: function() {
+          it = it.call(o);
+        },
+        n: function() {
+          var step = it.next();
+          normalCompletion = step.done;
+          return step;
+        },
+        e: function(e) {
+          didErr = true;
+          err = e;
+        },
+        f: function() {
+          try {
+            if (!normalCompletion && it.return != null)
+              it.return();
+          } finally {
+            if (didErr)
+              throw err;
+          }
+        }
+      };
+    }
+    var Component$1 = /* @__PURE__ */ _createClass(function Component3(name) {
+      _classCallCheck(this, Component3);
+      _defineProperty(this, "name", void 0);
+      _defineProperty(this, "data", {});
+      _defineProperty(this, "engine", null);
+      this.name = name;
+    });
+    var Node2 = /* @__PURE__ */ function() {
+      function Node3(name) {
+        _classCallCheck(this, Node3);
+        _defineProperty(this, "name", void 0);
+        _defineProperty(this, "id", void 0);
+        _defineProperty(this, "position", [0, 0]);
+        _defineProperty(this, "inputs", /* @__PURE__ */ new Map());
+        _defineProperty(this, "outputs", /* @__PURE__ */ new Map());
+        _defineProperty(this, "controls", /* @__PURE__ */ new Map());
+        _defineProperty(this, "data", {});
+        _defineProperty(this, "meta", {});
+        this.name = name;
+        this.id = Node3.incrementId();
+      }
+      _createClass(Node3, [{
+        key: "_add",
+        value: function _add(list, item, prop) {
+          if (list.has(item.key))
+            throw new Error("Item with key '".concat(item.key, "' already been added to the node"));
+          if (item[prop] !== null)
+            throw new Error("Item has already been added to some node");
+          item[prop] = this;
+          list.set(item.key, item);
+        }
+      }, {
+        key: "addControl",
+        value: function addControl(control) {
+          this._add(this.controls, control, "parent");
+          return this;
+        }
+      }, {
+        key: "removeControl",
+        value: function removeControl(control) {
+          control.parent = null;
+          this.controls["delete"](control.key);
+        }
+      }, {
+        key: "addInput",
+        value: function addInput(input) {
+          this._add(this.inputs, input, "node");
+          return this;
+        }
+      }, {
+        key: "removeInput",
+        value: function removeInput(input) {
+          input.removeConnections();
+          input.node = null;
+          this.inputs["delete"](input.key);
+        }
+      }, {
+        key: "addOutput",
+        value: function addOutput(output) {
+          this._add(this.outputs, output, "node");
+          return this;
+        }
+      }, {
+        key: "removeOutput",
+        value: function removeOutput(output) {
+          output.removeConnections();
+          output.node = null;
+          this.outputs["delete"](output.key);
+        }
+      }, {
+        key: "setMeta",
+        value: function setMeta(meta) {
+          this.meta = meta;
+          return this;
+        }
+      }, {
+        key: "getConnections",
+        value: function getConnections() {
+          var ios = [].concat(_toConsumableArray(this.inputs.values()), _toConsumableArray(this.outputs.values()));
+          var connections = ios.reduce(function(arr, io) {
+            return [].concat(_toConsumableArray(arr), _toConsumableArray(io.connections));
+          }, []);
+          return connections;
+        }
+      }, {
+        key: "update",
+        value: function update() {
+        }
+      }, {
+        key: "toJSON",
+        value: function toJSON() {
+          var reduceIO = function reduceIO2(list) {
+            return Array.from(list).reduce(function(obj, _ref) {
+              var _ref2 = _slicedToArray(_ref, 2), key = _ref2[0], io = _ref2[1];
+              obj[key] = io.toJSON();
+              return obj;
+            }, {});
+          };
+          return {
+            "id": this.id,
+            "data": this.data,
+            "inputs": reduceIO(this.inputs),
+            "outputs": reduceIO(this.outputs),
+            "position": this.position,
+            "name": this.name
+          };
+        }
+      }], [{
+        key: "incrementId",
+        value: function incrementId() {
+          if (!this.latestId)
+            this.latestId = 1;
+          else
+            this.latestId++;
+          return this.latestId;
+        }
+      }, {
+        key: "resetId",
+        value: function resetId() {
+          this.latestId = 0;
+        }
+      }, {
+        key: "fromJSON",
+        value: function fromJSON(json) {
+          var node = new Node3(json.name);
+          var _json$position = _slicedToArray(json.position, 2), x = _json$position[0], y = _json$position[1];
+          node.id = json.id;
+          node.data = json.data;
+          node.position = [x, y];
+          node.name = json.name;
+          Node3.latestId = Math.max(node.id, Node3.latestId);
+          return node;
+        }
+      }]);
+      return Node3;
+    }();
+    _defineProperty(Node2, "latestId", 0);
+    var Component2 = /* @__PURE__ */ function(_ComponentWorker) {
+      _inherits(Component3, _ComponentWorker);
+      var _super = _createSuper(Component3);
+      function Component3(name) {
+        var _this;
+        _classCallCheck(this, Component3);
+        _this = _super.call(this, name);
+        _defineProperty(_assertThisInitialized(_this), "editor", null);
+        _defineProperty(_assertThisInitialized(_this), "data", {});
+        return _this;
+      }
+      _createClass(Component3, [{
+        key: "build",
+        value: function() {
+          var _build = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(node) {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return this.builder(node);
+                  case 2:
+                    return _context.abrupt("return", node);
+                  case 3:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+          function build(_x) {
+            return _build.apply(this, arguments);
+          }
+          return build;
+        }()
+      }, {
+        key: "createNode",
+        value: function() {
+          var _createNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2() {
+            var data, node, _args2 = arguments;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    data = _args2.length > 0 && _args2[0] !== void 0 ? _args2[0] : {};
+                    node = new Node2(this.name);
+                    node.data = data;
+                    _context2.next = 5;
+                    return this.build(node);
+                  case 5:
+                    return _context2.abrupt("return", node);
+                  case 6:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+          function createNode() {
+            return _createNode.apply(this, arguments);
+          }
+          return createNode;
+        }()
+      }]);
+      return Component3;
+    }(Component$1);
+    var Connection = /* @__PURE__ */ function() {
+      function Connection2(output, input) {
+        _classCallCheck(this, Connection2);
+        _defineProperty(this, "output", void 0);
+        _defineProperty(this, "input", void 0);
+        _defineProperty(this, "data", {});
+        this.output = output;
+        this.input = input;
+        this.data = {};
+        this.input.addConnection(this);
+      }
+      _createClass(Connection2, [{
+        key: "remove",
+        value: function remove() {
+          this.input.removeConnection(this);
+          this.output.removeConnection(this);
+        }
+      }]);
+      return Connection2;
+    }();
+    var Control = /* @__PURE__ */ function() {
+      function Control2(key) {
+        _classCallCheck(this, Control2);
+        _defineProperty(this, "key", void 0);
+        _defineProperty(this, "data", {});
+        _defineProperty(this, "parent", null);
+        if (this.constructor === Control2)
+          throw new TypeError("Can not construct abstract class");
+        if (!key)
+          throw new Error("The key parameter is missing in super() of Control ");
+        this.key = key;
+      }
+      _createClass(Control2, [{
+        key: "getNode",
+        value: function getNode() {
+          if (this.parent === null)
+            throw new Error("Control isn't added to Node/Input");
+          if (this.parent instanceof Node2)
+            return this.parent;
+          if (!this.parent.node)
+            throw new Error("Control hasn't be added to Input or Node");
+          return this.parent.node;
+        }
+      }, {
+        key: "getData",
+        value: function getData(key) {
+          return this.getNode().data[key];
+        }
+      }, {
+        key: "putData",
+        value: function putData(key, data) {
+          this.getNode().data[key] = data;
+        }
+      }]);
+      return Control2;
+    }();
+    var Emitter = /* @__PURE__ */ function() {
+      function Emitter2(events) {
+        _classCallCheck(this, Emitter2);
+        _defineProperty(this, "events", {});
+        _defineProperty(this, "silent", false);
+        this.events = events instanceof Emitter2 ? events.events : events.handlers;
+      }
+      _createClass(Emitter2, [{
+        key: "on",
+        value: function on(names, handler) {
+          var _this = this;
+          var events = names instanceof Array ? names : names.split(" ");
+          events.forEach(function(name) {
+            if (!_this.events[name])
+              throw new Error("The event ".concat(name, " does not exist"));
+            _this.events[name].push(handler);
+          });
+          return this;
+        }
+      }, {
+        key: "trigger",
+        value: function trigger(name) {
+          var params = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+          if (!(name in this.events))
+            throw new Error("The event ".concat(String(name), " cannot be triggered"));
+          return this.events[name].reduce(function(r2, e) {
+            return e(params) !== false && r2;
+          }, true);
+        }
+      }, {
+        key: "bind",
+        value: function bind(name) {
+          if (this.events[name])
+            throw new Error("The event ".concat(name, " is already bound"));
+          this.events[name] = [];
+        }
+      }, {
+        key: "exist",
+        value: function exist(name) {
+          return Array.isArray(this.events[name]);
+        }
+      }]);
+      return Emitter2;
+    }();
+    var IO = /* @__PURE__ */ function() {
+      function IO2(key, name, socket, multiConns) {
+        _classCallCheck(this, IO2);
+        _defineProperty(this, "node", null);
+        _defineProperty(this, "multipleConnections", void 0);
+        _defineProperty(this, "connections", []);
+        _defineProperty(this, "key", void 0);
+        _defineProperty(this, "name", void 0);
+        _defineProperty(this, "socket", void 0);
+        this.node = null;
+        this.multipleConnections = multiConns;
+        this.connections = [];
+        this.key = key;
+        this.name = name;
+        this.socket = socket;
+      }
+      _createClass(IO2, [{
+        key: "removeConnection",
+        value: function removeConnection(connection) {
+          this.connections.splice(this.connections.indexOf(connection), 1);
+        }
+      }, {
+        key: "removeConnections",
+        value: function removeConnections() {
+          var _this = this;
+          this.connections.forEach(function(connection) {
+            return _this.removeConnection(connection);
+          });
+        }
+      }]);
+      return IO2;
+    }();
+    var Input2 = /* @__PURE__ */ function(_IO) {
+      _inherits(Input3, _IO);
+      var _super = _createSuper(Input3);
+      function Input3(key, title, socket) {
+        var _this;
+        var multiConns = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : false;
+        _classCallCheck(this, Input3);
+        _this = _super.call(this, key, title, socket, multiConns);
+        _defineProperty(_assertThisInitialized(_this), "control", null);
+        return _this;
+      }
+      _createClass(Input3, [{
+        key: "hasConnection",
+        value: function hasConnection() {
+          return this.connections.length > 0;
+        }
+      }, {
+        key: "addConnection",
+        value: function addConnection(connection) {
+          if (!this.multipleConnections && this.hasConnection())
+            throw new Error("Multiple connections not allowed");
+          this.connections.push(connection);
+        }
+      }, {
+        key: "addControl",
+        value: function addControl(control) {
+          this.control = control;
+          control.parent = this;
+        }
+      }, {
+        key: "showControl",
+        value: function showControl() {
+          return !this.hasConnection() && this.control !== null;
+        }
+      }, {
+        key: "toJSON",
+        value: function toJSON() {
+          return {
+            "connections": this.connections.map(function(c2) {
+              if (!c2.output.node)
+                throw new Error("Node not added to Output");
+              return {
+                node: c2.output.node.id,
+                output: c2.output.key,
+                data: c2.data
+              };
+            })
+          };
+        }
+      }]);
+      return Input3;
+    }(IO);
+    var Validator = /* @__PURE__ */ function() {
+      function Validator2() {
+        _classCallCheck(this, Validator2);
+      }
+      _createClass(Validator2, null, [{
+        key: "isValidData",
+        value: function isValidData(data) {
+          return typeof data.id === "string" && this.isValidId(data.id) && data.nodes instanceof Object && !(data.nodes instanceof Array);
+        }
+      }, {
+        key: "isValidId",
+        value: function isValidId(id) {
+          return /^[\w-]{3,}@[0-9]+\.[0-9]+\.[0-9]+$/.test(id);
+        }
+      }, {
+        key: "validate",
+        value: function validate(id, data) {
+          var id1 = id.split("@");
+          var id2 = data.id.split("@");
+          var msg = [];
+          if (!this.isValidData(data))
+            msg.push("Data is not suitable");
+          if (id !== data.id)
+            msg.push("IDs not equal");
+          if (id1[0] !== id2[0])
+            msg.push("Names don't match");
+          if (id1[1] !== id2[1])
+            msg.push("Versions don't match");
+          return {
+            success: Boolean(!msg.length),
+            msg: msg.join(". ")
+          };
+        }
+      }]);
+      return Validator2;
+    }();
+    var Context = /* @__PURE__ */ function(_Emitter) {
+      _inherits(Context2, _Emitter);
+      var _super = _createSuper(Context2);
+      function Context2(id, events) {
+        var _this;
+        _classCallCheck(this, Context2);
+        _this = _super.call(this, events);
+        _defineProperty(_assertThisInitialized(_this), "id", void 0);
+        _defineProperty(_assertThisInitialized(_this), "plugins", void 0);
+        _defineProperty(_assertThisInitialized(_this), "components", void 0);
+        if (!Validator.isValidId(id))
+          throw new Error("ID should be valid to name@0.1.0 format");
+        _this.id = id;
+        _this.plugins = /* @__PURE__ */ new Map();
+        _this.components = /* @__PURE__ */ new Map();
+        return _this;
+      }
+      _createClass(Context2, [{
+        key: "use",
+        value: function use(plugin, options2) {
+          if (plugin.name && this.plugins.has(plugin.name))
+            throw new Error("Plugin ".concat(plugin.name, " already in use"));
+          plugin.install(this, options2 || {});
+          this.plugins.set(plugin.name, options2);
+        }
+      }, {
+        key: "register",
+        value: function register(component4) {
+          if (this.components.has(component4.name))
+            throw new Error("Component ".concat(component4.name, " already registered"));
+          this.components.set(component4.name, component4);
+          this.trigger("componentregister", component4);
+        }
+      }, {
+        key: "destroy",
+        value: function destroy() {
+          this.trigger("destroy");
+        }
+      }]);
+      return Context2;
+    }(Emitter);
+    function listenWindow(event, handler) {
+      window.addEventListener(event, handler);
+      return function() {
+        window.removeEventListener(event, handler);
+      };
+    }
+    function getOffset(el, offsetParentEl) {
+      var searchDepth = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 8;
+      var x = el.offsetLeft;
+      var y = el.offsetTop;
+      var parent = el.offsetParent;
+      while (parent && parent !== offsetParentEl && searchDepth > 0) {
+        searchDepth--;
+        x += parent.offsetLeft;
+        y += parent.offsetTop;
+        parent = parent.offsetParent;
+      }
+      return {
+        x,
+        y
+      };
+    }
+    var Drag = /* @__PURE__ */ function() {
+      function Drag2(el) {
+        var onTranslate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : function(_x, _y, _e) {
+        };
+        var onStart = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : function(_e) {
+        };
+        var onDrag = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : function(_e) {
+        };
+        _classCallCheck(this, Drag2);
+        this.onTranslate = onTranslate;
+        this.onStart = onStart;
+        this.onDrag = onDrag;
+        _defineProperty(this, "pointerStart", void 0);
+        _defineProperty(this, "el", void 0);
+        _defineProperty(this, "destroy", void 0);
+        this.pointerStart = null;
+        this.el = el;
+        this.el.style.touchAction = "none";
+        this.el.addEventListener("pointerdown", this.down.bind(this));
+        var destroyMove = listenWindow("pointermove", this.move.bind(this));
+        var destroyUp = listenWindow("pointerup", this.up.bind(this));
+        this.destroy = function() {
+          destroyMove();
+          destroyUp();
+        };
+      }
+      _createClass(Drag2, [{
+        key: "down",
+        value: function down(e) {
+          if (e.pointerType === "mouse" && e.button !== 0)
+            return;
+          e.stopPropagation();
+          this.pointerStart = [e.pageX, e.pageY];
+          this.onStart(e);
+        }
+      }, {
+        key: "move",
+        value: function move(e) {
+          if (!this.pointerStart)
+            return;
+          e.preventDefault();
+          var _ref = [e.pageX, e.pageY], x = _ref[0], y = _ref[1];
+          var delta = [x - this.pointerStart[0], y - this.pointerStart[1]];
+          var zoom = this.el.getBoundingClientRect().width / this.el.offsetWidth;
+          this.onTranslate(delta[0] / zoom, delta[1] / zoom, e);
+        }
+      }, {
+        key: "up",
+        value: function up(e) {
+          if (!this.pointerStart)
+            return;
+          this.pointerStart = null;
+          this.onDrag(e);
+        }
+      }]);
+      return Drag2;
+    }();
+    var Zoom = /* @__PURE__ */ function() {
+      function Zoom2(container, el, intensity, onzoom) {
+        _classCallCheck(this, Zoom2);
+        _defineProperty(this, "el", void 0);
+        _defineProperty(this, "intensity", void 0);
+        _defineProperty(this, "onzoom", void 0);
+        _defineProperty(this, "previous", null);
+        _defineProperty(this, "pointers", []);
+        _defineProperty(this, "destroy", void 0);
+        this.el = el;
+        this.intensity = intensity;
+        this.onzoom = onzoom;
+        container.addEventListener("wheel", this.wheel.bind(this));
+        container.addEventListener("pointerdown", this.down.bind(this));
+        container.addEventListener("dblclick", this.dblclick.bind(this));
+        var destroyMove = listenWindow("pointermove", this.move.bind(this));
+        var destroyUp = listenWindow("pointerup", this.end.bind(this));
+        var destroyCancel = listenWindow("pointercancel", this.end.bind(this));
+        this.destroy = function() {
+          destroyMove();
+          destroyUp();
+          destroyCancel();
+        };
+      }
+      _createClass(Zoom2, [{
+        key: "translating",
+        get: function get() {
+          return this.pointers.length >= 2;
+        }
+      }, {
+        key: "wheel",
+        value: function wheel(e) {
+          e.preventDefault();
+          var rect = this.el.getBoundingClientRect();
+          var isNegative = e.deltaY < 0;
+          var delta = isNegative ? this.intensity : -this.intensity;
+          var ox = (rect.left - e.clientX) * delta;
+          var oy = (rect.top - e.clientY) * delta;
+          this.onzoom(delta, ox, oy, "wheel");
+        }
+      }, {
+        key: "touches",
+        value: function touches() {
+          var e = {
+            touches: this.pointers
+          };
+          var _ref = [e.touches[0].clientX, e.touches[0].clientY], x1 = _ref[0], y1 = _ref[1];
+          var _ref2 = [e.touches[1].clientX, e.touches[1].clientY], x2 = _ref2[0], y2 = _ref2[1];
+          var distance = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+          return {
+            cx: (x1 + x2) / 2,
+            cy: (y1 + y2) / 2,
+            distance
+          };
+        }
+      }, {
+        key: "down",
+        value: function down(e) {
+          this.pointers.push(e);
+        }
+      }, {
+        key: "move",
+        value: function move(e) {
+          this.pointers = this.pointers.map(function(p2) {
+            return p2.pointerId === e.pointerId ? e : p2;
+          });
+          if (!this.translating)
+            return;
+          var rect = this.el.getBoundingClientRect();
+          var _this$touches = this.touches(), cx = _this$touches.cx, cy = _this$touches.cy, distance = _this$touches.distance;
+          if (this.previous !== null) {
+            var delta = distance / this.previous.distance - 1;
+            var ox = (rect.left - cx) * delta;
+            var oy = (rect.top - cy) * delta;
+            this.onzoom(delta, ox - (this.previous.cx - cx), oy - (this.previous.cy - cy), "touch");
+          }
+          this.previous = {
+            cx,
+            cy,
+            distance
+          };
+        }
+      }, {
+        key: "end",
+        value: function end(e) {
+          this.previous = null;
+          this.pointers = this.pointers.filter(function(p2) {
+            return p2.pointerId !== e.pointerId;
+          });
+        }
+      }, {
+        key: "dblclick",
+        value: function dblclick(e) {
+          e.preventDefault();
+          var rect = this.el.getBoundingClientRect();
+          var delta = 4 * this.intensity;
+          var ox = (rect.left - e.clientX) * delta;
+          var oy = (rect.top - e.clientY) * delta;
+          this.onzoom(delta, ox, oy, "dblclick");
+        }
+      }]);
+      return Zoom2;
+    }();
+    var Area = /* @__PURE__ */ function(_Emitter) {
+      _inherits(Area2, _Emitter);
+      var _super = _createSuper(Area2);
+      function Area2(container, emitter) {
+        var _this;
+        _classCallCheck(this, Area2);
+        _this = _super.call(this, emitter);
+        _defineProperty(_assertThisInitialized(_this), "el", void 0);
+        _defineProperty(_assertThisInitialized(_this), "container", void 0);
+        _defineProperty(_assertThisInitialized(_this), "transform", {
+          k: 1,
+          x: 0,
+          y: 0
+        });
+        _defineProperty(_assertThisInitialized(_this), "mouse", {
+          x: 0,
+          y: 0
+        });
+        _defineProperty(_assertThisInitialized(_this), "_startPosition", null);
+        _defineProperty(_assertThisInitialized(_this), "_zoom", void 0);
+        _defineProperty(_assertThisInitialized(_this), "_drag", void 0);
+        var el = _this.el = document.createElement("div");
+        _this.container = container;
+        el.style.transformOrigin = "0 0";
+        _this._zoom = new Zoom(container, el, 0.1, _this.onZoom.bind(_assertThisInitialized(_this)));
+        _this._drag = new Drag(container, _this.onTranslate.bind(_assertThisInitialized(_this)), _this.onStart.bind(_assertThisInitialized(_this)));
+        emitter.on("destroy", function() {
+          _this._zoom.destroy();
+          _this._drag.destroy();
+        });
+        _this.container.addEventListener("pointermove", _this.pointermove.bind(_assertThisInitialized(_this)));
+        _this.update();
+        return _this;
+      }
+      _createClass(Area2, [{
+        key: "update",
+        value: function update() {
+          var t = this.transform;
+          this.el.style.transform = "translate(".concat(t.x, "px, ").concat(t.y, "px) scale(").concat(t.k, ")");
+        }
+      }, {
+        key: "pointermove",
+        value: function pointermove(e) {
+          var clientX = e.clientX, clientY = e.clientY;
+          var rect = this.el.getBoundingClientRect();
+          var x = clientX - rect.left;
+          var y = clientY - rect.top;
+          var k = this.transform.k;
+          this.mouse = {
+            x: x / k,
+            y: y / k
+          };
+          this.trigger("mousemove", _objectSpread2({}, this.mouse));
+        }
+      }, {
+        key: "onStart",
+        value: function onStart() {
+          this._startPosition = _objectSpread2({}, this.transform);
+        }
+      }, {
+        key: "onTranslate",
+        value: function onTranslate(dx, dy) {
+          if (this._zoom.translating)
+            return;
+          if (this._startPosition)
+            this.translate(this._startPosition.x + dx, this._startPosition.y + dy);
+        }
+      }, {
+        key: "onZoom",
+        value: function onZoom(delta, ox, oy, source) {
+          this.zoom(this.transform.k * (1 + delta), ox, oy, source);
+          this.update();
+        }
+      }, {
+        key: "translate",
+        value: function translate(x, y) {
+          var params = {
+            transform: this.transform,
+            x,
+            y
+          };
+          if (!this.trigger("translate", params))
+            return;
+          this.transform.x = params.x;
+          this.transform.y = params.y;
+          this.update();
+          this.trigger("translated");
+        }
+      }, {
+        key: "zoom",
+        value: function zoom(_zoom) {
+          var ox = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
+          var oy = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
+          var source = arguments.length > 3 ? arguments[3] : void 0;
+          var k = this.transform.k;
+          var params = {
+            transform: this.transform,
+            zoom: _zoom,
+            source
+          };
+          if (!this.trigger("zoom", params))
+            return;
+          var d = (k - params.zoom) / (k - _zoom || 1);
+          this.transform.k = params.zoom || 1;
+          this.transform.x += ox * d;
+          this.transform.y += oy * d;
+          this.update();
+          this.trigger("zoomed", {
+            source
+          });
+        }
+      }, {
+        key: "appendChild",
+        value: function appendChild(el) {
+          this.el.appendChild(el);
+        }
+      }, {
+        key: "removeChild",
+        value: function removeChild(el) {
+          this.el.removeChild(el);
+        }
+      }]);
+      return Area2;
+    }(Emitter);
+    var ConnectionView = /* @__PURE__ */ function(_Emitter) {
+      _inherits(ConnectionView2, _Emitter);
+      var _super = _createSuper(ConnectionView2);
+      function ConnectionView2(connection, inputNode, outputNode, emitter) {
+        var _this;
+        _classCallCheck(this, ConnectionView2);
+        _this = _super.call(this, emitter);
+        _defineProperty(_assertThisInitialized(_this), "connection", void 0);
+        _defineProperty(_assertThisInitialized(_this), "inputNode", void 0);
+        _defineProperty(_assertThisInitialized(_this), "outputNode", void 0);
+        _defineProperty(_assertThisInitialized(_this), "el", void 0);
+        _this.connection = connection;
+        _this.inputNode = inputNode;
+        _this.outputNode = outputNode;
+        _this.el = document.createElement("div");
+        _this.el.style.position = "absolute";
+        _this.el.style.zIndex = "-1";
+        _this.trigger("renderconnection", {
+          el: _this.el,
+          connection: _this.connection,
+          points: _this.getPoints()
+        });
+        return _this;
+      }
+      _createClass(ConnectionView2, [{
+        key: "getPoints",
+        value: function getPoints() {
+          var _this$connection = this.connection, input = _this$connection.input, output = _this$connection.output;
+          if (this.inputNode.hasSocket(input) && this.outputNode.hasSocket(output)) {
+            var _this$outputNode$getS = this.outputNode.getSocketPosition(output), _this$outputNode$getS2 = _slicedToArray(_this$outputNode$getS, 2), x1 = _this$outputNode$getS2[0], y1 = _this$outputNode$getS2[1];
+            var _this$inputNode$getSo = this.inputNode.getSocketPosition(input), _this$inputNode$getSo2 = _slicedToArray(_this$inputNode$getSo, 2), x2 = _this$inputNode$getSo2[0], y2 = _this$inputNode$getSo2[1];
+            return [x1, y1, x2, y2];
+          }
+          return [0, 0, 0, 0];
+        }
+      }, {
+        key: "update",
+        value: function update() {
+          this.trigger("updateconnection", {
+            el: this.el,
+            connection: this.connection,
+            points: this.getPoints()
+          });
+        }
+      }]);
+      return ConnectionView2;
+    }(Emitter);
+    var ControlView = /* @__PURE__ */ function(_Emitter) {
+      _inherits(ControlView2, _Emitter);
+      var _super = _createSuper(ControlView2);
+      function ControlView2(el, control, emitter) {
+        var _this;
+        _classCallCheck(this, ControlView2);
+        _this = _super.call(this, emitter);
+        _this.trigger("rendercontrol", {
+          el,
+          control
+        });
+        return _this;
+      }
+      return _createClass(ControlView2);
+    }(Emitter);
+    var SocketView = /* @__PURE__ */ function(_Emitter) {
+      _inherits(SocketView2, _Emitter);
+      var _super = _createSuper(SocketView2);
+      function SocketView2(el, type, io, node, emitter) {
+        var _this$trigger;
+        var _this;
+        _classCallCheck(this, SocketView2);
+        _this = _super.call(this, emitter);
+        _defineProperty(_assertThisInitialized(_this), "el", void 0);
+        _defineProperty(_assertThisInitialized(_this), "type", void 0);
+        _defineProperty(_assertThisInitialized(_this), "io", void 0);
+        _defineProperty(_assertThisInitialized(_this), "node", void 0);
+        _this.el = el;
+        _this.type = type;
+        _this.io = io;
+        _this.node = node;
+        _this.trigger("rendersocket", (_this$trigger = {
+          el
+        }, _defineProperty(_this$trigger, type, _this.io), _defineProperty(_this$trigger, "socket", io.socket), _this$trigger));
+        return _this;
+      }
+      _createClass(SocketView2, [{
+        key: "getPosition",
+        value: function getPosition(_ref, nodeViewEl) {
+          var position = _ref.position;
+          var el = this.el;
+          var _getOffset = getOffset(el, nodeViewEl), x = _getOffset.x, y = _getOffset.y;
+          return [position[0] + x + el.offsetWidth / 2, position[1] + y + el.offsetHeight / 2];
+        }
+      }]);
+      return SocketView2;
+    }(Emitter);
+    var NodeView = /* @__PURE__ */ function(_Emitter) {
+      _inherits(NodeView2, _Emitter);
+      var _super = _createSuper(NodeView2);
+      function NodeView2(node, component4, emitter) {
+        var _this;
+        _classCallCheck(this, NodeView2);
+        _this = _super.call(this, emitter);
+        _defineProperty(_assertThisInitialized(_this), "node", void 0);
+        _defineProperty(_assertThisInitialized(_this), "component", void 0);
+        _defineProperty(_assertThisInitialized(_this), "sockets", /* @__PURE__ */ new Map());
+        _defineProperty(_assertThisInitialized(_this), "controls", /* @__PURE__ */ new Map());
+        _defineProperty(_assertThisInitialized(_this), "el", void 0);
+        _defineProperty(_assertThisInitialized(_this), "_startPosition", []);
+        _defineProperty(_assertThisInitialized(_this), "_drag", void 0);
+        _this.node = node;
+        _this.component = component4;
+        _this.el = document.createElement("div");
+        _this.el.style.position = "absolute";
+        _this.el.addEventListener("contextmenu", function(e) {
+          return _this.trigger("contextmenu", {
+            e,
+            node: _this.node
+          });
+        });
+        _this._drag = new Drag(_this.el, _this.onTranslate.bind(_assertThisInitialized(_this)), _this.onSelect.bind(_assertThisInitialized(_this)), function() {
+          _this.trigger("nodedraged", node);
+          _this.trigger("nodedragged", node);
+        });
+        _this.trigger("rendernode", {
+          el: _this.el,
+          node,
+          component: component4.data,
+          bindSocket: _this.bindSocket.bind(_assertThisInitialized(_this)),
+          bindControl: _this.bindControl.bind(_assertThisInitialized(_this))
+        });
+        _this.update();
+        return _this;
+      }
+      _createClass(NodeView2, [{
+        key: "clearSockets",
+        value: function clearSockets() {
+          var _this2 = this;
+          var ios = [].concat(_toConsumableArray(this.node.inputs.values()), _toConsumableArray(this.node.outputs.values()));
+          this.sockets.forEach(function(s3) {
+            if (!ios.includes(s3.io))
+              _this2.sockets["delete"](s3.io);
+          });
+        }
+      }, {
+        key: "bindSocket",
+        value: function bindSocket(el, type, io) {
+          this.clearSockets();
+          this.sockets.set(io, new SocketView(el, type, io, this.node, this));
+        }
+      }, {
+        key: "bindControl",
+        value: function bindControl(el, control) {
+          this.controls.set(control, new ControlView(el, control, this));
+        }
+      }, {
+        key: "hasSocket",
+        value: function hasSocket(io) {
+          return this.sockets.has(io);
+        }
+      }, {
+        key: "getSocketPosition",
+        value: function getSocketPosition(io) {
+          var socket = this.sockets.get(io);
+          if (!socket)
+            throw new Error("Socket not found for ".concat(io.name, " with key ").concat(io.key));
+          return socket.getPosition(this.node, this.el);
+        }
+      }, {
+        key: "onSelect",
+        value: function onSelect(e) {
+          var payload = {
+            node: this.node,
+            accumulate: e.ctrlKey,
+            e
+          };
+          this.onStart();
+          this.trigger("multiselectnode", payload);
+          this.trigger("selectnode", payload);
+        }
+      }, {
+        key: "onStart",
+        value: function onStart() {
+          this._startPosition = _toConsumableArray(this.node.position);
+        }
+      }, {
+        key: "onTranslate",
+        value: function onTranslate(dx, dy) {
+          this.trigger("translatenode", {
+            node: this.node,
+            dx,
+            dy
+          });
+        }
+      }, {
+        key: "onDrag",
+        value: function onDrag(dx, dy) {
+          var x = this._startPosition[0] + dx;
+          var y = this._startPosition[1] + dy;
+          this.translate(x, y);
+        }
+      }, {
+        key: "translate",
+        value: function translate(x, y) {
+          var node = this.node;
+          var params = {
+            node,
+            x,
+            y
+          };
+          if (!this.trigger("nodetranslate", params))
+            return;
+          var _node$position = _slicedToArray(node.position, 2), px = _node$position[0], py = _node$position[1];
+          var prev = [px, py];
+          node.position[0] = params.x;
+          node.position[1] = params.y;
+          this.update();
+          this.trigger("nodetranslated", {
+            node,
+            prev
+          });
+        }
+      }, {
+        key: "update",
+        value: function update() {
+          var _this$node$position = _slicedToArray(this.node.position, 2), x = _this$node$position[0], y = _this$node$position[1];
+          this.el.style.transform = "translate(".concat(x, "px, ").concat(y, "px)");
+        }
+      }, {
+        key: "remove",
+        value: function remove() {
+        }
+      }, {
+        key: "destroy",
+        value: function destroy() {
+          this._drag.destroy();
+        }
+      }]);
+      return NodeView2;
+    }(Emitter);
+    var EditorView = /* @__PURE__ */ function(_Emitter) {
+      _inherits(EditorView2, _Emitter);
+      var _super = _createSuper(EditorView2);
+      function EditorView2(container, components2, emitter) {
+        var _this;
+        _classCallCheck(this, EditorView2);
+        _this = _super.call(this, emitter);
+        _defineProperty(_assertThisInitialized(_this), "container", void 0);
+        _defineProperty(_assertThisInitialized(_this), "components", void 0);
+        _defineProperty(_assertThisInitialized(_this), "nodes", /* @__PURE__ */ new Map());
+        _defineProperty(_assertThisInitialized(_this), "connections", /* @__PURE__ */ new Map());
+        _defineProperty(_assertThisInitialized(_this), "area", void 0);
+        _this.container = container;
+        _this.components = components2;
+        _this.container.style.overflow = "hidden";
+        _this.container.addEventListener("click", _this.click.bind(_assertThisInitialized(_this)));
+        _this.container.addEventListener("contextmenu", function(e) {
+          return _this.trigger("contextmenu", {
+            e,
+            view: _assertThisInitialized(_this)
+          });
+        });
+        emitter.on("destroy", listenWindow("resize", _this.resize.bind(_assertThisInitialized(_this))));
+        emitter.on("destroy", function() {
+          return _this.nodes.forEach(function(view) {
+            return view.destroy();
+          });
+        });
+        _this.on("nodetranslated", _this.updateConnections.bind(_assertThisInitialized(_this)));
+        _this.on("rendersocket", function(_ref) {
+          var input = _ref.input, output = _ref.output;
+          var connections = Array.from(_this.connections.entries());
+          var relatedConnections = connections.filter(function(_ref2) {
+            var _ref3 = _slicedToArray(_ref2, 1), connection = _ref3[0];
+            return connection.input === input || connection.output === output;
+          });
+          relatedConnections.forEach(function(_ref4) {
+            var _ref5 = _slicedToArray(_ref4, 2);
+            _ref5[0];
+            var view = _ref5[1];
+            return requestAnimationFrame(function() {
+              return view.update();
+            });
+          });
+        });
+        _this.area = new Area(container, _assertThisInitialized(_this));
+        _this.container.appendChild(_this.area.el);
+        return _this;
+      }
+      _createClass(EditorView2, [{
+        key: "addNode",
+        value: function addNode(node) {
+          var component4 = this.components.get(node.name);
+          if (!component4)
+            throw new Error("Component ".concat(node.name, " not found"));
+          var nodeView = new NodeView(node, component4, this);
+          this.nodes.set(node, nodeView);
+          this.area.appendChild(nodeView.el);
+        }
+      }, {
+        key: "removeNode",
+        value: function removeNode(node) {
+          var nodeView = this.nodes.get(node);
+          this.nodes["delete"](node);
+          if (nodeView) {
+            this.area.removeChild(nodeView.el);
+            nodeView.destroy();
+          }
+        }
+      }, {
+        key: "addConnection",
+        value: function addConnection(connection) {
+          if (!connection.input.node || !connection.output.node)
+            throw new Error("Connection input or output not added to node");
+          var viewInput = this.nodes.get(connection.input.node);
+          var viewOutput = this.nodes.get(connection.output.node);
+          if (!viewInput || !viewOutput)
+            throw new Error("View node not found for input or output");
+          var connView = new ConnectionView(connection, viewInput, viewOutput, this);
+          this.connections.set(connection, connView);
+          this.area.appendChild(connView.el);
+        }
+      }, {
+        key: "removeConnection",
+        value: function removeConnection(connection) {
+          var connView = this.connections.get(connection);
+          this.connections["delete"](connection);
+          if (connView)
+            this.area.removeChild(connView.el);
+        }
+      }, {
+        key: "updateConnections",
+        value: function updateConnections(_ref6) {
+          var _this2 = this;
+          var node = _ref6.node;
+          node.getConnections().forEach(function(conn) {
+            var connView = _this2.connections.get(conn);
+            if (!connView)
+              throw new Error("Connection view not found");
+            connView.update();
+          });
+        }
+      }, {
+        key: "resize",
+        value: function resize() {
+          var container = this.container;
+          if (!container.parentElement)
+            throw new Error("Container doesn't have parent element");
+          var width = container.parentElement.clientWidth;
+          var height = container.parentElement.clientHeight;
+          container.style.width = width + "px";
+          container.style.height = height + "px";
+        }
+      }, {
+        key: "click",
+        value: function click(e) {
+          var container = this.container;
+          if (container !== e.target)
+            return;
+          if (!this.trigger("click", {
+            e,
+            container
+          }))
+            return;
+        }
+      }]);
+      return EditorView2;
+    }(Emitter);
+    var Selected = /* @__PURE__ */ function() {
+      function Selected2() {
+        _classCallCheck(this, Selected2);
+        _defineProperty(this, "list", []);
+      }
+      _createClass(Selected2, [{
+        key: "add",
+        value: function add(item) {
+          var accumulate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+          if (!accumulate)
+            this.list = [item];
+          else if (!this.contains(item))
+            this.list.push(item);
+        }
+      }, {
+        key: "clear",
+        value: function clear() {
+          this.list = [];
+        }
+      }, {
+        key: "remove",
+        value: function remove(item) {
+          this.list.splice(this.list.indexOf(item), 1);
+        }
+      }, {
+        key: "contains",
+        value: function contains(item) {
+          return this.list.indexOf(item) !== -1;
+        }
+      }, {
+        key: "each",
+        value: function each(callback) {
+          this.list.forEach(callback);
+        }
+      }]);
+      return Selected2;
+    }();
+    var Events = /* @__PURE__ */ _createClass(function Events2(handlers) {
+      _classCallCheck(this, Events2);
+      _defineProperty(this, "handlers", void 0);
+      this.handlers = _objectSpread2({
+        warn: [console.warn],
+        error: [console.error],
+        componentregister: [],
+        destroy: []
+      }, handlers);
+    });
+    var EditorEvents = /* @__PURE__ */ function(_Events) {
+      _inherits(EditorEvents2, _Events);
+      var _super = _createSuper(EditorEvents2);
+      function EditorEvents2() {
+        _classCallCheck(this, EditorEvents2);
+        return _super.call(this, {
+          nodecreate: [],
+          nodecreated: [],
+          noderemove: [],
+          noderemoved: [],
+          connectioncreate: [],
+          connectioncreated: [],
+          connectionremove: [],
+          connectionremoved: [],
+          translatenode: [],
+          nodetranslate: [],
+          nodetranslated: [],
+          nodedraged: [],
+          nodedragged: [],
+          selectnode: [],
+          multiselectnode: [],
+          nodeselect: [],
+          nodeselected: [],
+          rendernode: [],
+          rendersocket: [],
+          rendercontrol: [],
+          renderconnection: [],
+          updateconnection: [],
+          keydown: [],
+          keyup: [],
+          translate: [],
+          translated: [],
+          zoom: [],
+          zoomed: [],
+          click: [],
+          mousemove: [],
+          contextmenu: [],
+          "import": [],
+          "export": [],
+          process: [],
+          clear: []
+        });
+      }
+      return _createClass(EditorEvents2);
+    }(Events);
+    var NodeEditor = /* @__PURE__ */ function(_Context) {
+      _inherits(NodeEditor2, _Context);
+      var _super = _createSuper(NodeEditor2);
+      function NodeEditor2(id, container) {
+        var _this;
+        _classCallCheck(this, NodeEditor2);
+        _this = _super.call(this, id, new EditorEvents());
+        _defineProperty(_assertThisInitialized(_this), "nodes", []);
+        _defineProperty(_assertThisInitialized(_this), "selected", new Selected());
+        _defineProperty(_assertThisInitialized(_this), "view", void 0);
+        _this.view = new EditorView(container, _this.components, _assertThisInitialized(_this));
+        _this.on("destroy", listenWindow("keydown", function(e) {
+          return _this.trigger("keydown", e);
+        }));
+        _this.on("destroy", listenWindow("keyup", function(e) {
+          return _this.trigger("keyup", e);
+        }));
+        _this.on("selectnode", function(_ref) {
+          var node = _ref.node, accumulate = _ref.accumulate;
+          return _this.selectNode(node, accumulate);
+        });
+        _this.on("nodeselected", function() {
+          return _this.selected.each(function(n) {
+            var nodeView = _this.view.nodes.get(n);
+            nodeView && nodeView.onStart();
+          });
+        });
+        _this.on("translatenode", function(_ref2) {
+          var dx = _ref2.dx, dy = _ref2.dy;
+          return _this.selected.each(function(n) {
+            var nodeView = _this.view.nodes.get(n);
+            nodeView && nodeView.onDrag(dx, dy);
+          });
+        });
+        return _this;
+      }
+      _createClass(NodeEditor2, [{
+        key: "addNode",
+        value: function addNode(node) {
+          if (!this.trigger("nodecreate", node))
+            return;
+          this.nodes.push(node);
+          this.view.addNode(node);
+          this.trigger("nodecreated", node);
+        }
+      }, {
+        key: "removeNode",
+        value: function removeNode(node) {
+          var _this2 = this;
+          if (!this.trigger("noderemove", node))
+            return;
+          node.getConnections().forEach(function(c2) {
+            return _this2.removeConnection(c2);
+          });
+          this.nodes.splice(this.nodes.indexOf(node), 1);
+          this.view.removeNode(node);
+          this.trigger("noderemoved", node);
+        }
+      }, {
+        key: "connect",
+        value: function connect(output, input) {
+          var data = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+          if (!this.trigger("connectioncreate", {
+            output,
+            input
+          }))
+            return;
+          try {
+            var connection = output.connectTo(input);
+            connection.data = data;
+            this.view.addConnection(connection);
+            this.trigger("connectioncreated", connection);
+          } catch (e) {
+            this.trigger("warn", e);
+          }
+        }
+      }, {
+        key: "removeConnection",
+        value: function removeConnection(connection) {
+          if (!this.trigger("connectionremove", connection))
+            return;
+          this.view.removeConnection(connection);
+          connection.remove();
+          this.trigger("connectionremoved", connection);
+        }
+      }, {
+        key: "selectNode",
+        value: function selectNode(node) {
+          var accumulate = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+          if (this.nodes.indexOf(node) === -1)
+            throw new Error("Node not exist in list");
+          if (!this.trigger("nodeselect", node))
+            return;
+          this.selected.add(node, accumulate);
+          this.trigger("nodeselected", node);
+        }
+      }, {
+        key: "getComponent",
+        value: function getComponent(name) {
+          var component4 = this.components.get(name);
+          if (!component4)
+            throw "Component ".concat(name, " not found");
+          return component4;
+        }
+      }, {
+        key: "register",
+        value: function register(component4) {
+          _get(_getPrototypeOf(NodeEditor2.prototype), "register", this).call(this, component4);
+          component4.editor = this;
+        }
+      }, {
+        key: "clear",
+        value: function clear() {
+          var _this3 = this;
+          _toConsumableArray(this.nodes).forEach(function(node) {
+            return _this3.removeNode(node);
+          });
+          this.trigger("clear");
+        }
+      }, {
+        key: "toJSON",
+        value: function toJSON() {
+          var data = {
+            id: this.id,
+            nodes: {}
+          };
+          this.nodes.forEach(function(node) {
+            return data.nodes[node.id] = node.toJSON();
+          });
+          this.trigger("export", data);
+          return data;
+        }
+      }, {
+        key: "beforeImport",
+        value: function beforeImport(json) {
+          var checking = Validator.validate(this.id, json);
+          if (!checking.success) {
+            this.trigger("warn", checking.msg);
+            return false;
+          }
+          this.silent = true;
+          this.clear();
+          this.trigger("import", json);
+          return true;
+        }
+      }, {
+        key: "afterImport",
+        value: function afterImport() {
+          this.silent = false;
+          return true;
+        }
+      }, {
+        key: "fromJSON",
+        value: function() {
+          var _fromJSON = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2(json) {
+            var _this4 = this;
+            var nodes;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    if (this.beforeImport(json)) {
+                      _context2.next = 2;
+                      break;
+                    }
+                    return _context2.abrupt("return", false);
+                  case 2:
+                    nodes = {};
+                    _context2.prev = 3;
+                    _context2.next = 6;
+                    return Promise.all(Object.keys(json.nodes).map(/* @__PURE__ */ function() {
+                      var _ref3 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(id) {
+                        var node, component4;
+                        return _regeneratorRuntime().wrap(function _callee$(_context) {
+                          while (1) {
+                            switch (_context.prev = _context.next) {
+                              case 0:
+                                node = json.nodes[id];
+                                component4 = _this4.getComponent(node.name);
+                                _context.next = 4;
+                                return component4.build(Node2.fromJSON(node));
+                              case 4:
+                                nodes[id] = _context.sent;
+                                _this4.addNode(nodes[id]);
+                              case 6:
+                              case "end":
+                                return _context.stop();
+                            }
+                          }
+                        }, _callee);
+                      }));
+                      return function(_x2) {
+                        return _ref3.apply(this, arguments);
+                      };
+                    }()));
+                  case 6:
+                    Object.keys(json.nodes).forEach(function(id) {
+                      var jsonNode = json.nodes[id];
+                      var node = nodes[id];
+                      Object.keys(jsonNode.outputs).forEach(function(key) {
+                        var outputJson = jsonNode.outputs[key];
+                        outputJson.connections.forEach(function(jsonConnection) {
+                          var nodeId = jsonConnection.node;
+                          var data = jsonConnection.data;
+                          var targetOutput = node.outputs.get(key);
+                          var targetInput = nodes[nodeId].inputs.get(jsonConnection.input);
+                          if (!targetOutput || !targetInput) {
+                            return _this4.trigger("error", "IO not found for node ".concat(node.id));
+                          }
+                          _this4.connect(targetOutput, targetInput, data);
+                        });
+                      });
+                    });
+                    _context2.next = 13;
+                    break;
+                  case 9:
+                    _context2.prev = 9;
+                    _context2.t0 = _context2["catch"](3);
+                    this.trigger("warn", _context2.t0);
+                    return _context2.abrupt("return", !this.afterImport());
+                  case 13:
+                    return _context2.abrupt("return", this.afterImport());
+                  case 14:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this, [[3, 9]]);
+          }));
+          function fromJSON(_x) {
+            return _fromJSON.apply(this, arguments);
+          }
+          return fromJSON;
+        }()
+      }]);
+      return NodeEditor2;
+    }(Context);
+    var Output2 = /* @__PURE__ */ function(_IO) {
+      _inherits(Output3, _IO);
+      var _super = _createSuper(Output3);
+      function Output3(key, title, socket) {
+        var multiConns = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : true;
+        _classCallCheck(this, Output3);
+        return _super.call(this, key, title, socket, multiConns);
+      }
+      _createClass(Output3, [{
+        key: "hasConnection",
+        value: function hasConnection() {
+          return this.connections.length > 0;
+        }
+      }, {
+        key: "connectTo",
+        value: function connectTo(input) {
+          if (!this.socket.compatibleWith(input.socket))
+            throw new Error("Sockets not compatible");
+          if (!input.multipleConnections && input.hasConnection())
+            throw new Error("Input already has one connection");
+          if (!this.multipleConnections && this.hasConnection())
+            throw new Error("Output already has one connection");
+          var connection = new Connection(this, input);
+          this.connections.push(connection);
+          return connection;
+        }
+      }, {
+        key: "connectedTo",
+        value: function connectedTo(input) {
+          return this.connections.some(function(item) {
+            return item.input === input;
+          });
+        }
+      }, {
+        key: "toJSON",
+        value: function toJSON() {
+          return {
+            "connections": this.connections.map(function(c2) {
+              if (!c2.input.node)
+                throw new Error("Node not added to Input");
+              return {
+                node: c2.input.node.id,
+                input: c2.input.key,
+                data: c2.data
+              };
+            })
+          };
+        }
+      }]);
+      return Output3;
+    }(IO);
+    var Socket2 = /* @__PURE__ */ function() {
+      function Socket3(name) {
+        var data = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        _classCallCheck(this, Socket3);
+        _defineProperty(this, "name", void 0);
+        _defineProperty(this, "data", void 0);
+        _defineProperty(this, "compatible", []);
+        this.name = name;
+        this.data = data;
+        this.compatible = [];
+      }
+      _createClass(Socket3, [{
+        key: "combineWith",
+        value: function combineWith(socket) {
+          this.compatible.push(socket);
+        }
+      }, {
+        key: "compatibleWith",
+        value: function compatibleWith(socket) {
+          return this === socket || this.compatible.includes(socket);
+        }
+      }]);
+      return Socket3;
+    }();
+    function intersect(array1, array2) {
+      return array1.filter(function(value) {
+        return -1 !== array2.indexOf(value);
+      });
+    }
+    var Recursion = /* @__PURE__ */ function() {
+      function Recursion2(nodes) {
+        _classCallCheck(this, Recursion2);
+        _defineProperty(this, "nodes", void 0);
+        this.nodes = nodes;
+      }
+      _createClass(Recursion2, [{
+        key: "extractInputNodes",
+        value: function extractInputNodes(node) {
+          var _this = this;
+          return Object.keys(node.inputs).reduce(function(acc, key) {
+            var connections = node.inputs[key].connections;
+            var nodesData = (connections || []).reduce(function(b2, c2) {
+              return [].concat(_toConsumableArray(b2), [_this.nodes[c2.node]]);
+            }, []);
+            return [].concat(_toConsumableArray(acc), _toConsumableArray(nodesData));
+          }, []);
+        }
+      }, {
+        key: "findSelf",
+        value: function findSelf(list, inputNodes) {
+          var inters = intersect(list, inputNodes);
+          if (inters.length)
+            return inters[0];
+          var _iterator = _createForOfIteratorHelper(inputNodes), _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+              var node = _step.value;
+              var l2 = [node].concat(_toConsumableArray(list));
+              var inter = this.findSelf(l2, this.extractInputNodes(node));
+              if (inter)
+                return inter;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+          return null;
+        }
+      }, {
+        key: "detect",
+        value: function detect() {
+          var _this2 = this;
+          var nodesArr = Object.keys(this.nodes).map(function(id) {
+            return _this2.nodes[id];
+          });
+          var _iterator2 = _createForOfIteratorHelper(nodesArr), _step2;
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+              var node = _step2.value;
+              var inters = this.findSelf([node], this.extractInputNodes(node));
+              if (inters)
+                return inters;
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+          return null;
+        }
+      }]);
+      return Recursion2;
+    }();
+    var State = {
+      AVAILABLE: 0,
+      PROCESSED: 1,
+      ABORT: 2
+    };
+    var EngineEvents = /* @__PURE__ */ function(_Events) {
+      _inherits(EngineEvents2, _Events);
+      var _super = _createSuper(EngineEvents2);
+      function EngineEvents2() {
+        _classCallCheck(this, EngineEvents2);
+        return _super.call(this, {});
+      }
+      return _createClass(EngineEvents2);
+    }(Events);
+    var Engine = /* @__PURE__ */ function(_Context) {
+      _inherits(Engine2, _Context);
+      var _super = _createSuper(Engine2);
+      function Engine2(id) {
+        var _this;
+        _classCallCheck(this, Engine2);
+        _this = _super.call(this, id, new EngineEvents());
+        _defineProperty(_assertThisInitialized(_this), "args", []);
+        _defineProperty(_assertThisInitialized(_this), "data", null);
+        _defineProperty(_assertThisInitialized(_this), "state", State.AVAILABLE);
+        _defineProperty(_assertThisInitialized(_this), "forwarded", /* @__PURE__ */ new Set());
+        _defineProperty(_assertThisInitialized(_this), "onAbort", function() {
+        });
+        return _this;
+      }
+      _createClass(Engine2, [{
+        key: "clone",
+        value: function clone() {
+          var engine = new Engine2(this.id);
+          this.components.forEach(function(c2) {
+            return engine.register(c2);
+          });
+          return engine;
+        }
+      }, {
+        key: "throwError",
+        value: function() {
+          var _throwError = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(message) {
+            var data, _args = arguments;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    data = _args.length > 1 && _args[1] !== void 0 ? _args[1] : null;
+                    _context.next = 3;
+                    return this.abort();
+                  case 3:
+                    this.trigger("error", {
+                      message,
+                      data
+                    });
+                    this.processDone();
+                    return _context.abrupt("return", "error");
+                  case 6:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+          function throwError(_x) {
+            return _throwError.apply(this, arguments);
+          }
+          return throwError;
+        }()
+      }, {
+        key: "processStart",
+        value: function processStart() {
+          if (this.state === State.AVAILABLE) {
+            this.state = State.PROCESSED;
+            return true;
+          }
+          if (this.state === State.ABORT) {
+            return false;
+          }
+          console.warn("The process is busy and has not been restarted.\n                Use abort() to force it to complete");
+          return false;
+        }
+      }, {
+        key: "processDone",
+        value: function processDone() {
+          var success = this.state !== State.ABORT;
+          this.state = State.AVAILABLE;
+          if (!success) {
+            this.onAbort();
+            this.onAbort = function() {
+            };
+          }
+          return success;
+        }
+      }, {
+        key: "abort",
+        value: function() {
+          var _abort = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee2() {
+            var _this2 = this;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    return _context2.abrupt("return", new Promise(function(ret) {
+                      if (_this2.state === State.PROCESSED) {
+                        _this2.state = State.ABORT;
+                        _this2.onAbort = ret;
+                      } else if (_this2.state === State.ABORT) {
+                        _this2.onAbort();
+                        _this2.onAbort = ret;
+                      } else
+                        ret();
+                    }));
+                  case 1:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+          function abort() {
+            return _abort.apply(this, arguments);
+          }
+          return abort;
+        }()
+      }, {
+        key: "lock",
+        value: function() {
+          var _lock = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee3(node) {
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    return _context3.abrupt("return", new Promise(function(res) {
+                      node.unlockPool = node.unlockPool || [];
+                      if (node.busy && !node.outputData)
+                        node.unlockPool.push(res);
+                      else
+                        res();
+                      node.busy = true;
+                    }));
+                  case 1:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3);
+          }));
+          function lock(_x2) {
+            return _lock.apply(this, arguments);
+          }
+          return lock;
+        }()
+      }, {
+        key: "unlock",
+        value: function unlock(node) {
+          node.unlockPool.forEach(function(a) {
+            return a();
+          });
+          node.unlockPool = [];
+          node.busy = false;
+        }
+      }, {
+        key: "extractInputData",
+        value: function() {
+          var _extractInputData = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee5(node) {
+            var _this3 = this;
+            var obj, _i, _Object$keys, key, input, conns, connData;
+            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    obj = {};
+                    _i = 0, _Object$keys = Object.keys(node.inputs);
+                  case 2:
+                    if (!(_i < _Object$keys.length)) {
+                      _context5.next = 13;
+                      break;
+                    }
+                    key = _Object$keys[_i];
+                    input = node.inputs[key];
+                    conns = input.connections;
+                    _context5.next = 8;
+                    return Promise.all(conns.map(/* @__PURE__ */ function() {
+                      var _ref = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee4(c2) {
+                        var prevNode, outputs;
+                        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+                          while (1) {
+                            switch (_context4.prev = _context4.next) {
+                              case 0:
+                                prevNode = _this3.data.nodes[c2.node];
+                                _context4.next = 3;
+                                return _this3.processNode(prevNode);
+                              case 3:
+                                outputs = _context4.sent;
+                                if (outputs) {
+                                  _context4.next = 8;
+                                  break;
+                                }
+                                _this3.abort();
+                                _context4.next = 9;
+                                break;
+                              case 8:
+                                return _context4.abrupt("return", outputs[c2.output]);
+                              case 9:
+                              case "end":
+                                return _context4.stop();
+                            }
+                          }
+                        }, _callee4);
+                      }));
+                      return function(_x4) {
+                        return _ref.apply(this, arguments);
+                      };
+                    }()));
+                  case 8:
+                    connData = _context5.sent;
+                    obj[key] = connData;
+                  case 10:
+                    _i++;
+                    _context5.next = 2;
+                    break;
+                  case 13:
+                    return _context5.abrupt("return", obj);
+                  case 14:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5);
+          }));
+          function extractInputData(_x3) {
+            return _extractInputData.apply(this, arguments);
+          }
+          return extractInputData;
+        }()
+      }, {
+        key: "processWorker",
+        value: function() {
+          var _processWorker = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee6(node) {
+            var inputData, component4, outputData;
+            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    _context6.next = 2;
+                    return this.extractInputData(node);
+                  case 2:
+                    inputData = _context6.sent;
+                    component4 = this.components.get(node.name);
+                    outputData = {};
+                    _context6.prev = 5;
+                    _context6.next = 8;
+                    return component4.worker.apply(component4, [node, inputData, outputData].concat(_toConsumableArray(this.args)));
+                  case 8:
+                    _context6.next = 14;
+                    break;
+                  case 10:
+                    _context6.prev = 10;
+                    _context6.t0 = _context6["catch"](5);
+                    this.abort();
+                    this.trigger("warn", _context6.t0);
+                  case 14:
+                    return _context6.abrupt("return", outputData);
+                  case 15:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee6, this, [[5, 10]]);
+          }));
+          function processWorker(_x5) {
+            return _processWorker.apply(this, arguments);
+          }
+          return processWorker;
+        }()
+      }, {
+        key: "processNode",
+        value: function() {
+          var _processNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee7(node) {
+            return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    if (!(this.state === State.ABORT || !node)) {
+                      _context7.next = 2;
+                      break;
+                    }
+                    return _context7.abrupt("return", null);
+                  case 2:
+                    _context7.next = 4;
+                    return this.lock(node);
+                  case 4:
+                    if (node.outputData) {
+                      _context7.next = 8;
+                      break;
+                    }
+                    _context7.next = 7;
+                    return this.processWorker(node);
+                  case 7:
+                    node.outputData = _context7.sent;
+                  case 8:
+                    this.unlock(node);
+                    return _context7.abrupt("return", node.outputData);
+                  case 10:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
+          function processNode(_x6) {
+            return _processNode.apply(this, arguments);
+          }
+          return processNode;
+        }()
+      }, {
+        key: "forwardProcess",
+        value: function() {
+          var _forwardProcess = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee10(node) {
+            var _this4 = this;
+            return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+              while (1) {
+                switch (_context10.prev = _context10.next) {
+                  case 0:
+                    if (!(this.state === State.ABORT)) {
+                      _context10.next = 2;
+                      break;
+                    }
+                    return _context10.abrupt("return", null);
+                  case 2:
+                    _context10.next = 4;
+                    return Promise.all(Object.keys(node.outputs).map(/* @__PURE__ */ function() {
+                      var _ref2 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee9(key) {
+                        var output;
+                        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+                          while (1) {
+                            switch (_context9.prev = _context9.next) {
+                              case 0:
+                                output = node.outputs[key];
+                                _context9.next = 3;
+                                return Promise.all(output.connections.map(/* @__PURE__ */ function() {
+                                  var _ref3 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee8(c2) {
+                                    var nextNode;
+                                    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+                                      while (1) {
+                                        switch (_context8.prev = _context8.next) {
+                                          case 0:
+                                            nextNode = _this4.data.nodes[c2.node];
+                                            if (_this4.forwarded.has(nextNode)) {
+                                              _context8.next = 7;
+                                              break;
+                                            }
+                                            _this4.forwarded.add(nextNode);
+                                            _context8.next = 5;
+                                            return _this4.processNode(nextNode);
+                                          case 5:
+                                            _context8.next = 7;
+                                            return _this4.forwardProcess(nextNode);
+                                          case 7:
+                                          case "end":
+                                            return _context8.stop();
+                                        }
+                                      }
+                                    }, _callee8);
+                                  }));
+                                  return function(_x9) {
+                                    return _ref3.apply(this, arguments);
+                                  };
+                                }()));
+                              case 3:
+                                return _context9.abrupt("return", _context9.sent);
+                              case 4:
+                              case "end":
+                                return _context9.stop();
+                            }
+                          }
+                        }, _callee9);
+                      }));
+                      return function(_x8) {
+                        return _ref2.apply(this, arguments);
+                      };
+                    }()));
+                  case 4:
+                    return _context10.abrupt("return", _context10.sent);
+                  case 5:
+                  case "end":
+                    return _context10.stop();
+                }
+              }
+            }, _callee10, this);
+          }));
+          function forwardProcess(_x7) {
+            return _forwardProcess.apply(this, arguments);
+          }
+          return forwardProcess;
+        }()
+      }, {
+        key: "copy",
+        value: function copy(data) {
+          data = Object.assign({}, data);
+          data.nodes = Object.assign({}, data.nodes);
+          Object.keys(data.nodes).forEach(function(key) {
+            data.nodes[key] = Object.assign({}, data.nodes[key]);
+          });
+          return data;
+        }
+      }, {
+        key: "validate",
+        value: function() {
+          var _validate = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee11(data) {
+            var checking, recursion, recurrentNode;
+            return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+              while (1) {
+                switch (_context11.prev = _context11.next) {
+                  case 0:
+                    checking = Validator.validate(this.id, data);
+                    recursion = new Recursion(data.nodes);
+                    if (checking.success) {
+                      _context11.next = 6;
+                      break;
+                    }
+                    _context11.next = 5;
+                    return this.throwError(checking.msg);
+                  case 5:
+                    return _context11.abrupt("return", _context11.sent);
+                  case 6:
+                    recurrentNode = recursion.detect();
+                    if (!recurrentNode) {
+                      _context11.next = 11;
+                      break;
+                    }
+                    _context11.next = 10;
+                    return this.throwError("Recursion detected", recurrentNode);
+                  case 10:
+                    return _context11.abrupt("return", _context11.sent);
+                  case 11:
+                    return _context11.abrupt("return", true);
+                  case 12:
+                  case "end":
+                    return _context11.stop();
+                }
+              }
+            }, _callee11, this);
+          }));
+          function validate(_x10) {
+            return _validate.apply(this, arguments);
+          }
+          return validate;
+        }()
+      }, {
+        key: "processStartNode",
+        value: function() {
+          var _processStartNode = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee12(id) {
+            var startNode;
+            return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+              while (1) {
+                switch (_context12.prev = _context12.next) {
+                  case 0:
+                    if (id) {
+                      _context12.next = 2;
+                      break;
+                    }
+                    return _context12.abrupt("return");
+                  case 2:
+                    startNode = this.data.nodes[id];
+                    if (startNode) {
+                      _context12.next = 7;
+                      break;
+                    }
+                    _context12.next = 6;
+                    return this.throwError("Node with such id not found");
+                  case 6:
+                    return _context12.abrupt("return", _context12.sent);
+                  case 7:
+                    _context12.next = 9;
+                    return this.processNode(startNode);
+                  case 9:
+                    _context12.next = 11;
+                    return this.forwardProcess(startNode);
+                  case 11:
+                  case "end":
+                    return _context12.stop();
+                }
+              }
+            }, _callee12, this);
+          }));
+          function processStartNode(_x11) {
+            return _processStartNode.apply(this, arguments);
+          }
+          return processStartNode;
+        }()
+      }, {
+        key: "processUnreachable",
+        value: function() {
+          var _processUnreachable = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee13() {
+            var data, i, node;
+            return _regeneratorRuntime().wrap(function _callee13$(_context13) {
+              while (1) {
+                switch (_context13.prev = _context13.next) {
+                  case 0:
+                    data = this.data;
+                    _context13.t0 = _regeneratorRuntime().keys(data.nodes);
+                  case 2:
+                    if ((_context13.t1 = _context13.t0()).done) {
+                      _context13.next = 12;
+                      break;
+                    }
+                    i = _context13.t1.value;
+                    node = data.nodes[i];
+                    if (!(typeof node.outputData === "undefined")) {
+                      _context13.next = 10;
+                      break;
+                    }
+                    _context13.next = 8;
+                    return this.processNode(node);
+                  case 8:
+                    _context13.next = 10;
+                    return this.forwardProcess(node);
+                  case 10:
+                    _context13.next = 2;
+                    break;
+                  case 12:
+                  case "end":
+                    return _context13.stop();
+                }
+              }
+            }, _callee13, this);
+          }));
+          function processUnreachable() {
+            return _processUnreachable.apply(this, arguments);
+          }
+          return processUnreachable;
+        }()
+      }, {
+        key: "process",
+        value: function() {
+          var _process = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee14(data) {
+            var startId, _len, args, _key, _args14 = arguments;
+            return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+              while (1) {
+                switch (_context14.prev = _context14.next) {
+                  case 0:
+                    startId = _args14.length > 1 && _args14[1] !== void 0 ? _args14[1] : null;
+                    if (this.processStart()) {
+                      _context14.next = 3;
+                      break;
+                    }
+                    return _context14.abrupt("return");
+                  case 3:
+                    if (this.validate(data)) {
+                      _context14.next = 5;
+                      break;
+                    }
+                    return _context14.abrupt("return");
+                  case 5:
+                    this.data = this.copy(data);
+                    for (_len = _args14.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                      args[_key - 2] = _args14[_key];
+                    }
+                    this.args = args;
+                    this.forwarded = /* @__PURE__ */ new Set();
+                    _context14.next = 11;
+                    return this.processStartNode(startId);
+                  case 11:
+                    _context14.next = 13;
+                    return this.processUnreachable();
+                  case 13:
+                    return _context14.abrupt("return", this.processDone() ? "success" : "aborted");
+                  case 14:
+                  case "end":
+                    return _context14.stop();
+                }
+              }
+            }, _callee14, this);
+          }));
+          function process2(_x12) {
+            return _process.apply(this, arguments);
+          }
+          return process2;
+        }()
+      }]);
+      return Engine2;
+    }(Context);
+    var index = {
+      Engine,
+      Recursion,
+      Component: Component2,
+      Control,
+      Connection,
+      Emitter,
+      Input: Input2,
+      IO,
+      Node: Node2,
+      NodeEditor,
+      Output: Output2,
+      Socket: Socket2
+    };
+    exports.Component = Component2;
+    exports.Connection = Connection;
+    exports.Control = Control;
+    exports.Emitter = Emitter;
+    exports.Engine = Engine;
+    exports.IO = IO;
+    exports.Input = Input2;
+    exports.Node = Node2;
+    exports.NodeEditor = NodeEditor;
+    exports.Output = Output2;
+    exports.Recursion = Recursion;
+    exports.Socket = Socket2;
+    exports["default"] = index;
+  }
+});
 var WorkflowClientControlManager = class _WorkflowClientControlManager {
   constructor() {
     this.controls = /* @__PURE__ */ new Map();
@@ -10776,6 +11345,7 @@ init_consola_36c0034f();
 init_core();
 init_consola_06ad8a64();
 init_utils();
+var import_insane = __toESM2(require_insane(), 1);
 var anyMap = /* @__PURE__ */ new WeakMap();
 var eventsMap = /* @__PURE__ */ new WeakMap();
 var producersMap = /* @__PURE__ */ new WeakMap();
@@ -11670,7 +12240,6 @@ var App = class {
     this.success("app started");
     this.state = 3;
     await this.emit("started", {});
-    omnilog.status_success("Server has started and is ready to accept connections.");
     return true;
   }
   async stop() {
@@ -11718,6 +12287,8 @@ var BaseWorkflow = class _BaseWorkflow {
     (_a = this.meta).created ?? (_a.created = Date.now());
     (_b = this.meta).tags ?? (_b.tags = []);
     this.meta.updated = Date.now();
+    this.meta.name = (0, import_insane.default)(this.meta.name, { allowedTags: [], allowedAttributes: {} });
+    this.meta.description = (0, import_insane.default)(this.meta.description, { allowedTags: [], allowedAttributes: {} });
     return this;
   }
   setRete(rete) {
@@ -11892,8 +12463,8 @@ for (let i = 0; i < 256; ++i) {
 }
 var randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
 var Rete2 = __toESM2(require_rete_common(), 1);
-var import_rete2 = __toESM2(require_rete_common(), 1);
-var CustomSocket = class extends import_rete2.Socket {
+var import_rete = __toESM2(require_rete_common(), 1);
+var CustomSocket = class extends import_rete.Socket {
   constructor(name, data) {
     super(name, data);
     this.array = false;
@@ -11916,6 +12487,7 @@ var CustomSocket = class extends import_rete2.Socket {
 var OmniComponentMacroTypes = /* @__PURE__ */ ((OmniComponentMacroTypes3) => {
   OmniComponentMacroTypes3["EXEC"] = "exec";
   OmniComponentMacroTypes3["BUILDER"] = "builder";
+  OmniComponentMacroTypes3["ON_SAVE"] = "save";
   return OmniComponentMacroTypes3;
 })(OmniComponentMacroTypes || {});
 var IOComposer = class {
@@ -11927,6 +12499,7 @@ var IOComposer = class {
     this.data.type = type;
     this.data.customSocket = customSocket;
     this.data.dataTypes = [type];
+    this.data.customData = {};
     this.data.title = name;
     this.data.source = { sourceType: ioType === "input" ? "requestBody" : "responseBody" };
     return this;
@@ -11967,6 +12540,10 @@ var IOComposer = class {
     this.data.default = defaultValue;
     return this;
   }
+  setCustom(key, value) {
+    this.data.customData[key] = value;
+    return this;
+  }
   toOmniIO() {
     var _a;
     (_a = this.data).title ?? (_a.title = this.data.name);
@@ -11976,6 +12553,7 @@ var IOComposer = class {
 var ControlComposer = class {
   constructor(name) {
     this.data = { name };
+    this.data.customData = {};
   }
   create(name, dataType) {
     this.data.name = name;
@@ -11988,6 +12566,10 @@ var ControlComposer = class {
   }
   setHidden(hidden) {
     this.data.hidden = hidden;
+    return this;
+  }
+  setCustom(key, value) {
+    this.data.customData[key] = value;
     return this;
   }
   setControlType(controlType) {
@@ -12048,6 +12630,7 @@ var ComponentComposer = class extends BaseComposer {
     this.data.flags = 0;
     this.data.macros = {};
     this.data.origin = "omnitool:Composer";
+    this.data.customData = {};
   }
   fromScratch() {
     this.data.apiNamespace = this.data.displayNamespace;
@@ -12079,6 +12662,10 @@ var ComponentComposer = class extends BaseComposer {
     this.data.tags = tags;
     return this;
   }
+  setRenderTemplate(template) {
+    this.data.renderTemplate = template;
+    return this;
+  }
   create(displayNamespace, displayOperationId) {
     this.data.displayNamespace = displayNamespace;
     this.data.displayOperationId = displayOperationId;
@@ -12108,10 +12695,11 @@ var ComponentComposer = class extends BaseComposer {
   setFlag(flag, value = true) {
     const mask = 1 << flag;
     if (value) {
-      return this.data.flags | mask;
+      this.data.flags = this.data.flags | mask;
     } else {
-      return this.data.flags & ~mask;
+      this.data.flags = this.data.flags & ~mask;
     }
+    return this;
   }
   setMacro(macro, fn) {
     this.data.macros[macro] = fn;
@@ -12127,6 +12715,12 @@ var ComponentComposer = class extends BaseComposer {
     let ret = new ControlComposer(name).create(name, dataType);
     return ret;
   }
+  setCustom(key, value) {
+    var _a;
+    (_a = this.data).customData ?? (_a.customData = {});
+    this.data.customData[key] = value;
+    return this;
+  }
   addControl(control) {
     this.data.controls = this.data.controls ?? {};
     this.data.controls[control.name] = control;
@@ -12141,6 +12735,7 @@ var PatchComposer = class extends BaseComposer {
     super();
     this.data.macros = {};
     this.data.origin = "omnitool:Composer";
+    this.data.customData = {};
   }
   fromComponent(apiNamespace, apiOperationId) {
     this.data.apiNamespace = apiNamespace;
@@ -12183,6 +12778,12 @@ var PatchComposer = class extends BaseComposer {
     this.data.meta = meta;
     return this;
   }
+  setCustom(key, value) {
+    var _a;
+    (_a = this.data).customData ?? (_a.customData = {});
+    this.data.customData[key] = value;
+    return this;
+  }
   createControl(name) {
     let ret = new ControlComposer(name).create(name);
     return ret;
@@ -12206,8 +12807,8 @@ var PatchComposer = class extends BaseComposer {
     return this.data;
   }
 };
-var import_rete3 = __toESM2(require_rete_common(), 1);
-var OAIControl31 = class _OAIControl31 extends import_rete3.default.Control {
+var import_rete2 = __toESM2(require_rete_common(), 1);
+var OAIControl31 = class _OAIControl31 extends import_rete2.default.Control {
   constructor(config, control, emitter) {
     super(config.name);
     this.data = JSON.parse(JSON.stringify(config));
@@ -12258,7 +12859,7 @@ var OAIControl31 = class _OAIControl31 extends import_rete3.default.Control {
               title: v2[choices.map.title],
               description: v2[choices.map.description] || ""
             };
-          }).filter((e) => e.value);
+          }).filter((e) => e.value).sort((a, b2) => a[choices.map.title] > b2[choices.map.title] ? -1 : 1);
         }
       }
     }
@@ -12292,6 +12893,12 @@ var OAIControl31 = class _OAIControl31 extends import_rete3.default.Control {
   }
   get maximum() {
     return this.data.maximum;
+  }
+  get customData() {
+    return this.data.customData ?? {};
+  }
+  custom(key) {
+    return this.data.customData?.[key] ?? null;
   }
   get choices() {
     return this.data.choices ?? ["(default)"];
@@ -12672,8 +13279,111 @@ component2.addControl(
 var PromptComponent2 = component2.toJSON();
 var LoraComponent_default = PromptComponent2;
 
+// components/RoopComponent.ts
+var NS_OMNI3 = "omnitool";
+var component3 = OAIBaseComponent.create(NS_OMNI3, "roop").fromScratch().set("description", "Resize the image to the given dimensions with various options for scaling, fitting, and cropping.").set("title", "Face Swap (Roop)").set("category", "Image Manipulation").setMethod("X-CUSTOM");
+component3.addInput(
+  component3.createInput("prompt", "string", "text").set("description", "Optional prompt. Uses CLIP for auto prompt if left blank.").setDefault("").toOmniIO()
+).addInput(
+  component3.createInput("negative_prompt", "string", "text").set("description", "Optional negative prompt").setDefault("").toOmniIO()
+).addInput(
+  component3.createInput("replace_faces", "string", "text").set("description", "Which faces to replace").setDefault("0,1,2,3").toOmniIO()
+).addInput(
+  component3.createInput("denoising_strength", "float").set("description", "Balance between the two images. Low: Prioritize Source Face, High: Prioritize Target Image (denoising strength)").setDefault(0.05).setConstraints(1e-3, 1, 0.01).setControl({
+    controlType: "AlpineNumWithSliderComponent"
+  }).toOmniIO()
+).addInput(
+  component3.createInput("face_restorer", "string").set("title", "Facial Restoration").setDefault("CodeFormer").setChoices(["None", "CodeFormer", "GFPGAN"]).toOmniIO()
+).addInput(
+  component3.createInput("checkpoint", "string", "text").set("description", "The checkpoint to use.").setDefault("v1-5-pruned-emaonly").setChoices({
+    block: "automatic1111.getModels",
+    map: {
+      cache: "global",
+      title: "model_name",
+      value: "model_name"
+    }
+  }).toOmniIO()
+).addInput(
+  component3.createInput("sampler_name", "string").setDefault("DPM++ 2M").setChoices({
+    block: "automatic1111.getSamplers",
+    map: {
+      cache: "global",
+      title: "name",
+      value: "name"
+    }
+  }).toOmniIO()
+).addInput(
+  component3.createInput("scale_factor", "float").set("title", "Upscale Factor").setDefault(1).setConstraints(1, 4, 0.01).toOmniIO()
+).addInput(
+  component3.createInput("upscaler", "string").set("title", "Facial Upscaler").setDefault("None").setChoices(["None", "Lanczos", "Nearest", "BSRGAN", "LDSR", "ESRGAN_4x", "R-ESRGAN 2x+", "R-ESRGAN 4x+", "R-ESRGAN 4x+ Anime6B", "R-ESRGAN AnimeVideo", "R-ESRGAN General 4xV3", "R-ESRGAN General WDN 4xV3", "SwinIR_4x", "ScuNET PSNR", "ScuNet"]).toOmniIO()
+).addInput(
+  component3.createInput("source", "object", "image").set("description", "Image containing a the face to replace in the target image.").set("title", "Face Image (Source)").setRequired(true).setControl({
+    controlType: "AlpineLabelComponent"
+  }).toOmniIO()
+).addInput(
+  component3.createInput("init_images", "object", "imageArray").set("title", "Target Image").set("description", "The image in which to replace the faces. Each image will be processed with the same prompt and face indices").setRequired(true).toOmniIO()
+).addOutput(
+  component3.createOutput("images", "object", "imageArray").set("description", "The processed images").toOmniIO()
+).setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
+  var _a;
+  const componentService = ctx.app.services.get("componentService");
+  let source = payload.source;
+  let init_images = payload.init_images || [];
+  let sourceB64 = (await ctx.app.cdn.get(source.ticket)).asBase64();
+  let resultImages = [];
+  for (let i = 0; i < init_images.length; i++) {
+    let img2imgOpts = {};
+    let negative_prompt = payload.negative_prompt;
+    let block = automatic1111.simpleImage2Image;
+    let target = init_images[i];
+    let meta = target.meta;
+    let targetB64 = await ctx.app.cdn.get(target.ticket, {}, "asBase64");
+    negative_prompt = negative_prompt || meta.sd?.negativePrompt;
+    img2imgOpts = {
+      width: meta.width,
+      height: meta.height,
+      prompt: payload.prompt || meta.sd?.prompt || (await componentService.runBlock(ctx, "automatic1111.interrogate", { image: targetB64, model: "clip" })).caption,
+      negative_prompt,
+      sampler_name: payload.sampler_name,
+      init_images: [targetB64],
+      denoising_strength: payload.denoising_strength || 0.05
+    };
+    let pl = Object.assign({}, {
+      negative_prompt,
+      checkpoint: payload.checkpoint || void 0,
+      "alwayson_scripts": {
+        "roop": {
+          "args": [
+            sourceB64,
+            true,
+            payload.replace_faces ?? "0",
+            "../../../models/roop/inswapper_128.onnx",
+            payload.face_restorer,
+            payload.face_restoration_strength,
+            payload.upscaler,
+            1,
+            payload.scale_factor,
+            false,
+            true
+          ]
+        }
+      }
+    }, img2imgOpts || {});
+    const imgResult = (await componentService.runBlock(ctx, block, pl)).images[0];
+    if (imgResult) {
+      (_a = imgResult.meta).sd ?? (_a.sd = {});
+      imgResult.meta.sd.prompt = payload.prompt;
+      imgResult.meta.sd.negative_prompt = payload.negative_prompt;
+      resultImages.push(imgResult);
+    }
+  }
+  return { images: resultImages };
+});
+var RoopComponent = component3.toJSON();
+var RoopComponent_default = RoopComponent;
+
 // components.ts
-var components = [PromptComponent_default, LoraComponent_default];
+var components = [RoopComponent_default, PromptComponent_default, LoraComponent_default];
 var components_default = () => {
   return {
     blocks: components,
@@ -12698,6 +13408,9 @@ export {
   (*! (c) Andrea Giammarchi - ISC *)
 */
 /*! Bundled license information:
+
+he/he.js:
+  (*! http://mths.be/he v0.5.0 by @mathias | MIT license *)
 
 rete/build/rete.common.js:
   (*!
