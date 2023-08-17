@@ -11886,11 +11886,7 @@ var Manager = class {
   async start() {
     for (const [id, child] of this.children) {
       omnilog.log(`child ${id} start`);
-      try {
-        await child.start?.();
-      } catch (e) {
-        omnilog.warn(`child ${id} failed to start with error: ${e}`);
-      }
+      await child.start?.();
     }
     omnilog.log("All children started");
     return true;
@@ -12687,7 +12683,6 @@ var TextSocket = class _TextSocket extends CustomSocket_default {
       return this.array ? [value] : value;
     }
     if (this.array) {
-      debugger;
       if (!Array.isArray(value)) {
         if (typeof value === "string") {
           console.log("Settings", this.customSettings);
@@ -13251,14 +13246,10 @@ var OAIBaseComponent = class extends Rete2.Component {
     (_a = this.data).macros ?? (_a.macros = {});
     (_b = this.data).flags ?? (_b.flags = 0);
     for (const key in this.data.inputs) {
-      if (!key.startsWith("$")) {
-        (_c = this.data.inputs[key]).source ?? (_c.source = { sourceType: "requestBody" });
-      }
+      (_c = this.data.inputs[key]).source ?? (_c.source = { sourceType: "requestBody" });
     }
     for (const key in this.data.outputs) {
-      if (!key.startsWith("$")) {
-        (_d = this.data.outputs[key]).source ?? (_d.source = { sourceType: "responseBody" });
-      }
+      (_d = this.data.outputs[key]).source ?? (_d.source = { sourceType: "responseBody" });
     }
     this._validator = config.validator != null ? deserializeValidator(config.validator) : void 0;
   }
@@ -13320,6 +13311,9 @@ var OAIBaseComponent = class extends Rete2.Component {
   }
   get macros() {
     return this.data.macros;
+  }
+  get hash() {
+    return this.data.hash;
   }
   get controls() {
     return this.data.controls;
@@ -13536,7 +13530,7 @@ var PromptComponent_default = PromptComponent;
 
 // components/RoopComponent.ts
 var NS_OMNI2 = "omnitool";
-var component2 = OAIBaseComponent.create(NS_OMNI2, "roop").fromScratch().dependsOn(["automatic1111.interrogateapi_sdapi_v1_interrogate_post", "automatic1111.simpleImage2Image"]).set("description", "Resize the image to given width and height using various options.").set("title", "Face Swap (Roop)").set("category", "Image Manipulation").setMeta({ "source": {
+var component2 = OAIBaseComponent.create(NS_OMNI2, "roop").fromScratch().dependsOn(["automatic1111.interrogateapi_sdapi_v1_interrogate_post", "automatic1111.simpleImage2Image", "automatic1111.get_upscalers_sdapi_v1_upscalers_get", "automatic1111.getSamplers", "automatic1111.getModels"]).set("description", "Resize the image to given width and height using various options.").set("title", "Face Swap (Roop)").set("category", "Image Manipulation").setMeta({ "source": {
   "summary": "Facial Restoration using roop",
   links: {
     "Roop for Automatic1111": "https://github.com/s0md3v/sd-webui-roop"
@@ -13557,23 +13551,14 @@ component2.addInput(component2.createInput("prompt", "string", "text").set("desc
     "value": "name"
   }
 }).setDefault("UniPC").set("title", "Sampler").toOmniIO()).addInput(component2.createInput("scale_factor", "float").set("title", "Upscale Factor").setConstraints(1, 4, 0.1).setDefault(1).toOmniIO()).addInput(component2.createInput("upscaler", "string").set("title", "Facial Upscaler").setChoices(
-  [
-    "None",
-    "Lanczos",
-    "Nearest",
-    "BSRGAN",
-    "LDSR",
-    "ESRGAN_4x",
-    "R-ESRGAN 2x+",
-    "R-ESRGAN 4x+",
-    "R-ESRGAN 4x+ Anime6B",
-    "R-ESRGAN AnimeVideo",
-    "R-ESRGAN General 4xV3",
-    "R-ESRGAN General WDN 4xV3",
-    "SwinIR_4x",
-    "ScuNET PSNR",
-    "ScuNet"
-  ]
+  {
+    block: "automatic1111.get_upscalers_sdapi_v1_upscalers_get",
+    "cache": "global",
+    map: {
+      "title": "name",
+      "value": "name"
+    }
+  }
 ).setDefault("None").toOmniIO()).addInput(component2.createInput("source", "object", "image").set("title", "Face Image (Source)").set("description", "Image containing a the face to replace in the target image").setRequired(true).toOmniIO()).addInput(component2.createInput("init_images", "object", "image", { array: true }).set("title", "The Target Images to project the face onto").set("description", "Image containing a the face to replace in the target image").setRequired(true).toOmniIO());
 component2.addOutput(component2.createOutput("result", "object").toOmniIO()).addOutput(component2.createOutput("images", "object", "image", { array: true }).set("title", "Output Images").set("description", "The resized images.").toOmniIO());
 component2.setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
