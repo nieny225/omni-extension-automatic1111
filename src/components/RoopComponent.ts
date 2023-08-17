@@ -6,7 +6,8 @@ const NS_OMNI = 'omnitool';
 let component = OAIBaseComponent
     .create(NS_OMNI, 'roop')
     .fromScratch()
-    .dependsOn(['automatic1111.interrogateapi_sdapi_v1_interrogate_post', 'automatic1111.simpleImage2Image','automatic1111.get_upscalers_sdapi_v1_upscalers_get','automatic1111.getSamplers','automatic1111.getModels'])
+    .dependsOn(['automatic1111.interrogateapi_sdapi_v1_interrogate_post', 'automatic1111.simpleImage2Image','automatic1111.get_upscalers_sdapi_v1_upscalers_get','automatic1111.getSamplers','automatic1111.getModels',
+    "automatic1111.get_face_restorers_sdapi_v1_face_restorers_get"  ])
     .set('description', 'Resize the image to given width and height using various options.')
     .set('title', 'Face Swap (Roop)')
     .set('category', 'Image Manipulation')
@@ -24,7 +25,16 @@ component
     .addInput(component.createInput('negative_prompt', 'string', 'text').set('description', 'Optional negative prompt').setDefault('').toOmniIO())
     .addInput(component.createInput('replace_faces', 'string', 'text').set('description', 'Which faces to replace').setDefault('0,1,2,3').toOmniIO())
     .addInput(component.createInput('denoising_strength', 'float').set('title', 'Blend Balance').set('description', 'Balance between the two images. Low: Prioritize Source Face, High: Prioritize Target Image (denoising strength)').setConstraints(0.001, 1.0, 0.05).toOmniIO())
-    .addInput(component.createInput('face_restorer', 'string').set('title', 'Facial Restoration').setChoices([ "None", "CodeFormer", "GFPGAN"]).setDefault('None').toOmniIO())  // Note: For simplicity, I've not added choices here. Similar for other inputs.
+    .addInput(component.createInput('face_restorer', 'string').set('title', 'Facial Restoration').setChoices({
+      block: "automatic1111.get_face_restorers_sdapi_v1_face_restorers_get",
+      "cache": "global",
+      map:
+      {
+        "title": "name",
+        "value": "name",
+      }
+    }
+    ).setDefault('CodeFormer').toOmniIO())
     .addInput(component.createInput('face_restoration_strength', 'float').set('title', 'Restoration Strength').setConstraints(0.0, 1.0, 0.1).setDefault(0.5).toOmniIO())
     .addInput(component.createInput('checkpoint', 'string').set('title', 'Model').setChoices({
       "block": "automatic1111.getModels",
