@@ -1,6 +1,6 @@
-title: Automatic1111 Support
+title: Automatic1111
 version: 0.0.1
-description: Extension adding additional automatic1111 support
+description: Support for Automatic1111 and SD-Next, adding new blocks and features for connecting to the Automatic1111 Stable Diffusion API.
 author: Georg Zoeller
 origin: https://github.com/georgzoeller/omni-extension-automatic1111.git
 supports: ['blocks:v2']
