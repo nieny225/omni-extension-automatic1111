@@ -12288,17 +12288,21 @@ var BaseWorkflow = class _BaseWorkflow {
     this.setMeta(meta || null);
     this.setRete(null);
     this.setAPI(null);
-    this.langchain = null;
+    this.ui = {};
   }
   setMeta(meta) {
-    var _a, _b;
-    this.meta = meta ?? { name: "New Workflow", description: "No description.", pictureUrl: "omni.png" };
+    var _a, _b, _c, _d;
+    this.meta = meta ?? { name: "New Workflow", description: "No description.", pictureUrl: "omni.png", author: "Anonymous" };
     this.meta.updated = Date.now();
     (_a = this.meta).created ?? (_a.created = Date.now());
     (_b = this.meta).tags ?? (_b.tags = []);
     this.meta.updated = Date.now();
+    (_c = this.meta).author || (_c.author = meta?.author || "Anonymous");
+    (_d = this.meta).help || (_d.help = meta?.help || "");
     this.meta.name = (0, import_insane.default)(this.meta.name, { allowedTags: [], allowedAttributes: {} });
     this.meta.description = (0, import_insane.default)(this.meta.description, { allowedTags: [], allowedAttributes: {} });
+    this.meta.author = (0, import_insane.default)(this.meta.author, { allowedTags: [], allowedAttributes: {} });
+    this.meta.help = (0, import_insane.default)(this.meta.help, { allowedTags: [], allowedAttributes: {} });
     return this;
   }
   setRete(rete) {
@@ -12311,6 +12315,11 @@ var BaseWorkflow = class _BaseWorkflow {
     this.meta.updated = Date.now();
     return this;
   }
+  setUI(ui) {
+    this.ui = ui ?? {};
+    this.meta.updated = Date.now();
+    return this;
+  }
   toJSON() {
     return {
       id: this.id,
@@ -12318,15 +12327,15 @@ var BaseWorkflow = class _BaseWorkflow {
       meta: this.meta,
       rete: this.rete,
       api: this.api,
-      langchain: this.langchain
+      ui: this.ui
     };
   }
   static fromJSON(json) {
     const result = new _BaseWorkflow(json.id, json.version);
-    result.langchain = json.langchain;
     result.setMeta(json.meta);
     result.setRete(json.rete);
     result.setAPI(json.api);
+    result.setUI(json.ui);
     return result;
   }
 };
@@ -12348,11 +12357,11 @@ var _Workflow = class _Workflow2 extends BaseWorkflow {
       id = json.id;
     }
     const result = new _Workflow2(id, json.version ?? "draft", { owner: json.owner || json.meta.owner, org: json.org });
-    result.langchain = json.langchain;
     result.publishedTo = json.publishedTo;
     result.setMeta(json.meta);
     result.setRete(json.rete);
     result.setAPI(json.api);
+    result.setUI(json.ui);
     if (json._rev) {
       result._rev = json._rev;
     }
@@ -12522,15 +12531,18 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
       return socket instanceof _FileObjectSocket;
     }
   }
+  detectMimeType(ctx, value) {
+    return void 0;
+  }
   constructor(name, type, opts) {
     super(name, type, opts);
   }
-  // #v-ifdef MERCS_INCLUDE_CLIENT_WORKERS
   async persistObject(ctx, value, opts) {
-    if (value.ticket && value.url && !value.data) {
+    if ((value.ticket || value.fid) && value.url && !value.data) {
       return await Promise.resolve(value);
     }
     opts ?? (opts = {});
+    opts.mimeType ?? (opts.mimeType = this.detectMimeType?.(ctx, value));
     const finalOpts = { userId: ctx.userId, ...opts };
     return ctx.app.cdn.putTemp(value, finalOpts);
   }
@@ -12550,24 +12562,27 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
     }));
   }
   async _handleSingleObject(ctx, value, getValue = false) {
-    console.log("_handleSingleObject", value, this.format);
     if (!value) {
       return null;
-    }
-    if (value.fid && !value.data && (getValue && this.format === "base64")) {
+    } else if (value.fid && !value.data && (getValue && this.format?.startsWith("base64"))) {
       value = await ctx.app.cdn.get({ fid: value.fid }, null, this.format);
     } else if (this.isValidUrl(value)) {
       value = await this.persistObject(ctx, value.trim());
+    } else if (value?.startsWith?.("fid://") && !this.format?.startsWith("base64")) {
+      value = await ctx.app.cdn.get({ fid: value.split("://")[1] }, null, this.format);
     } else if (value && !value.url) {
       value = await this.persistObject(ctx, value);
     }
-    if (value && this.format === "base64") {
-      value = value.asBase64();
+    if (value && this.format?.startsWith("base64")) {
+      const addHeader = this.format?.includes("withHeader") === true;
+      value = value.asBase64(addHeader);
+    }
+    if (this.customSettings?.do_no_return_data) {
+      delete value.data;
     }
     return value;
   }
   async _handleObjectArray(ctx, value, getValue = false) {
-    console.log("_handleObjectArray", value, this.format);
     if (!value) {
       return null;
     }
@@ -12597,15 +12612,55 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
   }
 };
 var FileObjectSocket_default = FileObjectSocket;
+var DocumentSocket = class _DocumentSocket extends FileObjectSocket_default {
+  constructor(name, type, opts) {
+    super(name, type, opts);
+  }
+  // Try to guess if we have a plain text
+  mightBeUtf8PlainText(text2) {
+    const thresholdPercentage = 0.05;
+    const maxControlChars = text2.length * thresholdPercentage;
+    let controlCharCount = 0;
+    for (const char of text2) {
+      const charCode = char.charCodeAt(0);
+      if (charCode >= 0 && charCode <= 31 || charCode >= 127 && charCode <= 159) {
+        controlCharCount++;
+        if (controlCharCount > maxControlChars) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  detectMimeType(ctx, value) {
+    if (value && typeof value === "string") {
+      if (this.mightBeUtf8PlainText(value)) {
+        return "text/plain";
+      }
+    }
+    return void 0;
+  }
+  compatibleWith(socket, noReverse) {
+    let cs = this;
+    if (cs.type) {
+      return ["string", "text", "document"].includes(cs.type);
+    }
+    return socket instanceof _DocumentSocket;
+  }
+};
+var DocumentSocket_default = DocumentSocket;
 var PrimitiveSocket = class extends CustomSocket_default {
   constructor(name, type, opts) {
     super(name, type, opts);
   }
   async handleInput(ctx, value) {
-    return Promise.resolve(value);
+    if (Array.isArray(value)) {
+      value = value[0];
+    }
+    return value;
   }
   async handleOutput(ctx, value) {
-    return Promise.resolve(value);
+    return this.handleInput(ctx, value);
   }
 };
 var PrimitiveSocket_default = PrimitiveSocket;
@@ -12617,9 +12672,8 @@ var ImageSocket = class _ImageSocket extends FileObjectSocket_default {
     let cs = this;
     if (cs.type) {
       return ["string", "file", "image"].includes(cs.type);
-    } else {
-      return socket instanceof _ImageSocket;
     }
+    return socket instanceof _ImageSocket;
   }
 };
 var ImageSocket_default = ImageSocket;
@@ -12628,17 +12682,25 @@ var NumberSocket = class extends CustomSocket_default {
     super(name, type, opts);
   }
   async handleInput(ctx, value) {
-    if (value === "inf") {
-      return Promise.resolve(Infinity);
-    } else if (value === "-inf") {
-      return Promise.resolve(-Infinity);
-    } else if (value === "nan") {
-      return Promise.resolve(NaN);
+    if (Array.isArray(value)) {
+      value = value[0];
     }
-    return Promise.resolve(value);
+    if (!value) {
+      return 0;
+    }
+    if (value === "inf") {
+      return Infinity;
+    }
+    if (value === "-inf") {
+      return -Infinity;
+    }
+    if (value === "nan") {
+      return NaN;
+    }
+    return Number(value);
   }
   async handleOutput(ctx, value) {
-    return await this.handleOutput(ctx, value);
+    return this.handleInput(ctx, value);
   }
 };
 var NumberSocket_default = NumberSocket;
@@ -12679,35 +12741,18 @@ var TextSocket = class _TextSocket extends CustomSocket_default {
     return JSON.stringify(value, null, 2);
   }
   async handleInput(ctx, value) {
-    if (value == null) {
-      return this.array ? [value] : value;
+    const array_separator = this.customSettings?.array_separator ?? "\n";
+    if (this.array && typeof value === "string") {
+      value = value.split(array_separator);
     }
-    if (this.array) {
-      if (!Array.isArray(value)) {
-        if (typeof value === "string") {
-          console.log("Settings", this.customSettings);
-          value = value.split(this.customSettings?.array_separator ?? "\n");
-          if (this.customSettings?.filter_empty) {
-            value = value.filter((v2) => v2 != null && v2 !== "");
-          }
-        } else {
-          value = [this.convertSingleValue(value)];
-        }
-      } else {
-        value = value.map((v2) => this.convertSingleValue(v2));
-      }
-    } else {
-      if (Array.isArray(value)) {
-        value = value.map((v2) => this.convertSingleValue(v2));
-        if (this.customSettings?.filter_empty) {
-          value = value.filter((v2) => v2 != null && v2 !== "");
-        }
-        value = value.join(this.customSettings?.array_separator ?? "\n");
-      } else {
-        value = this.convertSingleValue(value);
-      }
+    if (!Array.isArray(value)) {
+      value = [value];
     }
-    return Promise.resolve(value);
+    value = value.map(this.convertSingleValue);
+    if (this.customSettings?.filter_empty) {
+      value = value.filter((v2) => v2);
+    }
+    return this.array ? value : value.join(array_separator);
   }
   async handleOutput(ctx, value) {
     return this.handleInput(ctx, value);
@@ -12719,10 +12764,13 @@ var BooleanSocket = class extends CustomSocket_default {
     super(name, type, opts);
   }
   async handleInput(ctx, value) {
+    if (Array.isArray(value)) {
+      value = value[0];
+    }
     return !!value;
   }
   async handleOutput(ctx, value) {
-    return Promise.resolve(value);
+    return this.handleInput(ctx, value);
   }
 };
 var BooleanSocket_default = BooleanSocket;
@@ -12731,12 +12779,13 @@ socketTypeMap.set("boolean", BooleanSocket_default);
 socketTypeMap.set("number", NumberSocket_default);
 socketTypeMap.set("integer", NumberSocket_default);
 socketTypeMap.set("float", NumberSocket_default);
+socketTypeMap.set("string", TextSocket_default);
 socketTypeMap.set("text", TextSocket_default);
 socketTypeMap.set("json", PrimitiveSocket_default);
 socketTypeMap.set("file", FileObjectSocket_default);
 socketTypeMap.set("image", ImageSocket_default);
 socketTypeMap.set("audio", FileObjectSocket_default);
-socketTypeMap.set("document", FileObjectSocket_default);
+socketTypeMap.set("document", DocumentSocket_default);
 var OmniComponentMacroTypes = /* @__PURE__ */ ((OmniComponentMacroTypes3) => {
   OmniComponentMacroTypes3["EXEC"] = "exec";
   OmniComponentMacroTypes3["BUILDER"] = "builder";
@@ -13105,14 +13154,14 @@ var OAIControl31 = class _OAIControl31 extends import_rete2.default.Control {
         });
       }
       if (typeof this.data.choices === "object") {
-        choices = this.data.choices;
-        if (choices.block) {
-          let list;
+        let choices2 = this.data.choices;
+        if (choices2.block) {
+          let list = ["Internal Error Fetching choices"];
           try {
             list = await globalThis.client.runBlock({
-              block: choices.block,
+              block: choices2.block,
               args: {},
-              cache: choices.cache
+              cache: choices2.cache ?? choices2.map.cache ?? "none"
             });
           } catch (ex) {
             console.error("Could not load choices for " + this.data.name + ": " + ex.message);
@@ -13122,7 +13171,7 @@ var OAIControl31 = class _OAIControl31 extends import_rete2.default.Control {
             console.error("Could not load choices for " + this.data.name + ": " + list.error.message);
             list = ["ERROR: " + list.error, this.data.default];
           }
-          const root = choices.map?.root;
+          const root = choices2.map?.root;
           if (root && list[root] != null && Array.isArray(list[root])) {
             list = list[root];
           }
@@ -13130,12 +13179,16 @@ var OAIControl31 = class _OAIControl31 extends import_rete2.default.Control {
             list = Array.from(Object.values(list));
           }
           this.data.choices = list.map((v2) => {
-            return {
-              value: v2[choices.map.value],
-              title: v2[choices.map.title],
-              description: v2[choices.map.description] || ""
-            };
-          }).filter((e) => e.value).sort((a, b2) => a[choices.map.title] > b2[choices.map.title] ? -1 : 1);
+            let e = { value: v2, title: v2, description: "" };
+            if (choices2.map?.value && choices2.map?.title) {
+              e = {
+                value: v2[choices2.map.value],
+                title: v2[choices2.map.title],
+                description: v2[choices2.map.description] || ""
+              };
+            }
+            return e;
+          }).filter((e) => e.value).sort((a, b2) => b2.title.localeCompare(a.title));
         }
       }
     }
@@ -13238,18 +13291,19 @@ var deserializeValidator = function(jsString) {
 var OAIBaseComponent = class extends Rete2.Component {
   // #v-endif
   constructor(config, patch) {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e, _f;
     const data = (0, import_deepmerge.default)(config, patch ?? {});
     super(`${data.displayNamespace}.${data.displayOperationId}`);
-    this.errors = [];
     this.data = data;
     (_a = this.data).macros ?? (_a.macros = {});
     (_b = this.data).flags ?? (_b.flags = 0);
+    (_c = this.data).errors ?? (_c.errors = []);
+    (_d = this.data).enabled ?? (_d.enabled = true);
     for (const key in this.data.inputs) {
-      (_c = this.data.inputs[key]).source ?? (_c.source = { sourceType: "requestBody" });
+      (_e = this.data.inputs[key]).source ?? (_e.source = { sourceType: "requestBody" });
     }
     for (const key in this.data.outputs) {
-      (_d = this.data.outputs[key]).source ?? (_d.source = { sourceType: "responseBody" });
+      (_f = this.data.outputs[key]).source ?? (_f.source = { sourceType: "responseBody" });
     }
     this._validator = config.validator != null ? deserializeValidator(config.validator) : void 0;
   }
@@ -13291,6 +13345,9 @@ var OAIBaseComponent = class extends Rete2.Component {
   get apiKey() {
     return `${this.data.apiNamespace}.${this.data.apiOperationId}`;
   }
+  get apiNamespace() {
+    return this.data.apiNamespace;
+  }
   get renderTemplate() {
     return this.data.renderTemplate || "default";
   }
@@ -13317,6 +13374,12 @@ var OAIBaseComponent = class extends Rete2.Component {
   }
   get controls() {
     return this.data.controls;
+  }
+  get enabled() {
+    return this.data.enabled ?? true;
+  }
+  set enabled(enabled) {
+    this.data.enabled = enabled;
   }
   setType(type) {
     this.data.type = type;
@@ -13424,7 +13487,7 @@ var OAIBaseComponent = class extends Rete2.Component {
       console.warn("Null Object Type");
     }
     const customSocket = obj.customSocket;
-    if (customSocket && ["imageArray", "image", "document", "documentArray", "audio", "audioArray", "mediaObject", "mediaObjectArray"].includes(customSocket)) {
+    if (customSocket && ["imageArray", "image", "document", "documentArray", "audio", "file", "audioArray", "fileArray"].includes(customSocket)) {
       return "AlpineLabelComponent";
     }
     if (objType === "number" || objType === "integer" || objType === "float") {
@@ -13585,13 +13648,14 @@ component2.setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
     let init_images = payload.init_images || [];
     let sourceB64 = (await ctx.app.cdn.get(source.ticket)).asBase64();
     let resultImages = [];
+    debugger;
     for (let i = 0; i < init_images.length; i++) {
       let img2imgOpts = {};
       let negative_prompt = payload.negative_prompt;
       let block = "automatic1111.simpleImage2Image";
       let target = init_images[i];
       let meta = target.meta;
-
+      debugger;
       let targetB64 = (await ctx.app.cdn.get(target.ticket, {})).asBase64();
       negative_prompt = negative_prompt || meta.sd?.negativePrompt;
       img2imgOpts = {
@@ -13632,7 +13696,11 @@ component2.setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
         img2imgOpts || {}
       );
       console.log(pl.alwayson_scripts.roop);
-      const imgResult = (await componentService.runBlock(ctx, block, pl)).images[0];
+      const result = (await componentService.runBlock(ctx, block, pl)).images;
+      if (!result || result.length == 0) {
+        throw new Error("No images returned by img2img");
+      }
+      const imgResult = result[0];
       if (imgResult) {
         (_a = imgResult.meta).sd ?? (_a.sd = {});
         imgResult.meta.sd.prompt = payload.prompt;
@@ -13717,8 +13785,8 @@ he/he.js:
 
 rete/build/rete.common.js:
   (*!
-  * rete v1.5.2
-  * (c) 2023 Vitaliy Stoliarov
+  * rete v1.5.2 
+  * (c) 2023 Vitaliy Stoliarov 
   * Released under the MIT license.
   *)
   (*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE *)

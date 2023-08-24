@@ -144,7 +144,14 @@ component.setMacro(OmniComponentMacroTypes.EXEC, async (payload: any, ctx: Worke
       }, img2imgOpts || {})
 
       console.log(pl.alwayson_scripts.roop)
-      const imgResult = (await componentService.runBlock(ctx,block, pl)).images[0]
+      const result = (await componentService.runBlock(ctx,block, pl)).images
+
+      if (!result || result.length == 0)
+      {
+        throw new Error("No images returned by img2img")
+      }
+
+      const imgResult = result[0]
 
       if (imgResult)
       {
