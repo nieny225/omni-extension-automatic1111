@@ -23,7 +23,7 @@ let component = OAIBaseComponent
 component
     .addInput(component.createInput('prompt', 'string', 'text').set('description', 'Optional prompt. Uses CLIP for auto prompt if left blank.').setDefault('').toOmniIO())
     .addInput(component.createInput('negative_prompt', 'string', 'text').set('description', 'Optional negative prompt').setDefault('').toOmniIO())
-    .addInput(component.createInput('replace_faces', 'string', 'text').set('description', 'Which faces to replace').setDefault('0,1,2,3').toOmniIO())
+    .addInput(component.createInput('replace_faces', 'string', 'text').set('description', 'Which faces to replace').setDefault('0').toOmniIO())
     .addInput(component.createInput('denoising_strength', 'float').set('title', 'Blend Balance').set('description', 'Balance between the two images. Low: Prioritize Source Face, High: Prioritize Target Image (denoising strength)').setConstraints(0.001, 1.0, 0.05).toOmniIO())
     .addInput(component.createInput('face_restorer', 'string').set('title', 'Facial Restoration').setChoices({
       block: "automatic1111.get_face_restorers_sdapi_v1_face_restorers_get",
@@ -148,7 +148,7 @@ component.setMacro(OmniComponentMacroTypes.EXEC, async (payload: any, ctx: Worke
 
       if (!result || result.length == 0)
       {
-        throw new Error("No images returned by img2img")
+        throw new Error("No images returned by img2img - internal error")
       }
 
       const imgResult = result[0]
