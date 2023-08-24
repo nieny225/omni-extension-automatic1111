@@ -13591,7 +13591,7 @@ component2.setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
       let block = "automatic1111.simpleImage2Image";
       let target = init_images[i];
       let meta = target.meta;
-      debugger;
+
       let targetB64 = (await ctx.app.cdn.get(target.ticket, {})).asBase64();
       negative_prompt = negative_prompt || meta.sd?.negativePrompt;
       img2imgOpts = {
@@ -13717,8 +13717,8 @@ he/he.js:
 
 rete/build/rete.common.js:
   (*!
-  * rete v1.5.2 
-  * (c) 2023 Vitaliy Stoliarov 
+  * rete v1.5.2
+  * (c) 2023 Vitaliy Stoliarov
   * Released under the MIT license.
   *)
   (*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE *)

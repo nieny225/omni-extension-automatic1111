@@ -88,6 +88,7 @@ component.setMacro(OmniComponentMacroTypes.EXEC, async (payload: any, ctx: Worke
     let init_images = payload.init_images || []
     let sourceB64 = (await ctx.app.cdn.get(source.ticket)).asBase64()
     let resultImages = []
+    debugger;
 
     for (let i = 0; i < init_images.length; i++)
     {
