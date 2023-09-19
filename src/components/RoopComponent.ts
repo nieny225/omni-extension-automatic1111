@@ -1,5 +1,5 @@
 
-import { OAIBaseComponent, WorkerContext, OmniComponentMacroTypes } from 'mercs_rete'
+import { OAIBaseComponent, WorkerContext, OmniComponentMacroTypes } from 'omni-sockets'
 
 const NS_OMNI = 'omnitool';
 
@@ -88,7 +88,7 @@ component.setMacro(OmniComponentMacroTypes.EXEC, async (payload: any, ctx: Worke
     let init_images = payload.init_images || []
     let sourceB64 = (await ctx.app.cdn.get(source.ticket)).asBase64()
     let resultImages = []
-    debugger;
+
 
     for (let i = 0; i < init_images.length; i++)
     {
@@ -97,7 +97,7 @@ component.setMacro(OmniComponentMacroTypes.EXEC, async (payload: any, ctx: Worke
       let block = "automatic1111.simpleImage2Image"
       let target = init_images[i]
       let meta = target.meta
-      debugger;
+
       let targetB64 = (await ctx.app.cdn.get(target.ticket,{})).asBase64()
       negative_prompt = negative_prompt || meta.sd?.negativePrompt
       img2imgOpts = {

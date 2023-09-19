@@ -664,9 +664,9 @@ var require_jsonata = __commonJS({
           const deltaWeeks = function(start, end) {
             return (end - start) / (millisInADay * 7) + 1;
           };
-          const getDateTimeFragment = (date, component4) => {
+          const getDateTimeFragment = (date, component3) => {
             let componentValue;
-            switch (component4) {
+            switch (component3) {
               case "Y":
                 componentValue = date.getUTCFullYear();
                 break;
@@ -5733,7 +5733,7 @@ var require_jsonata = __commonJS({
   }
 });
 
-// ../../../../mercs_rete/lib/index.js
+// ../../../../omni-ui/omni-sockets/lib/index.js
 var import_jsonata = __toESM(require_jsonata(), 1);
 import { formatWithOptions } from "util";
 import { sep } from "path";
@@ -5776,7 +5776,7 @@ var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__
   mod
 ));
 var require_cjs = __commonJS2({
-  "../../node_modules/deepmerge/dist/cjs.js"(exports, module) {
+  "../../../node_modules/deepmerge/dist/cjs.js"(exports, module) {
     "use strict";
     var isMergeableObject = function isMergeableObject2(value) {
       return isNonNullObject(value) && !isSpecial(value);
@@ -5953,7 +5953,7 @@ var paused;
 var queue;
 var Consola;
 var init_core = __esm({
-  "../../node_modules/consola/dist/core.mjs"() {
+  "../../../node_modules/consola/dist/core.mjs"() {
     "use strict";
     LogLevels = {
       silent: Number.NEGATIVE_INFINITY,
@@ -6304,7 +6304,7 @@ function writeStream(data, stream) {
 var bracket;
 var BasicReporter;
 var init_consola_06ad8a64 = __esm({
-  "../../node_modules/consola/dist/shared/consola.06ad8a64.mjs"() {
+  "../../../node_modules/consola/dist/shared/consola.06ad8a64.mjs"() {
     "use strict";
     bracket = (x) => x ? `[${x}]` : "";
     BasicReporter = class {
@@ -6464,7 +6464,7 @@ var ansiRegex;
 var boxStylePresets;
 var defaultStyle;
 var init_utils = __esm({
-  "../../node_modules/consola/dist/utils.mjs"() {
+  "../../../node_modules/consola/dist/utils.mjs"() {
     "use strict";
     ({
       env = {},
@@ -6795,7 +6795,7 @@ var confirm;
 var select;
 var multiselect;
 var init_prompt = __esm({
-  "../../node_modules/consola/dist/chunks/prompt.mjs"() {
+  "../../../node_modules/consola/dist/chunks/prompt.mjs"() {
     "use strict";
     init_consola_36c0034f();
     init_utils();
@@ -7605,7 +7605,7 @@ var TYPE_ICONS;
 var FancyReporter;
 var consola;
 var init_consola_36c0034f = __esm({
-  "../../node_modules/consola/dist/shared/consola.36c0034f.mjs"() {
+  "../../../node_modules/consola/dist/shared/consola.36c0034f.mjs"() {
     "use strict";
     init_core();
     init_consola_06ad8a64();
@@ -7833,7 +7833,7 @@ var init_consola_36c0034f = __esm({
   }
 });
 var require_he = __commonJS2({
-  "../../node_modules/he/he.js"(exports, module) {
+  "../../../node_modules/he/he.js"(exports, module) {
     "use strict";
     (function(root) {
       var freeExports = typeof exports == "object" && exports;
@@ -8073,7 +8073,7 @@ var require_he = __commonJS2({
   }
 });
 var require_assignment = __commonJS2({
-  "../../node_modules/assignment/assignment.js"(exports, module) {
+  "../../../node_modules/assignment/assignment.js"(exports, module) {
     "use strict";
     function assignment(result) {
       var stack = Array.prototype.slice.call(arguments, 1);
@@ -8097,7 +8097,7 @@ var require_assignment = __commonJS2({
   }
 });
 var require_lowercase = __commonJS2({
-  "../../node_modules/insane/lowercase.js"(exports, module) {
+  "../../../node_modules/insane/lowercase.js"(exports, module) {
     "use strict";
     module.exports = function lowercase(string) {
       return typeof string === "string" ? string.toLowerCase() : string;
@@ -8105,7 +8105,7 @@ var require_lowercase = __commonJS2({
   }
 });
 var require_toMap = __commonJS2({
-  "../../node_modules/insane/toMap.js"(exports, module) {
+  "../../../node_modules/insane/toMap.js"(exports, module) {
     "use strict";
     function toMap(list) {
       return list.reduce(asKey, {});
@@ -8118,7 +8118,7 @@ var require_toMap = __commonJS2({
   }
 });
 var require_attributes = __commonJS2({
-  "../../node_modules/insane/attributes.js"(exports, module) {
+  "../../../node_modules/insane/attributes.js"(exports, module) {
     "use strict";
     var toMap = require_toMap();
     var uris = ["background", "base", "cite", "href", "longdesc", "src", "usemap"];
@@ -8129,7 +8129,7 @@ var require_attributes = __commonJS2({
   }
 });
 var require_elements = __commonJS2({
-  "../../node_modules/insane/elements.js"(exports, module) {
+  "../../../node_modules/insane/elements.js"(exports, module) {
     "use strict";
     var toMap = require_toMap();
     var voids = ["area", "br", "col", "hr", "img", "wbr", "input", "base", "basefont", "link", "meta"];
@@ -8139,7 +8139,7 @@ var require_elements = __commonJS2({
   }
 });
 var require_parser = __commonJS2({
-  "../../node_modules/insane/parser.js"(exports, module) {
+  "../../../node_modules/insane/parser.js"(exports, module) {
     "use strict";
     var he = require_he();
     var lowercase = require_lowercase();
@@ -8263,7 +8263,7 @@ var require_parser = __commonJS2({
   }
 });
 var require_sanitizer = __commonJS2({
-  "../../node_modules/insane/sanitizer.js"(exports, module) {
+  "../../../node_modules/insane/sanitizer.js"(exports, module) {
     "use strict";
     var he = require_he();
     var lowercase = require_lowercase();
@@ -8393,7 +8393,7 @@ var require_sanitizer = __commonJS2({
   }
 });
 var require_defaults = __commonJS2({
-  "../../node_modules/insane/defaults.js"(exports, module) {
+  "../../../node_modules/insane/defaults.js"(exports, module) {
     "use strict";
     var defaults = {
       allowedAttributes: {
@@ -8455,7 +8455,7 @@ var require_defaults = __commonJS2({
   }
 });
 var require_insane = __commonJS2({
-  "../../node_modules/insane/insane.js"(exports, module) {
+  "../../../node_modules/insane/insane.js"(exports, module) {
     "use strict";
     var he = require_he();
     var assign = require_assignment();
@@ -8474,7 +8474,7 @@ var require_insane = __commonJS2({
   }
 });
 var require_rete_common = __commonJS2({
-  "../../node_modules/rete/build/rete.common.js"(exports) {
+  "../../../node_modules/rete/build/rete.common.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function ownKeys(object, enumerableOnly) {
@@ -9547,11 +9547,11 @@ var require_rete_common = __commonJS2({
         }
       }, {
         key: "register",
-        value: function register(component4) {
-          if (this.components.has(component4.name))
-            throw new Error("Component ".concat(component4.name, " already registered"));
-          this.components.set(component4.name, component4);
-          this.trigger("componentregister", component4);
+        value: function register(component3) {
+          if (this.components.has(component3.name))
+            throw new Error("Component ".concat(component3.name, " already registered"));
+          this.components.set(component3.name, component3);
+          this.trigger("componentregister", component3);
         }
       }, {
         key: "destroy",
@@ -9964,7 +9964,7 @@ var require_rete_common = __commonJS2({
     var NodeView = /* @__PURE__ */ function(_Emitter) {
       _inherits(NodeView2, _Emitter);
       var _super = _createSuper(NodeView2);
-      function NodeView2(node, component4, emitter) {
+      function NodeView2(node, component3, emitter) {
         var _this;
         _classCallCheck(this, NodeView2);
         _this = _super.call(this, emitter);
@@ -9976,7 +9976,7 @@ var require_rete_common = __commonJS2({
         _defineProperty(_assertThisInitialized(_this), "_startPosition", []);
         _defineProperty(_assertThisInitialized(_this), "_drag", void 0);
         _this.node = node;
-        _this.component = component4;
+        _this.component = component3;
         _this.el = document.createElement("div");
         _this.el.style.position = "absolute";
         _this.el.addEventListener("contextmenu", function(e) {
@@ -9992,7 +9992,7 @@ var require_rete_common = __commonJS2({
         _this.trigger("rendernode", {
           el: _this.el,
           node,
-          component: component4.data,
+          component: component3.data,
           bindSocket: _this.bindSocket.bind(_assertThisInitialized(_this)),
           bindControl: _this.bindControl.bind(_assertThisInitialized(_this))
         });
@@ -10157,10 +10157,10 @@ var require_rete_common = __commonJS2({
       _createClass(EditorView2, [{
         key: "addNode",
         value: function addNode(node) {
-          var component4 = this.components.get(node.name);
-          if (!component4)
+          var component3 = this.components.get(node.name);
+          if (!component3)
             throw new Error("Component ".concat(node.name, " not found"));
-          var nodeView = new NodeView(node, component4, this);
+          var nodeView = new NodeView(node, component3, this);
           this.nodes.set(node, nodeView);
           this.area.appendChild(nodeView.el);
         }
@@ -10424,16 +10424,16 @@ var require_rete_common = __commonJS2({
       }, {
         key: "getComponent",
         value: function getComponent(name) {
-          var component4 = this.components.get(name);
-          if (!component4)
+          var component3 = this.components.get(name);
+          if (!component3)
             throw "Component ".concat(name, " not found");
-          return component4;
+          return component3;
         }
       }, {
         key: "register",
-        value: function register(component4) {
-          _get(_getPrototypeOf(NodeEditor2.prototype), "register", this).call(this, component4);
-          component4.editor = this;
+        value: function register(component3) {
+          _get(_getPrototypeOf(NodeEditor2.prototype), "register", this).call(this, component3);
+          component3.editor = this;
         }
       }, {
         key: "clear",
@@ -10497,15 +10497,15 @@ var require_rete_common = __commonJS2({
                     _context2.next = 6;
                     return Promise.all(Object.keys(json.nodes).map(/* @__PURE__ */ function() {
                       var _ref3 = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee(id) {
-                        var node, component4;
+                        var node, component3;
                         return _regeneratorRuntime().wrap(function _callee$(_context) {
                           while (1) {
                             switch (_context.prev = _context.next) {
                               case 0:
                                 node = json.nodes[id];
-                                component4 = _this4.getComponent(node.name);
+                                component3 = _this4.getComponent(node.name);
                                 _context.next = 4;
-                                return component4.build(Node2.fromJSON(node));
+                                return component3.build(Node2.fromJSON(node));
                               case 4:
                                 nodes[id] = _context.sent;
                                 _this4.addNode(nodes[id]);
@@ -10947,7 +10947,7 @@ var require_rete_common = __commonJS2({
         key: "processWorker",
         value: function() {
           var _processWorker = _asyncToGenerator(/* @__PURE__ */ _regeneratorRuntime().mark(function _callee6(node) {
-            var inputData, component4, outputData;
+            var inputData, component3, outputData;
             return _regeneratorRuntime().wrap(function _callee6$(_context6) {
               while (1) {
                 switch (_context6.prev = _context6.next) {
@@ -10956,11 +10956,11 @@ var require_rete_common = __commonJS2({
                     return this.extractInputData(node);
                   case 2:
                     inputData = _context6.sent;
-                    component4 = this.components.get(node.name);
+                    component3 = this.components.get(node.name);
                     outputData = {};
                     _context6.prev = 5;
                     _context6.next = 8;
-                    return component4.worker.apply(component4, [node, inputData, outputData].concat(_toConsumableArray(this.args)));
+                    return component3.worker.apply(component3, [node, inputData, outputData].concat(_toConsumableArray(this.args)));
                   case 8:
                     _context6.next = 14;
                     break;
@@ -11782,7 +11782,9 @@ var _OmniLog = class _OmniLog2 {
     this._status_priority = consola.create({ level: OmniLogLevels.verbose });
     this._void = (_msg) => {
     };
-    this.__log = (msg) => consola.log(msg);
+    this.__log = (msg) => {
+      consola.log(msg);
+    };
     this._log = DEFAULT_LOG_LEVEL >= 3 ? this.__log : this._void;
     if (_OmniLog2._instance !== void 0) {
       throw new Error("Log instance duplicate error");
@@ -11799,7 +11801,9 @@ var _OmniLog = class _OmniLog2 {
     this._log = value >= 3 ? this.__log : this._void;
     consola.level = value;
     if (value < 0) {
-      this._customLevel.forEach((e) => e = OmniLogLevels.silent);
+      this._customLevel.forEach((e) => {
+        e = OmniLogLevels.silent;
+      });
     }
   }
   get warn() {
@@ -12164,6 +12168,50 @@ var { parse: $parse, stringify: $stringify } = JSON;
 var options = { json: true, lossy: true };
 var parse = (str) => deserialize($parse(str));
 var stringify = (any) => $stringify(serialize(any, options));
+var Settings = class {
+  constructor(scope) {
+    this.settings = /* @__PURE__ */ new Map();
+    this.scope = scope;
+  }
+  bindStorage(storage) {
+    this.settings = storage;
+  }
+  // Adds a setting to this system.
+  add(setting) {
+    if (this.settings.has(setting.key)) {
+      omnilog.warn(`Setting ${setting.key} already exists, doing nothing...`);
+      return this;
+    }
+    this.settings.set(setting.key, setting);
+    return this;
+  }
+  // Retrieves a setting by its key.
+  get(key) {
+    return this.settings.get(key);
+  }
+  // Updates a setting's value and validates it.
+  update(key, newValue) {
+    const setting = this.get(key);
+    if (setting) {
+      setting.value = newValue;
+    }
+  }
+  // Resets a specific setting to its default value.
+  reset(key) {
+    const setting = this.get(key);
+    if (setting) {
+      setting.value = setting.defaultValue;
+    }
+  }
+  // Resets all settings to their default values.
+  resetAll() {
+    if (this.settings) {
+      for (const s3 of this.settings.values()) {
+        s3.value = s3.defaultValue;
+      }
+    }
+  }
+};
 var STATE = /* @__PURE__ */ ((STATE2) => {
   STATE2[STATE2["CREATED"] = 0] = "CREATED";
   STATE2[STATE2["CONFIGURED"] = 1] = "CONFIGURED";
@@ -12184,6 +12232,7 @@ var App = class {
     this.services = new ServiceManager(this);
     this.integrations = new (opts.integrationsManagerType || IntegrationsManager)(this);
     const loginstance = this.logger.createWithTag(id);
+    this.settings = new Settings();
     this.info = loginstance.info;
     this.success = loginstance.success;
     this.debug = loginstance.debug;
@@ -12282,23 +12331,25 @@ var App = class {
 };
 App.STATES = STATE;
 var BaseWorkflow = class _BaseWorkflow {
-  constructor(id, version, meta) {
-    this.id = id;
-    this.version = version;
-    this.setMeta(meta || null);
+  constructor(id, meta) {
+    this.id = id ?? "";
+    this.setMeta(meta);
     this.setRete(null);
     this.setAPI(null);
+    this.setBlockIds(/* @__PURE__ */ new Set());
     this.ui = {};
   }
   setMeta(meta) {
     var _a, _b, _c, _d;
-    this.meta = meta ?? { name: "New Workflow", description: "No description.", pictureUrl: "omni.png", author: "Anonymous" };
+    meta = JSON.parse(JSON.stringify(meta ?? {}));
+    meta = meta ?? { name: "New Recipe", description: "No description.", pictureUrl: "omni.png", author: "Anonymous" };
+    this.meta = meta;
     this.meta.updated = Date.now();
     (_a = this.meta).created ?? (_a.created = Date.now());
     (_b = this.meta).tags ?? (_b.tags = []);
     this.meta.updated = Date.now();
-    (_c = this.meta).author || (_c.author = meta?.author || "Anonymous");
-    (_d = this.meta).help || (_d.help = meta?.help || "");
+    (_c = this.meta).author || (_c.author = "Anonymous");
+    (_d = this.meta).help || (_d.help = "");
     this.meta.name = (0, import_insane.default)(this.meta.name, { allowedTags: [], allowedAttributes: {} });
     this.meta.description = (0, import_insane.default)(this.meta.description, { allowedTags: [], allowedAttributes: {} });
     this.meta.author = (0, import_insane.default)(this.meta.author, { allowedTags: [], allowedAttributes: {} });
@@ -12320,48 +12371,68 @@ var BaseWorkflow = class _BaseWorkflow {
     this.meta.updated = Date.now();
     return this;
   }
+  setBlockIds(ids) {
+    this.blockIds = ids;
+    return this;
+  }
+  get isBlank() {
+    return (this?.rete?.nodes ?? []).length === 0;
+  }
   toJSON() {
     return {
       id: this.id,
-      version: this.version,
       meta: this.meta,
       rete: this.rete,
       api: this.api,
-      ui: this.ui
+      ui: this.ui,
+      blockIds: this.blockIds
     };
   }
   static fromJSON(json) {
-    const result = new _BaseWorkflow(json.id, json.version);
+    const result = new _BaseWorkflow(json.id);
     result.setMeta(json.meta);
     result.setRete(json.rete);
     result.setAPI(json.api);
     result.setUI(json.ui);
+    result.setBlockIds(json.blockIds);
     return result;
   }
 };
 var _Workflow = class _Workflow2 extends BaseWorkflow {
-  // Either 'public', organisation IDs, group IDs, or user IDs
-  constructor(id, version, data, meta) {
-    super(id, version, meta);
-    this._id = version == "draft" ? `wf:${id}` : `wf:${id}:${version}`;
+  // publishedTo: string[] // Either 'public', organisation IDs, group IDs, or user IDs
+  constructor(id, data, meta) {
+    super(id, meta);
+    this._id = `wf:${id}`;
     this.owner = data.owner;
     this.org = data.org;
-    this.publishedTo = [];
   }
   toJSON() {
-    return { ...super.toJSON(), _id: this._id, _rev: this._rev, owner: this.owner, org: this.org, publishedTo: this.publishedTo };
+    return {
+      ...super.toJSON(),
+      _id: this._id,
+      _rev: this._rev,
+      owner: this.owner,
+      org: this.org
+      // publishedTo: this.publishedTo
+    };
   }
   static fromJSON(json) {
     let id = json._id?.replace("wf:", "") || json.id;
     if (json.id && json.id.length > 16 && id.startsWith(json.id)) {
       id = json.id;
     }
-    const result = new _Workflow2(id, json.version ?? "draft", { owner: json.owner || json.meta.owner, org: json.org });
-    result.publishedTo = json.publishedTo;
+    const result = new _Workflow2(id, { owner: json.owner || json.meta.owner, org: json.org });
     result.setMeta(json.meta);
     result.setRete(json.rete);
     result.setAPI(json.api);
     result.setUI(json.ui);
+    if (json.blockIds) {
+      result.setBlockIds(json.blockIds);
+    } else if (json.rete.nodes) {
+      result.setBlockIds(new Set(Object.values(json.rete.nodes).map((node) => node.name)));
+    } else {
+      result.setBlockIds(/* @__PURE__ */ new Set());
+    }
     if (json._rev) {
       result._rev = json._rev;
     }
@@ -12416,8 +12487,8 @@ var _User = class _User2 extends DBObject {
     this.tier = null;
     this.password = null;
     this.salt = null;
-    this.token = null;
     this.tags = [];
+    this.settings = new Settings(this.id);
   }
   isAdmin() {
     return this.tags.some((tag) => tag === "admin");
@@ -12439,7 +12510,6 @@ var _User = class _User2 extends DBObject {
     result.tier = json.tier;
     result.password = json.password;
     result.salt = json.salt;
-    result.token = json.token;
     result.tags = json.tags;
     return result;
   }
@@ -12494,7 +12564,7 @@ var CustomSocket = class extends import_rete.Socket {
     return this.opts.format;
   }
   get array() {
-    return this.opts.array;
+    return this.opts.array || false;
   }
   get customAction() {
     return this.opts.customAction;
@@ -12524,7 +12594,7 @@ var CustomSocket = class extends import_rete.Socket {
 var CustomSocket_default = CustomSocket;
 var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
   compatibleWith(socket, noReverse) {
-    let cs = this;
+    const cs = this;
     if (cs.type) {
       return ["string", "image", "audio", "document", "file"].includes(cs.type);
     } else {
@@ -12534,16 +12604,13 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
   detectMimeType(ctx, value) {
     return void 0;
   }
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   async persistObject(ctx, value, opts) {
     if ((value.ticket || value.fid) && value.url && !value.data) {
       return await Promise.resolve(value);
     }
     opts ?? (opts = {});
     opts.mimeType ?? (opts.mimeType = this.detectMimeType?.(ctx, value));
-    const finalOpts = { userId: ctx.userId, ...opts };
+    const finalOpts = { userId: ctx.userId, jobId: ctx.jobId, ...opts };
     return ctx.app.cdn.putTemp(value, finalOpts);
   }
   async persistObjects(ctx, value, opts) {
@@ -12574,7 +12641,7 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
       value = await this.persistObject(ctx, value);
     }
     if (value && this.format?.startsWith("base64")) {
-      const addHeader = this.format?.includes("withHeader") === true;
+      const addHeader = this.format?.includes("withHeader");
       value = value.asBase64(addHeader);
     }
     if (this.customSettings?.do_no_return_data) {
@@ -12591,7 +12658,7 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
     }
     value = value.filter((x) => x !== null);
     return await Promise.all(value.map(async (v2) => {
-      return this._handleSingleObject(ctx, v2, getValue);
+      return await this._handleSingleObject(ctx, v2, getValue);
     }));
   }
   async _handlePort(ctx, value, getValue) {
@@ -12600,9 +12667,9 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
       value = [value];
     }
     if (this.array) {
-      return this._handleObjectArray(ctx, value, getValue);
+      return await this._handleObjectArray(ctx, value, getValue);
     }
-    return this._handleSingleObject(ctx, value[0], getValue);
+    return await this._handleSingleObject(ctx, value[0], getValue);
   }
   async handleInput(ctx, value) {
     return await this._handlePort(ctx, value, true);
@@ -12613,9 +12680,6 @@ var FileObjectSocket = class _FileObjectSocket extends CustomSocket_default {
 };
 var FileObjectSocket_default = FileObjectSocket;
 var DocumentSocket = class _DocumentSocket extends FileObjectSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   // Try to guess if we have a plain text
   mightBeUtf8PlainText(text2) {
     const thresholdPercentage = 0.05;
@@ -12641,7 +12705,7 @@ var DocumentSocket = class _DocumentSocket extends FileObjectSocket_default {
     return void 0;
   }
   compatibleWith(socket, noReverse) {
-    let cs = this;
+    const cs = this;
     if (cs.type) {
       return ["string", "text", "document"].includes(cs.type);
     }
@@ -12650,9 +12714,6 @@ var DocumentSocket = class _DocumentSocket extends FileObjectSocket_default {
 };
 var DocumentSocket_default = DocumentSocket;
 var PrimitiveSocket = class extends CustomSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   async handleInput(ctx, value) {
     if (Array.isArray(value)) {
       value = value[0];
@@ -12660,16 +12721,13 @@ var PrimitiveSocket = class extends CustomSocket_default {
     return value;
   }
   async handleOutput(ctx, value) {
-    return this.handleInput(ctx, value);
+    return await this.handleInput(ctx, value);
   }
 };
 var PrimitiveSocket_default = PrimitiveSocket;
 var ImageSocket = class _ImageSocket extends FileObjectSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   compatibleWith(socket, noReverse) {
-    let cs = this;
+    const cs = this;
     if (cs.type) {
       return ["string", "file", "image"].includes(cs.type);
     }
@@ -12678,8 +12736,12 @@ var ImageSocket = class _ImageSocket extends FileObjectSocket_default {
 };
 var ImageSocket_default = ImageSocket;
 var NumberSocket = class extends CustomSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
+  compatibleWith(socket, noReverse) {
+    const cs = this;
+    if (cs.type) {
+      return ["integer", "number", "float"].includes(cs.type);
+    }
+    return socket instanceof CustomSocket_default;
   }
   async handleInput(ctx, value) {
     if (Array.isArray(value)) {
@@ -12697,21 +12759,21 @@ var NumberSocket = class extends CustomSocket_default {
     if (value === "nan") {
       return NaN;
     }
-    return Number(value);
+    if (typeof value !== "number") {
+      return Number(value);
+    }
+    return value;
   }
   async handleOutput(ctx, value) {
-    return this.handleInput(ctx, value);
+    return await this.handleInput(ctx, value);
   }
 };
 var NumberSocket_default = NumberSocket;
 var TextSocket = class _TextSocket extends CustomSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   compatibleWith(socket, noReverse) {
-    let cs = this;
+    const cs = this;
     if (cs.type) {
-      return ["string", "object", "number", "file", "image", "audio", "document", "text"].includes(cs.type);
+      return ["string", "object", "number", "integer", "float", "file", "image", "audio", "document", "text"].includes(cs.type);
     } else {
       return socket instanceof _TextSocket;
     }
@@ -12741,39 +12803,48 @@ var TextSocket = class _TextSocket extends CustomSocket_default {
     return JSON.stringify(value, null, 2);
   }
   async handleInput(ctx, value) {
-    const array_separator = this.customSettings?.array_separator ?? "\n";
+    const arraySeparator = this.customSettings?.array_separator ?? "\n";
     if (this.array && typeof value === "string") {
-      value = value.split(array_separator);
+      value = value.split(arraySeparator);
     }
     if (!Array.isArray(value)) {
       value = [value];
     }
-    value = value.map(this.convertSingleValue);
+    value = value.map(this.convertSingleValue.bind(this));
     if (this.customSettings?.filter_empty) {
       value = value.filter((v2) => v2);
     }
-    return this.array ? value : value.join(array_separator);
+    return this.array ? value : value.join(arraySeparator);
   }
   async handleOutput(ctx, value) {
-    return this.handleInput(ctx, value);
+    return await this.handleInput(ctx, value);
   }
 };
 var TextSocket_default = TextSocket;
 var BooleanSocket = class extends CustomSocket_default {
-  constructor(name, type, opts) {
-    super(name, type, opts);
-  }
   async handleInput(ctx, value) {
     if (Array.isArray(value)) {
       value = value[0];
     }
-    return !!value;
+    return Boolean(value);
   }
   async handleOutput(ctx, value) {
-    return this.handleInput(ctx, value);
+    return await this.handleInput(ctx, value);
   }
 };
 var BooleanSocket_default = BooleanSocket;
+var AnySocket = class extends CustomSocket_default {
+  compatibleWith(socket, noReverse) {
+    return true;
+  }
+  async handleInput(ctx, value) {
+    return value;
+  }
+  async handleOutput(ctx, value) {
+    return value;
+  }
+};
+var AnySocket_default = AnySocket;
 var socketTypeMap = /* @__PURE__ */ new Map();
 socketTypeMap.set("boolean", BooleanSocket_default);
 socketTypeMap.set("number", NumberSocket_default);
@@ -12786,12 +12857,30 @@ socketTypeMap.set("file", FileObjectSocket_default);
 socketTypeMap.set("image", ImageSocket_default);
 socketTypeMap.set("audio", FileObjectSocket_default);
 socketTypeMap.set("document", DocumentSocket_default);
+socketTypeMap.set("any", AnySocket_default);
 var OmniComponentMacroTypes = /* @__PURE__ */ ((OmniComponentMacroTypes3) => {
   OmniComponentMacroTypes3["EXEC"] = "exec";
   OmniComponentMacroTypes3["BUILDER"] = "builder";
   OmniComponentMacroTypes3["ON_SAVE"] = "save";
   return OmniComponentMacroTypes3;
 })(OmniComponentMacroTypes || {});
+function SimplifyChoices(choices) {
+  if (Array.isArray(choices)) {
+    if (choices.length === 0) {
+      return [];
+    }
+    if (typeof choices[0] === "string") {
+      return choices.map((v2) => ({ title: v2, value: v2 }));
+    }
+    if (typeof choices[0] === "object" && "title" in choices[0] && "value" in choices[0]) {
+      return choices;
+    }
+  }
+  if (typeof choices === "object" && "block" in choices && "map" in choices) {
+    return choices;
+  }
+  return choices;
+}
 var IOComposer = class {
   constructor() {
     this.data = {};
@@ -12844,21 +12933,15 @@ var IOComposer = class {
     return this;
   }
   setChoices(choices, defaultValue) {
-    if (Array.isArray(choices)) {
-      if (choices.length > 0) {
-        if (typeof choices[0] === "string") {
-          choices = choices.map((v2) => ({ title: v2, value: v2 }));
-        }
-        this.data.choices = choices;
-      } else {
+    if (defaultValue != null) {
+      this.data.default = defaultValue;
+    }
+    if (choices != null) {
+      this.data.choices = SimplifyChoices(choices);
+      if (!this.data.choices) {
         this.data.choices = [{ title: "(default)", value: defaultValue ?? "" }];
       }
-    } else if (typeof choices === "object") {
-      if (choices.hasOwnProperty("block")) {
-        this.data.choices = choices;
-      }
     }
-    this.data.default = defaultValue;
     return this;
   }
   setCustom(key, value) {
@@ -12902,21 +12985,11 @@ var ControlComposer = class {
     return this;
   }
   setChoices(choices, defaultValue) {
-    if (Array.isArray(choices)) {
-      if (choices.length > 0) {
-        if (typeof choices[0] === "string") {
-          choices = choices.map((v2) => ({ title: v2, value: v2 }));
-        }
-        this.data.choices = choices;
-      } else {
-        this.data.choices = [{ title: "(default)", value: defaultValue ?? "" }];
-      }
-    } else if (typeof choices === "object") {
-      if (choices.hasOwnProperty("block")) {
-        this.data.choices = choices;
-      }
-    }
     this.data.default = defaultValue;
+    this.data.choices = SimplifyChoices(choices);
+    if (!this.data.choices) {
+      this.data.choices = [{ title: "(default)", value: defaultValue ?? "" }];
+    }
     return this;
   }
   setReadonly(readonly) {
@@ -12924,9 +12997,12 @@ var ControlComposer = class {
     return this;
   }
   setConstraints(minimum, maximum, step) {
-    this.data.minimum = minimum;
-    this.data.maximum = maximum;
-    this.data.step = step;
+    if (minimum != null)
+      this.data.minimum = minimum;
+    if (maximum != null)
+      this.data.maximum = maximum;
+    if (step != null)
+      this.data.step = step;
     return this;
   }
   toOmniControl() {
@@ -13140,9 +13216,12 @@ var OAIControl31 = class _OAIControl31 extends import_rete2.default.Control {
     this.emitter = emitter;
     this.props = { ikey: config.name };
     this.component = control;
+    if (!control) {
+      console.error("Could not find component for " + config.controlType);
+    }
   }
   async initChoices() {
-    if (this.data.choices != null) {
+    if (this.data.choices) {
       let choices = this.data.choices;
       if (Array.isArray(choices)) {
         this.data.choices = choices.map(function(v2) {
@@ -13298,7 +13377,7 @@ var OAIBaseComponent = class extends Rete2.Component {
     (_a = this.data).macros ?? (_a.macros = {});
     (_b = this.data).flags ?? (_b.flags = 0);
     (_c = this.data).errors ?? (_c.errors = []);
-    (_d = this.data).enabled ?? (_d.enabled = true);
+    (_d = this.data).xOmniEnabled ?? (_d.xOmniEnabled = true);
     for (const key in this.data.inputs) {
       (_e = this.data.inputs[key]).source ?? (_e.source = { sourceType: "requestBody" });
     }
@@ -13375,11 +13454,11 @@ var OAIBaseComponent = class extends Rete2.Component {
   get controls() {
     return this.data.controls;
   }
-  get enabled() {
-    return this.data.enabled ?? true;
+  get xOmniEnabled() {
+    return this.data.xOmniEnabled ?? true;
   }
-  set enabled(enabled) {
-    this.data.enabled = enabled;
+  set xOmniEnabled(enabled) {
+    this.data.xOmniEnabled = enabled;
   }
   setType(type) {
     this.data.type = type;
@@ -13591,135 +13670,9 @@ component.addInput(
 var PromptComponent = component.toJSON();
 var PromptComponent_default = PromptComponent;
 
-// components/RoopComponent.ts
-var NS_OMNI2 = "omnitool";
-var component2 = OAIBaseComponent.create(NS_OMNI2, "roop").fromScratch().dependsOn([
-  "automatic1111.interrogateapi_sdapi_v1_interrogate_post",
-  "automatic1111.simpleImage2Image",
-  "automatic1111.get_upscalers_sdapi_v1_upscalers_get",
-  "automatic1111.getSamplers",
-  "automatic1111.getModels",
-  "automatic1111.get_face_restorers_sdapi_v1_face_restorers_get"
-]).set("description", "Resize the image to given width and height using various options.").set("title", "Face Swap (Roop)").set("category", "Image Manipulation").setMeta({ "source": {
-  "summary": "Facial Restoration using roop",
-  links: {
-    "Roop for Automatic1111": "https://github.com/s0md3v/sd-webui-roop"
-  }
-} }).setMethod("X-CUSTOM");
-component2.addInput(component2.createInput("prompt", "string", "text").set("description", "Optional prompt. Uses CLIP for auto prompt if left blank.").setDefault("").toOmniIO()).addInput(component2.createInput("negative_prompt", "string", "text").set("description", "Optional negative prompt").setDefault("").toOmniIO()).addInput(component2.createInput("replace_faces", "string", "text").set("description", "Which faces to replace").setDefault("0,1,2,3").toOmniIO()).addInput(component2.createInput("denoising_strength", "float").set("title", "Blend Balance").set("description", "Balance between the two images. Low: Prioritize Source Face, High: Prioritize Target Image (denoising strength)").setConstraints(1e-3, 1, 0.05).toOmniIO()).addInput(component2.createInput("face_restorer", "string").set("title", "Facial Restoration").setChoices(
-  {
-    block: "automatic1111.get_face_restorers_sdapi_v1_face_restorers_get",
-    "cache": "global",
-    map: {
-      "title": "name",
-      "value": "name"
-    }
-  }
-).setDefault("CodeFormer").toOmniIO()).addInput(component2.createInput("face_restoration_strength", "float").set("title", "Restoration Strength").setConstraints(0, 1, 0.1).setDefault(0.5).toOmniIO()).addInput(component2.createInput("checkpoint", "string").set("title", "Model").setChoices({
-  "block": "automatic1111.getModels",
-  "cache": "global",
-  map: {
-    "title": "model_name",
-    "value": "model_name"
-  }
-}).setDefault("v1-5-pruned-emaonly").toOmniIO()).addInput(component2.createInput("sampler_name", "string").setChoices({
-  block: "automatic1111.getSamplers",
-  "cache": "global",
-  map: {
-    "title": "name",
-    "value": "name"
-  }
-}).setDefault("UniPC").set("title", "Sampler").toOmniIO()).addInput(component2.createInput("scale_factor", "float").set("title", "Upscale Factor").setConstraints(1, 4, 0.1).setDefault(1).toOmniIO()).addInput(component2.createInput("upscaler", "string").set("title", "Facial Upscaler").setChoices(
-  {
-    block: "automatic1111.get_upscalers_sdapi_v1_upscalers_get",
-    "cache": "global",
-    map: {
-      "title": "name",
-      "value": "name"
-    }
-  }
-).setDefault("None").toOmniIO()).addInput(component2.createInput("source", "object", "image").set("title", "Face Image (Source)").set("description", "Image containing a the face to replace in the target image").setRequired(true).toOmniIO()).addInput(component2.createInput("init_images", "object", "image", { array: true }).set("title", "The Target Images to project the face onto").set("description", "Image containing a the face to replace in the target image").setRequired(true).toOmniIO());
-component2.addOutput(component2.createOutput("result", "object").toOmniIO()).addOutput(component2.createOutput("images", "object", "image", { array: true }).set("title", "Output Images").set("description", "The resized images.").toOmniIO());
-component2.setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
-  var _a;
-  {
-    const componentService = ctx.app.blocks;
-    let source = payload.source;
-    let init_images = payload.init_images || [];
-    let sourceB64 = (await ctx.app.cdn.get(source.ticket)).asBase64();
-    let resultImages = [];
-    debugger;
-    for (let i = 0; i < init_images.length; i++) {
-      let img2imgOpts = {};
-      let negative_prompt = payload.negative_prompt;
-      let block = "automatic1111.simpleImage2Image";
-      let target = init_images[i];
-      let meta = target.meta;
-      debugger;
-      let targetB64 = (await ctx.app.cdn.get(target.ticket, {})).asBase64();
-      negative_prompt = negative_prompt || meta.sd?.negativePrompt;
-      img2imgOpts = {
-        width: meta.width,
-        height: meta.height,
-        prompt: payload.prompt || meta.sd?.prompt || (await componentService.runBlock(ctx, "automatic1111.interrogateapi_sdapi_v1_interrogate_post", { image: targetB64, model: "clip" })).caption,
-        negative_prompt,
-        sampler_name: payload.sampler_name,
-        init_images: [targetB64],
-        denoising_strength: payload.denoising_strength || 0.05
-      };
-      let pl = Object.assign(
-        {},
-        {
-          negative_prompt,
-          //inpainting_fill: 1,
-          //inpaint_full_res: true,
-          // "absolutereality_v1-inpainting"
-          checkpoint: payload.checkpoint || void 0,
-          "alwayson_scripts": {
-            "roop": {
-              "args": [
-                sourceB64,
-                true,
-                payload.replace_faces ?? "0",
-                "../../../models/roop/inswapper_128.onnx",
-                payload.face_restorer,
-                payload.face_restoration_strength,
-                payload.upscaler,
-                1,
-                payload.scale_factor,
-                false,
-                true
-              ]
-            }
-          }
-        },
-        img2imgOpts || {}
-      );
-      console.log(pl.alwayson_scripts.roop);
-      const result = (await componentService.runBlock(ctx, block, pl)).images;
-      if (!result || result.length == 0) {
-        throw new Error("No images returned by img2img");
-      }
-      const imgResult = result[0];
-      if (imgResult) {
-        (_a = imgResult.meta).sd ?? (_a.sd = {});
-        imgResult.meta.sd.prompt = payload.prompt;
-        imgResult.meta.sd.negative_prompt = payload.negative_prompt;
-        resultImages.push(imgResult);
-      }
-    }
-    return {
-      result: { "ok": true },
-      images: resultImages
-    };
-  }
-});
-var RoopComponent = component2.toJSON();
-var RoopComponent_default = RoopComponent;
-
 // components/LoraComponent.ts
-var NS_OMNI3 = "automatic1111";
-var component3 = OAIBaseComponent.create(NS_OMNI3, "lora").fromScratch().set("description", "A component to add a lora").set("title", "Lora (automatic1111)").set("category", "Image Generation").setMethod("X-CUSTOM").setMeta({
+var NS_OMNI2 = "automatic1111";
+var component2 = OAIBaseComponent.create(NS_OMNI2, "lora").fromScratch().set("description", "A component to add a lora").set("title", "Lora (automatic1111)").set("category", "Image Generation").setMethod("X-CUSTOM").setMeta({
   source: {
     summary: "Lora Support for  automatic1111.",
     authors: ["georg zoeller/mercenaries.ai"],
@@ -13729,8 +13682,8 @@ var component3 = OAIBaseComponent.create(NS_OMNI3, "lora").fromScratch().set("de
     }
   }
 });
-component3.addControl(
-  component3.createControl("lora").set("description", "The lora to add").set("title", "Lora").setRequired(true).setChoices({
+component2.addControl(
+  component2.createControl("lora").set("description", "The lora to add").set("title", "Lora").setRequired(true).setChoices({
     block: "automatic1111.getLoras",
     cache: "global",
     map: {
@@ -13739,9 +13692,9 @@ component3.addControl(
     }
   }).toOmniControl()
 ).addInput(
-  component3.createInput("strength", "number").set("description", "The lora strength").setConstraints(-8, 8, 0.1).setDefault(0.5).toOmniIO()
+  component2.createInput("strength", "number").set("description", "The lora strength").setConstraints(-8, 8, 0.1).setDefault(0.5).toOmniIO()
 ).addOutput(
-  component3.createOutput("lora", "object").set("description", "The constructed object").toOmniIO()
+  component2.createOutput("lora", "object").set("description", "The constructed object").toOmniIO()
 ).setMacro(OmniComponentMacroTypes.EXEC, async (payload, ctx) => {
   let { lora, strength } = payload;
   let ret = {};
@@ -13750,11 +13703,15 @@ component3.addControl(
     lora: ret
   };
 });
-var PromptComponent2 = component3.toJSON();
+var PromptComponent2 = component2.toJSON();
 var LoraComponent_default = PromptComponent2;
 
 // components.ts
-var components = [PromptComponent_default, LoraComponent_default, RoopComponent_default];
+var components = [
+  PromptComponent_default,
+  LoraComponent_default
+  /* RoopComponent*/
+];
 var components_default = () => {
   return {
     blocks: components,
